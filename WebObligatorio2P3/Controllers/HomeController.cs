@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using WebObligatorio_2_P3.Models;
 using Auxiliar;
 using Dominio;
-using ExportarInformacion;
+using ImportarInformacion;
 
 
 namespace WebObligatorio_2_P3.Controllers
@@ -77,17 +77,20 @@ namespace WebObligatorio_2_P3.Controllers
         }
 
 
-        public ActionResult ExportarInfo()
+        public ActionResult ImportarUsuarios()
         {
-            if (Session["usuarioLogueado"] == null)
-            {
-                return View("~/Views/Shared/NoAutorizado.cshtml");
-            }
-
-            Exportar.ExportarTodo();      
+            bool ok = Importar.ImportarUsuarios();      
             ViewBag.Resultado = true; 
             return View();
         }
+
+        public ActionResult ImportarActividades()
+        {
+            bool ok = Importar.ImportarActividades();
+            ViewBag.Resultado = true;
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -59,14 +59,14 @@
                         <ul class="dropdown-menu">
                             @if (Session["usuarioLogueado"] != null)
                             {
-                                <li><a href="/Usuario/XXXX">Importar usuarios</a> </li>
-                                <li><a href="/Usuario/XXXX">Importar actividades</a> </li>
+                                <li><a href="/Home/ImportarUsuarios">Importar usuarios</a> </li>
+                                <li><a href="/Home/ImportarActividades">Importar actividades</a> </li>
                             }
                             else
                             {
                                 <li><a href="#"><strong>Usuario: Sin identificar</strong></a></li>
-                                <li><a href="/Usuario/XXXX">Importar usuarios</a> </li>
-                                <li><a href="/Usuario/XXXX">Importar actividades</a> </li>
+                                <li><a href="/Home/ImportarUsuarios">Importar usuarios</a> </li>
+                                <li><a href="/Home/ImportarActividades">Importar actividades</a> </li>
                             }
                         </ul>
                     </li>

@@ -234,9 +234,9 @@
       <Project>{72ac896c-7b9b-4f59-a669-f4cd89de3c91}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ExportarInformacion\ExportarInformacion.csproj">
+    <ProjectReference Include="..\ExportarInformacion\ImportarInformacion.csproj">
       <Project>{f715ec9c-c138-4c53-aaba-e73ac0e88c7b}</Project>
-      <Name>ExportarInformacion</Name>
+      <Name>ImportarInformacion</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
