@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Dominio.DiaYHora>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de actividades</h2>
+
+<table class="table table-bordered">
+    <tr class="info">
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Activ)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Dia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hora)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Id)
+    </td>
+
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Activ.Nombre)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Dia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Hora)
+    </td>
+    <td>
+        @Html.ActionLink("Ingresar actividad", "ConfirmarIngreso", new { idFechaYhora = item.Id }, new { @class = "btn btn-info" })
+    </td>
+</tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Regresar a la lista de socios", "Index", "Socio")
+</div>

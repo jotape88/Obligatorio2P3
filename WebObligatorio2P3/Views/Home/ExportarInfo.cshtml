@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "ExportarInformacion";
+}
+
+<hr />
+
+@if (ViewBag.Resultado != null)
+{
+    if (ViewBag.Resultado == true)
+    {
+        <div class="alert alert-success" role="alert">
+            <p>La informacion se exportó con exito.</p>
+        </div>
+
+
+    }
+    else if (ViewBag.Resultado == false)
+    {
+        <div class="alert alert-danger" role="alert">
+            <p>Error al exportar la información.</p>
+        </div>
+    }
+
+}
+
+<div>
+    @Html.ActionLink("Regresar al inicio", "Index", "Home")
+</div>
+

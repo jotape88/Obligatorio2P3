@@ -1,0 +1,89 @@
+﻿@model WebObligatorio_2_P3.Models.ViewModelSocio
+
+@{
+    ViewBag.Title = "GestionPago";
+}
+
+<h2>Registro de pago</h2>
+
+<hr />
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cedula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreYapellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreYapellido)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label>Elija una forma de pago</label>
+            <select name="tipoPago" onchange="mostrarInputActividades()" id="selectFormaPago" class="form-control">
+                <option value="cuponera">Cuponera</option>
+                <option value="paseLibre">Pase Libre</option>
+            </select>
+        </div>
+
+        <div id="inputCantidadAct">
+            <input name="ctdActiv" id="inputActividades" class="form-control" type="number" placeholder="Cantidad de actividades">
+        </div>
+        <hr />
+
+        <input name="id" type='hidden' value="@Model.Id">
+
+        <button type="submit" class="btn btn-info">Mostrar el total</button>
+    }
+
+    <hr />
+
+    @if (ViewBag.PaseLibre != null)
+    {
+        <h3>Monto total a pagar: </h3>
+        <h1> $@ViewBag.PaseLibre; </h1>
+        <a href='@Url.Action("ConfirmarPago", new { id = Model.Id })' class="btn btn-success">Confirmar pago</a>
+    }
+    else if (ViewBag.Cuponera != null && ViewBag.Error == null)
+    {
+        <h3>Monto total a pagar: </h3>
+        <h1> $@ViewBag.Cuponera </h1>
+        <a href='@Url.Action("ConfirmarPago", new { id = Model.Id })' class="btn btn-success">Confirmar pago</a>
+    }
+    else if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.Error
+        </div>
+    }
+</div>
+
+<hr />
+<hr />
+
+<p>
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>
+
+
+@* Script de JS para ocultar-mostrar input*@
+<script type="text/javascript">
+    function mostrarInputActividades() {
+        let formaPago = document.getElementById("selectFormaPago");
+        let activs = document.getElementById("inputCantidadAct");
+        activs.style.display = formaPago.value == "cuponera" ? "block" : "none";
+    }
+</script>

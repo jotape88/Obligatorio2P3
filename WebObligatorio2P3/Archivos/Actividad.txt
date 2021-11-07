@@ -1,0 +1,13 @@
+1|Boxeo|13|60
+2|Abdominales|13|60
+3|Pilates|3|90
+4|Pileta|3|90
+5|Funcional|12|90
+6|Crossfit|12|90
+7|Hiit|12|50
+8|Yoga|3|90
+9|Sala|12|90
+10|Cardio|12|90
+11|Aerobox|8|90
+12|Zumba|8|90
+13|Spinning|8|90

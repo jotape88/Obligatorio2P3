@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebObligatorio_2_P3.Models.ViewModelSocio>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado de Socios</h2>
+<hr />
+<p>
+    @Html.ActionLink("Registrar nuevo socio", "Create", null, new { @class = "btn btn-success" })
+</p>
+
+<hr />
+<table class="table table-bordered">
+
+    <tr class="info">
+        <th>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreYapellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstaActivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cedula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreYapellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                @if(item.EstaActivo == "1")
+                {
+                <p>SI</p>
+                }
+                else
+                {
+                <p>NO</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaRegistro)
+            </td>
+            <td>
+                @if (item.EstaActivo != "0")
+                {
+                    @Html.ActionLink("Detalles", "DetalleSocio", new { id = item.Id }, new { @class = "btn btn-info" })
+
+                }
+            </td>
+        </tr>
+    }
+
+</table>

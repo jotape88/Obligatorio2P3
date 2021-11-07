@@ -1,0 +1,44 @@
+﻿@model WebObligatorio_2_P3.Models.ViewModelIngresoActividad
+
+@{
+    ViewBag.Title = "IngresoFechasLista";
+}
+
+
+@using (Html.BeginForm("ListarIngresos", "Socio", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h2>Ingrese un período (inclusive) de fechas</h2>
+    <h4>O deje en blanco para buscar durante todo el mes corriente</h4>
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.FechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.FechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Buscar entre fechas" class="btn btn-info" />
+        </div>
+    </div>
+</div>
+}
+
+
+<div>
+    @Html.ActionLink("Regresar a la lista de socios", "Index")
+</div>

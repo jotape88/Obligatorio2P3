@@ -1,0 +1,65 @@
+﻿@model WebObligatorio_2_P3.Models.ViewModelSocio
+
+@{
+    ViewBag.Title = "DetalleSocio";
+}
+
+<h2>Detalles del socio</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cedula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreYapellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreYapellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaNacimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaRegistro)
+        </dd>
+    </dl>  
+    
+    <div class="col-md-offset-2 col-md-10">
+        <a href='@Url.Action("Edit", "Socio", new { Id = Model.Id })' class="btn btn-info">Editar</a> |
+        <a href='@Url.Action("Delete", "Socio", new { Id = Model.Id })' class="btn btn-danger">Deshabilitar</a> |
+
+        @if (ViewBag.TienePago != 1)
+        {
+            <a href='@Url.Action("GestionPago", "Socio", new { Id = Model.Id })' class="btn btn-primary">Gestionar Pago</a> 
+                }
+        else
+                {
+            <a href= '@Url.Action("Index", "Actividad", new { Id = Model.Id })' class="btn btn-primary">Ingreso de actividad</a>
+        }
+
+        <a href='@Url.Action("IngresoFechasLista", "Socio", new { id = Model.Id })' class="btn btn-warning">Ver registro de actividades</a>
+    </div>
+</div>
+<hr />
+<hr />
+<p>
+    @Html.ActionLink("Regresar a la lista de socios", "Index")
+</p>

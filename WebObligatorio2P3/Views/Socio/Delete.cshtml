@@ -1,0 +1,77 @@
+﻿@model WebObligatorio_2_P3.Models.ViewModelSocio
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<hr />
+
+<h2>Baja de socio</h2>
+
+@if (Model != null)
+{
+    <h3>¿Está seguro que desea deshabilitar este socio?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Cedula)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cedula)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NombreYapellido)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NombreYapellido)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FechaNacimiento)
+            </dd>
+        </dl>
+    </div>
+
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Deshabilitar" class="btn btn-danger" />
+            </div>
+        </div>
+    }
+
+}
+
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Error
+    </div>
+}
+@if (ViewBag.Success != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Success
+    </div>
+}
+
+
+
+
+<div>
+    @Html.ActionLink("Regresar a la lista de socios", "Index")
+</div>
+
+

@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Obligatorio 2 P3 - N3A</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Club Deportivo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @* Menu principal *@
+                    @if (Session["usuarioLogueado"] != null)
+                    {
+                        <li><a href="/Usuario/Create">Registrar nuevo Funcionario</a></li>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Mantenimiento de Socio<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Socio/Create">Registro de socio</a></li>
+                                <li><a href="/Socio/Buscar">Buscar socio</a></li>
+                                <li><a href="/Socio/Index">Listar todos los socios</a></li>
+                            </ul>
+                        </li>
+                        }
+                </ul>
+
+                @* Menu de la derecha / Logearse, Desloguearse *@
+            <ul class="nav navbar-nav navbar-right">
+                @if (Session["usuarioLogueado"] == null)
+                {
+                    <li><a href="/Home/Login">Login</a> </li>
+                }
+                @if (Session["usuarioLogueado"] != null)
+                {
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Mi cuenta<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Funcionario: @Session["usuarioLogueado"].ToString()</a></li>
+                            <li><a href="/Home/ExportarInfo">Exportar archivos</a></li>
+                            <li><a href="/Home/Logout">Salir</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"></a></li>             
+                }
+            </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - N3A - Juan Pablo Gil - Juan Ignacio Haro</p>
+            <h4>Universidad ORT</h4>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
