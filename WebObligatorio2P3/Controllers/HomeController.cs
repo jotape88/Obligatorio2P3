@@ -33,7 +33,7 @@ namespace WebObligatorio_2_P3.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(ViewModelUsuario vMUsu) //Lo cambie para que use ViewModel
+        public ActionResult Login(ViewModelUsuario vMUsu)
         {
              Usuario unUsu = new Usuario();
 

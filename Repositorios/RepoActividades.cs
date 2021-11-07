@@ -11,9 +11,31 @@ namespace Repositorios
 {
     public class RepoActividades : IRepoActividades
     {
-        public bool Alta(Actividad obj)
+        public bool Alta(Actividad unaAct)
         {
-            throw new NotImplementedException();
+            bool bandera = false;
+            if (unaAct != null)
+            {
+                if (unaAct.ValidarEdadActiv(unaAct.EdadMinima, unaAct.EdadMaxima))
+                {
+                    try
+                    {
+                        using (ClubContext db = new ClubContext())
+                        {
+                            db.Actividades.Add(unaAct);
+                            db.SaveChanges();
+                            bandera = true;
+                        }
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+
+                }
+
+            }
+            return bandera;
         }
 
         public bool Baja(int id)
@@ -24,41 +46,18 @@ namespace Repositorios
         public Actividad BuscarPorId(int id)
         {
             Actividad unaAct = null;
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            SqlConnection miConexion = new SqlConnection(miString);
             try
             {
-                string miSql = "SELECT * FROM Actividades WHERE Id=@id;";
-                SqlCommand miComando = new SqlCommand(miSql, miConexion);
-                miComando.Parameters.AddWithValue("@id", id);
-
-                miConexion.Open();
-                SqlDataReader miReader = miComando.ExecuteReader();
-                if (miReader.Read())
+                using(ClubContext db = new ClubContext())
                 {
-                    unaAct = new Actividad()
-                    {
-                        Id = miReader.GetInt32(0),
-                        Nombre = miReader.GetString(1),
-                        EdadMinima = miReader.GetInt32(2),
-                        EdadMaxima = miReader.GetInt32(3),
-                    };
+                    unaAct = db.Actividades.Find(id);
                 }
-                miConexion.Close();
-                miConexion.Dispose();
             }
             catch
             {
                 throw;
             }
-            finally
-            {
-                if (miConexion.State == ConnectionState.Open)
-                {
-                    miConexion.Close();
-                    miConexion.Dispose();
-                }
-            }
+
             return unaAct;
         }
 
@@ -70,41 +69,18 @@ namespace Repositorios
         public List<Actividad> TraerTodo()
         {
             List<Actividad> actividades = new List<Actividad>();
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            SqlConnection miConexion = new SqlConnection(miString);
             try
             {
-                string miSql = "SELECT * FROM Actividades";
-                SqlCommand miComando = new SqlCommand(miSql, miConexion);
-
-                miConexion.Open();
-                SqlDataReader miReader = miComando.ExecuteReader();
-                while (miReader.Read())
+                using (ClubContext db = new ClubContext())
                 {
-                    Actividad unaAct = new Actividad
-                    {
-                        Id = miReader.GetInt32(0),
-                        Nombre = miReader.GetString(1),
-                        EdadMinima = miReader.GetInt32(2),
-                        EdadMaxima = miReader.GetInt32(3),
-                    };
-                    actividades.Add(unaAct);
+                    actividades = db.Actividades.ToList();
                 }
-                miConexion.Close();
-                miConexion.Dispose();
             }
             catch
             {
                 throw;
             }
-            finally
-            {
-                if (miConexion.State == ConnectionState.Open)
-                {
-                    miConexion.Close();
-                    miConexion.Dispose();
-                }
-            }
+
             return actividades;
         }
     }

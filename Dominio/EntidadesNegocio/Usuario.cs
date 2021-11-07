@@ -5,14 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography; 
 using System.IO;
+using System.ComponentModel.DataAnnotations; 
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
 {
+    [Table("Usuarios")]
     public class Usuario
     {
+        public int Id { get; set; }
         #region Propiedades
         public string Email { get; set; }
+
         public string Contrasenia { get; set; }
+
+       //[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6}$")]
+        public string ContraseniaDesencriptada { get; set; }
         #endregion
 
         #region Validaciones
@@ -63,6 +71,30 @@ namespace Dominio
                 }
             }
             return stringEncriptacion;
+        }
+
+        public string Desencriptacion(string stringDesencriptar)
+        {
+            string EncryptionKey = "f3m8ajfe=@9r3?-e1231fdASXXe12-e===1";
+            byte[] cipherBytes = Convert.FromBase64String(stringDesencriptar);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[]
+                     { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(),
+                                               CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    stringDesencriptar = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return stringDesencriptar;
         }
         #endregion
     }

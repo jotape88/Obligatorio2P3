@@ -29,56 +29,56 @@ namespace WebObligatorio_2_P3.Controllers
         }
 
         // GET: Usuario/Create
-        public ActionResult Create()
-        {
-            if (Session["usuarioLogueado"] == null)
-            {
-                return View("~/Views/Shared/NoAutorizado.cshtml");
-            }
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    if (Session["usuarioLogueado"] == null)
+        //    {
+        //        return View("~/Views/Shared/NoAutorizado.cshtml");
+        //    }
+        //    return View();
+        //}
 
         // POST: Usuario/Create
-        [HttpPost]
-        public ActionResult Create(ViewModelUsuario vMUsuario)
-        {
-            if (Session["usuarioLogueado"] == null)
-            {
-                return View("~/Views/Shared/NoAutorizado.cshtml");
-            }
-            Usuario unUsu = new Usuario();
-            if (unUsu.ValidarMail(vMUsuario.Email) && unUsu.ValidarContrasenia(vMUsuario.Contrasenia))
-            {
-                string passEncriptada = unUsu.Encriptacion(vMUsuario.Contrasenia);
-                unUsu = repousu.BuscarPorEmail(vMUsuario.Email);
-                if (unUsu == null)
-                {
-                    Usuario usuAux = new Usuario()
-                    {
-                        Email = vMUsuario.Email,
-                        Contrasenia = passEncriptada
-                    };
+        //[HttpPost]
+        //public ActionResult Create(ViewModelUsuario vMUsuario)
+        //{
+        //    if (Session["usuarioLogueado"] == null)
+        //    {
+        //        return View("~/Views/Shared/NoAutorizado.cshtml");
+        //    }
+        //    Usuario unUsu = new Usuario();
+        //    if (unUsu.ValidarMail(vMUsuario.Email) && unUsu.ValidarContrasenia(vMUsuario.Contrasenia))
+        //    {
+        //        string passEncriptada = unUsu.Encriptacion(vMUsuario.Contrasenia);
+        //        unUsu = repousu.BuscarPorEmail(vMUsuario.Email);
+        //        if (unUsu == null)
+        //        {
+        //            Usuario usuAux = new Usuario()
+        //            {
+        //                Email = vMUsuario.Email,
+        //                Contrasenia = passEncriptada
+        //            };
 
-                    if(repousu.Alta(usuAux))
-                    {
-                        ViewBag.Success = "El usuario fue dado de alta";
-                        return View();
-                    }
-                }
-                else
-                {
-                    ViewBag.Error = "El email ya se encuentra registrado, intente nuevamente";
-                    return View();
-                }
-            }
-            else
-            {
-                ViewBag.Error = "El formato del email y/o contraseña no es válido, intente nuevamente";
-                return View();
-            }
+        //            if(repousu.Alta(usuAux))
+        //            {
+        //                ViewBag.Success = "El usuario fue dado de alta";
+        //                return View();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            ViewBag.Error = "El email ya se encuentra registrado, intente nuevamente";
+        //            return View();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Error = "El formato del email y/o contraseña no es válido, intente nuevamente";
+        //        return View();
+        //    }
 
-            return View();
-        }
+        //    return View();
+        //}
 
         // GET: Usuario/Edit/5
         public ActionResult Edit(int id)

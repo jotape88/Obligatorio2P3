@@ -12,7 +12,7 @@ namespace WebObligatorio_2_P3.Models
     public class ViewModelUsuario
     {
         #region Propiedades
-        [Required, DataType(DataType.EmailAddress)] //Validamos mail por data annotations
+        [Required, DataType(DataType.EmailAddress)] 
         public string Email { get; set; }
 
         [Required, Display(Name = "Contraseña"), DataType(DataType.Password)]

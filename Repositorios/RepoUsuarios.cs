@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
+
 using System.Data;
 using System.Data.SqlClient;
+
+using System.Data.Entity;
 
 namespace Repositorios
 {
@@ -14,40 +17,24 @@ namespace Repositorios
         public bool Alta(Usuario unUsuario)
         {
             bool bandera = false;
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            SqlConnection miConexion = new SqlConnection(miString);
             if (unUsuario != null)
             {
-                if(unUsuario.ValidarContrasenia(unUsuario.Contrasenia) && unUsuario.ValidarMail(unUsuario.Email)) 
+                if (unUsuario.ValidarContrasenia(unUsuario.Contrasenia) && unUsuario.ValidarMail(unUsuario.Email))
                 {
                     try
                     {
-                        string miSql = "INSERT INTO Usuarios(Email, Contrasenia) VALUES(@email, @pass);";
-                        SqlCommand miComando = new SqlCommand(miSql, miConexion);
-                        miComando.Parameters.AddWithValue("@email", unUsuario.Email);
-                        miComando.Parameters.AddWithValue("@pass", unUsuario.Contrasenia);
-
-                        miConexion.Open();
-
-                        int filasAfectadas = miComando.ExecuteNonQuery();
-
-                        miConexion.Close();
-                        miConexion.Dispose();
-
-                        bandera = filasAfectadas == 1;
+                        using(ClubContext db = new ClubContext())
+                        {
+                            db.Usuarios.Add(unUsuario);
+                            db.SaveChanges();
+                            bandera = true;
+                        }
                     }
                     catch
                     {
                         throw;
                     }
-                    finally
-                    {
-                        if (miConexion.State == ConnectionState.Open)
-                        {
-                            miConexion.Close();
-                            miConexion.Dispose();
-                        }
-                    }
+
                 }
 
             }
@@ -57,39 +44,17 @@ namespace Repositorios
         public Usuario BuscarPorEmail(string email)
         {
             Usuario unUsuario = null;
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            SqlConnection miConexion = new SqlConnection(miString);
-                try
+            try
+            {
+                using (ClubContext db = new ClubContext())
                 {
-                    string miSql = "SELECT * FROM Usuarios WHERE Email=@email;";
-                    SqlCommand miComando = new SqlCommand(miSql, miConexion);
-                    miComando.Parameters.AddWithValue("@email", email);
-                    miConexion.Open();
-                    SqlDataReader miReader = miComando.ExecuteReader();
-
-                    if (miReader.Read())
-                    {
-                        unUsuario = new Usuario()
-                        {
-                            Email = miReader.GetString(1),
-                            Contrasenia = miReader.GetString(2)
-                        };
-                    }
-                    miConexion.Close();
-                    miConexion.Dispose();
+                unUsuario = db.Usuarios.Where(u => u.Email == email).SingleOrDefault(); 
                 }
+            }
             catch
-                {
-                    throw;
-                }
-                finally
-                {
-                    if (miConexion.State == ConnectionState.Open)
-                    {
-                        miConexion.Close();
-                        miConexion.Dispose();
-                    }
-                }   
+            {
+                throw;
+            }
             return unUsuario;
         }
 
@@ -113,39 +78,16 @@ namespace Repositorios
         public List<Usuario> TraerTodo()
         {
             List<Usuario> usuarios = new List<Usuario>();
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            SqlConnection miConexion = new SqlConnection(miString);
             try
             {
-                string miSql = "SELECT * FROM Usuarios ";
-                SqlCommand miComando = new SqlCommand(miSql, miConexion);
-
-                miConexion.Open();
-                SqlDataReader miReader = miComando.ExecuteReader();
-                while (miReader.Read())
+                using(ClubContext db = new ClubContext())
                 {
-                    Usuario unUsu = new Usuario
-                    {
-                        
-                        Email = miReader.GetString(1),
-                        Contrasenia = miReader.GetString(2)
-                    };
-                    usuarios.Add(unUsu);
+                    usuarios = db.Usuarios.ToList();
                 }
-                miConexion.Close();
-                miConexion.Dispose();
             }
             catch
             {
                 throw;
-            }
-            finally
-            {
-                if (miConexion.State == ConnectionState.Open)
-                {
-                    miConexion.Close();
-                    miConexion.Dispose();
-                }
             }
             return usuarios;
         }
