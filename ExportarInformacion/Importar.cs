@@ -17,18 +17,35 @@ namespace ImportarInformacion
         {
             try
             {
-                string rutaAplicacion = System.Web.HttpRuntime.AppDomainAppPath;
-                IRepoUsuarios usuRepo = FabricaRepositorios.ObtenerRepositorioUsuarios();
+                List<Usuario> usus = new List<Usuario>();
 
+                string rutaAplicacion = System.Web.HttpRuntime.AppDomainAppPath;
                 string rutaArchivoUsuario = Path.Combine(rutaAplicacion, "Archivos", "Usuarios.txt");
-                Stream streamUsuarios = new FileStream(rutaArchivoUsuario, FileMode.Create);
-                StreamWriter swUsu = new StreamWriter(streamUsuarios);
-                List<Usuario> usuarios = usuRepo.TraerTodo();
-                foreach (Usuario usu in usuarios)
+                Stream streamUsuarios = new FileStream(rutaArchivoUsuario, FileMode.Open); //agregue el filemode.open
+                StreamReader miStReader = new StreamReader(streamUsuarios); 
+
+                 string linea = miStReader.ReadLine();
+
+                while (linea != null)
                 {
-                    swUsu.WriteLine(usu.Email + "|" + usu.Contrasenia);
+
                 }
-                swUsu.Close();
+
+
+
+
+                //string rutaAplicacion = System.Web.HttpRuntime.AppDomainAppPath;
+                //IRepoUsuarios usuRepo = FabricaRepositorios.ObtenerRepositorioUsuarios();
+
+                //string rutaArchivoUsuario = Path.Combine(rutaAplicacion, "Archivos", "Usuarios.txt");
+                //Stream streamUsuarios = new FileStream(rutaArchivoUsuario, FileMode.Create);
+                //StreamWriter swUsu = new StreamWriter(streamUsuarios);
+                //List<Usuario> usuarios = usuRepo.TraerTodo();
+                //foreach (Usuario usu in usuarios)
+                //{
+                //    swUsu.WriteLine(usu.Email + "|" + usu.Contrasenia);
+                //}
+                //swUsu.Close();
             }
 
             catch
