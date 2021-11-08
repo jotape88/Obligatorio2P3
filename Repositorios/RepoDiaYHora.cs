@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using Dominio;
+using System.Data.Entity;
 
 
 namespace Repositorios
@@ -24,7 +25,9 @@ namespace Repositorios
                         using (ClubContext db = new ClubContext())
                         {
                             db.DiasYHoras.Add(unDiaYHr);
+                            db.Entry(unDiaYHr.Activ).State = EntityState.Unchanged;
                             db.SaveChanges();
+
                             bandera = true;
                         }
                     }

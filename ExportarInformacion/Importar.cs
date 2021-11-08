@@ -154,7 +154,6 @@ namespace ImportarInformacion
 
         private static DiaYHora ConvertirStringEnDiaHora(string unaLinea, string separador)
         {
-
             try
             {
                 IRepoActividades repoACt = FabricaRepositorios.ObtenerRepositorioActividades();

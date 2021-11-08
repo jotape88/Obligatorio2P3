@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
 {
+    [Table("DiasYHoras")]
     public class DiaYHora
     {
         #region Propiedades
         public int Id { get; set; }
-        public Actividad Activ { get; set; }
         public string Dia { get; set; }
         public decimal Hora { get; set; }
+        public Actividad Activ { get; set; }
+
 
         public int CuposMaximos { get; set; }
         #endregion
