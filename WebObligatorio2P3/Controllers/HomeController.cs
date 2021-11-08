@@ -48,12 +48,12 @@ namespace WebObligatorio_2_P3.Controllers
                          Session["usuarioLogueado"] = vMUsu.Email;
                          return RedirectToAction("Index", "Home");
                      }
-                     ViewBag.Error = "Los datos ingresados no son correctos, intente nuevamente";
+                     ViewBag.Error = "Los datos ingresados no son correctos, intente nuevamente y/o verifique que se hayan importado los usuarios";
                      return View();
                  }
                  else
                  {
-                     ViewBag.Error = "Los datos ingresados no son correctos, intente nuevamente"; //El mensaje se repite porque validamos mail y contraseña en forma separada, y por seguridad no decimos que es lo que falló
+                     ViewBag.Error = "Los datos ingresados no son correctos, intente nuevamente y/o verifique que se hayan importado los usuarios"; //El mensaje se repite porque validamos mail y contraseña en forma separada, y por seguridad no decimos que es lo que falló
                      return View();
                  }
              }
@@ -79,15 +79,27 @@ namespace WebObligatorio_2_P3.Controllers
 
         public ActionResult ImportarUsuarios()
         {
-            bool ok = Importar.ImportarUsuarios();      
-            ViewBag.Resultado = true; 
+            if (Importar.ImportarUsuarios())
+            {
+                ViewBag.Success = "Los usuarios se importaron con éxito";
+            }
+            else
+            {
+                ViewBag.Error = "Hubo un error durante la importacion de los usuarios";
+            }
             return View();
         }
 
         public ActionResult ImportarActividades()
         {
-            bool ok = Importar.ImportarActividades();
-            ViewBag.Resultado = true;
+            if (Importar.ImportarActividades())
+            {
+                ViewBag.Success = "Las actividades se importaron con éxito";
+            }
+            else
+            {
+                ViewBag.Success = "Hubo un error durante la importacion de las actividades";
+            }
             return View();
         }
 

@@ -15,9 +15,8 @@ namespace Dominio
 
         public int Id { get; set; }
 
-        //[Index (IsUnique = true), Required, StringLength(30)]
+        [Index (IsUnique = true), StringLength(15)]
         public string Nombre { get; set; }
-
         [Range(3, 90)]
         public int EdadMinima { get; set; }
         [Range(3, 90)]

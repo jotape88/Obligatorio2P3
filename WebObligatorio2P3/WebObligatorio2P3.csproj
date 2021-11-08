@@ -215,6 +215,8 @@
     <Content Include="Views\Socio\IngresoFechasLista.cshtml" />
     <Content Include="Views\Socio\ListarIngresos.cshtml" />
     <Content Include="Views\Shared\NoAutorizado.cshtml" />
+    <Content Include="Views\Home\ImportarUsuarios.cshtml" />
+    <Content Include="Views\Home\ImportarActividades.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
