@@ -36,19 +36,19 @@ namespace ImportarInformacion
                     {
                         if (repoUsuarios.BuscarPorEmail(unUsuario.Email) == null)
                         {
-                            repoUsuarios.Alta(unUsuario);
+                            if (repoUsuarios.Alta(unUsuario)) bandera = true;
                         }
                     }
                     unaLinea = miStReader.ReadLine();
                 }
-                bandera = true;
+                miStReader.Close();
             }
 
             catch
             {
                 throw;
             }
-            return true;
+            return bandera;
         }
 
         private static Usuario ConvertirStringEnUsuario(string unaLinea, string separador)
@@ -92,6 +92,7 @@ namespace ImportarInformacion
                     }
                     unaLinea = miStReader.ReadLine();
                 }
+                miStReader.Close();
                 ImportarDiasYHoras();
                 bandera = true;
             }
@@ -143,6 +144,7 @@ namespace ImportarInformacion
                     }
                     unaLinea = miStReader.ReadLine();
                 }
+                miStReader.Close();
                 bandera = true;
             }
             catch

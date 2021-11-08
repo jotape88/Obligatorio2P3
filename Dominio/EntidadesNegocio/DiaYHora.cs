@@ -12,7 +12,7 @@ namespace Dominio
     public class DiaYHora
     {
         #region Propiedades
-        [DatabaseGenerated(DatabaseGeneratedOption.None)] //Usamos las ids del Archivo
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)] //Usamos las ids del Archivo
         public int Id { get; set; }
         public string Dia { get; set; }
         public decimal Hora { get; set; }

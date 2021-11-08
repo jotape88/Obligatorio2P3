@@ -19,9 +19,10 @@ namespace Repositorios
             bool bandera = false;
             if (unUsuario != null)
             {
-                if (unUsuario.ValidarContrasenia(unUsuario.Contrasenia) && unUsuario.ValidarMail(unUsuario.Email))
-                {
-                    try
+                    if (unUsuario.ValidarContrasenia(unUsuario.ContraseniaDesencriptada) && unUsuario.ValidarMail(unUsuario.Email)) //Tenemos que validar la contrasenia desencriptada
+                   //if (unUsuario.ValidarMail(unUsuario.Email)) //Tenemos que validar la contrasenia desencriptada
+                    {
+                        try
                     {
                         using(ClubContext db = new ClubContext())
                         {

@@ -79,14 +79,22 @@ namespace WebObligatorio_2_P3.Controllers
 
         public ActionResult ImportarUsuarios()
         {
-            if (Importar.ImportarUsuarios())
+            try
             {
-                ViewBag.Success = "Los usuarios se importaron con éxito";
+                if (Importar.ImportarUsuarios())
+                {
+                    ViewBag.Success = "Los usuarios se importaron con éxito";
+                }
+                else
+                {
+                    ViewBag.Warning = "No se encontraron usuarios nuevos en el archivo y/o los datos no cumplen con el formato requerido";
+                }
             }
-            else
+            catch(Exception laExc)
             {
-                ViewBag.Error = "Hubo un error durante la importacion de los usuarios";
+                ViewBag.Error = "Error en la importacion: " + laExc.Message;
             }
+
             return View();
         }
 

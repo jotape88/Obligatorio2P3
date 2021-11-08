@@ -13,13 +13,14 @@ namespace Dominio
     [Table("Usuarios")]
     public class Usuario
     {
-        public int Id { get; set; }
         #region Propiedades
+        public int Id { get; set; }
+        [Required, Index(IsUnique = true), EmailAddress, StringLength(50)] //El mail lo validamos con EmailAdress, si dato con un formato incorrecto, el resto de los usuarios no los carga, es unico y el strenth length es para el unique
         public string Email { get; set; }
-
+        [Required]
         public string Contrasenia { get; set; }
 
-       //[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6}$")]
+        [Required, RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$")] //Que requiera mayusculas y minusculas y que requiera digitos (\d)
         public string ContraseniaDesencriptada { get; set; }
         #endregion
 
@@ -54,7 +55,7 @@ namespace Dominio
         public string Encriptacion(string stringEncriptacion)
         {
             string llaveEncriptacion = "f3m8ajfe=@9r3?-e1231fdASXXe12-e===1";
-            byte[] clearBytes = Encoding.Unicode.GetBytes(stringEncriptacion);
+            byte[] cipherBytes = Encoding.Unicode.GetBytes(stringEncriptacion);
             using (Aes encryptor = Aes.Create())
             {
                 Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(llaveEncriptacion, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
@@ -64,7 +65,7 @@ namespace Dominio
                 {
                     using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
                     {
-                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
                         cs.Close();
                     }
                     stringEncriptacion = Convert.ToBase64String(ms.ToArray());
@@ -75,11 +76,11 @@ namespace Dominio
 
         public string Desencriptacion(string stringDesencriptar)
         {
-            string EncryptionKey = "f3m8ajfe=@9r3?-e1231fdASXXe12-e===1";
+            string llaveEncriptacion = "f3m8ajfe=@9r3?-e1231fdASXXe12-e===1";
             byte[] cipherBytes = Convert.FromBase64String(stringDesencriptar);
             using (Aes encryptor = Aes.Create())
             {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[]
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(llaveEncriptacion, new byte[]
                      { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
                 encryptor.Key = pdb.GetBytes(32);
                 encryptor.IV = pdb.GetBytes(16);
