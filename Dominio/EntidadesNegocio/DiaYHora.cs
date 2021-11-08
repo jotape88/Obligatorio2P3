@@ -26,7 +26,6 @@ namespace Dominio
         public bool ValidarDiaYHora(string unDia, decimal unaHora)
         {
             bool bandera = false;
-
             if(unDia == "Lunes" || unDia == "Martes" || unDia == "Miercoles" || unDia == "Jueves" || unDia == "Viernes")
             {
                 decimal contador = 7;

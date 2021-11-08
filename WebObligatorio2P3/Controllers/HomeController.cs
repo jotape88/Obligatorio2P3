@@ -100,28 +100,21 @@ namespace WebObligatorio_2_P3.Controllers
 
         public ActionResult ImportarActividades()
         {
-            if (Importar.ImportarActividades())
+            try
             {
-                ViewBag.Success = "Las actividades se importaron con éxito";
+                if (Importar.ImportarActividades())
+                {
+                    ViewBag.Success = "Las actividades se importaron con éxito";
+                }
+                else
+                {
+                    ViewBag.Warning = "No se encontraron actividades nuevas en el archivo y/o los datos no cumplen con el formato requerido";
+                }
             }
-            else
+            catch (Exception laExc)
             {
-                ViewBag.Success = "Hubo un error durante la importacion de las actividades";
+                ViewBag.Error = "Error en la importacion: " + laExc.Message;
             }
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
         #endregion

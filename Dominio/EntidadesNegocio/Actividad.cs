@@ -12,10 +12,8 @@ namespace Dominio
     public class Actividad
     {
         #region Propiedades
-
         public int Id { get; set; }
-
-        [Index (IsUnique = true), StringLength(15)]
+        [Index (IsUnique = true), StringLength(20)]
         public string Nombre { get; set; }
         [Range(3, 90)]
         public int EdadMinima { get; set; }

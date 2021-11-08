@@ -17,7 +17,12 @@
         @ViewBag.Success
     </div>
 }
-
+@if (ViewBag.Warning != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @ViewBag.Warning
+    </div>
+}
 
 
 

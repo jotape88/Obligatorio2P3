@@ -47,46 +47,20 @@ namespace Repositorios
             throw new NotImplementedException();
         }
 
-        public DiaYHora BuscarPorId(int id)
+        public DiaYHora BuscarPorId(int id) //Implemente este metodo
         {
             DiaYHora unDiaYHora = null;
-            //string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            //SqlConnection miConexion = new SqlConnection(miString);
-            //try
-            //{
-            //    string miSql = "SELECT * FROM DiaYHora WHERE Id=@id;";
-            //    SqlCommand miComando = new SqlCommand(miSql, miConexion);
-            //    RepoActividades repoAct = new RepoActividades();
-            //    miComando.Parameters.AddWithValue("@id", id);
-
-            //    miConexion.Open();
-            //    SqlDataReader miReader = miComando.ExecuteReader();
-            //    if (miReader.Read())
-            //    {
-            //        unDiaYHora = new DiaYHora()
-            //        {
-            //            Id = miReader.GetInt32(0),
-            //            Activ = repoAct.BuscarPorId(miReader.GetInt32(1)),
-            //            Dia = miReader.GetString(2),
-            //            Hora = miReader.GetDecimal(3),
-            //            CuposMaximos = miReader.GetInt32(4)
-            //        };
-            //    }
-            //    miConexion.Close();
-            //    miConexion.Dispose();
-            //}
-            //catch
-            //{
-            //    throw;
-            //}
-            //finally
-            //{
-            //    if (miConexion.State == ConnectionState.Open)
-            //    {
-            //        miConexion.Close();
-            //        miConexion.Dispose();
-            //    }
-            //}
+            try
+            {
+                using (ClubContext db = new ClubContext())
+                {
+                    unDiaYHora = db.DiasYHoras.Find(id);
+                }
+            }
+            catch
+            {
+                throw;
+            }
             return unDiaYHora;
         }
 

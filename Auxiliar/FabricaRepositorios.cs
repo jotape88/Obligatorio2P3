@@ -45,4 +45,5 @@ namespace Auxiliar
             return new RepoIngresosActividades();
         }
     }
+
 }
