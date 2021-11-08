@@ -1,4 +1,5 @@
 1|Boxeo|13|60
+25|Boxeo|13|60
 2|Abdominales|13|60
 3|Pilates|3|90
 4|Pileta|3|90

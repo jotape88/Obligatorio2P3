@@ -35,34 +35,40 @@ namespace WebObligatorio_2_P3.Controllers
         [HttpPost]
         public ActionResult Login(ViewModelUsuario vMUsu)
         {
-             Usuario unUsu = new Usuario();
+            try
+            {
+                Usuario unUsu = new Usuario();
 
-             if (unUsu.ValidarMail(vMUsu.Email) && unUsu.ValidarContrasenia(vMUsu.Contrasenia))
-             {
-                 unUsu = repousu.BuscarPorEmail(vMUsu.Email);
-                 if (unUsu != null)
-                 {
-                     string passEncriptada = unUsu.Encriptacion(vMUsu.Contrasenia); //Encripto la contrasenia recibida para compararla con la contrasenia encriptada de la base
-                     if (unUsu.Contrasenia == passEncriptada)
-                     {
-                         Session["usuarioLogueado"] = vMUsu.Email;
-                         return RedirectToAction("Index", "Home");
-                     }
-                     ViewBag.Error = "Los datos ingresados no son correctos, intente nuevamente y/o verifique que se hayan importado los usuarios";
-                     return View();
-                 }
-                 else
-                 {
-                     ViewBag.Error = "Los datos ingresados no son correctos, intente nuevamente y/o verifique que se hayan importado los usuarios"; //El mensaje se repite porque validamos mail y contraseña en forma separada, y por seguridad no decimos que es lo que falló
-                     return View();
-                 }
-             }
-             else
-             {
-                 ViewBag.Error = "El formato del email y/o contraseña no es válido, intente nuevamente";
-                 return View();
-             }
-            
+                if (unUsu.ValidarMail(vMUsu.Email) && unUsu.ValidarContrasenia(vMUsu.Contrasenia))
+                {
+                    unUsu = repousu.BuscarPorEmail(vMUsu.Email);
+                    if (unUsu != null)
+                    {
+                        string passEncriptada = unUsu.Encriptacion(vMUsu.Contrasenia); //Encripto la contrasenia recibida desde el viewModel
+                        if (unUsu.Contrasenia == passEncriptada) //La comparo con la contraseña encriptada en la BD
+                        {
+                            Session["usuarioLogueado"] = vMUsu.Email;
+                            return RedirectToAction("Index", "Home");
+                        }
+                        ViewBag.Warning = "Los datos ingresados no son correctos, intente nuevamente y/o verifique que se hayan importado los usuarios";
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.Warning = "Los datos ingresados no son correctos, intente nuevamente y/o verifique que se hayan importado los usuarios"; //El mensaje se repite dos veces porque validamos mail y contraseña en forma separada, y por seguridad no decimos que es lo que falló
+                        return View();
+                    }
+                }
+                else
+                {
+                    ViewBag.Warning = "El formato del email y/o contraseña no es válido, intente nuevamente";
+                    return View();
+                }
+            }
+            catch (Exception laExc)
+            {
+                return View("~/Views/Shared/Error.cshtml"); //Al ser el Login un campo sensisble con respecto a la seguridad, no devolvemos ningún mensaje proveniente de la exception/innerException
+            }
         }
 
         public ActionResult Logout()
@@ -71,11 +77,9 @@ namespace WebObligatorio_2_P3.Controllers
             {
                 return View("~/Views/Shared/NoAutorizado.cshtml");
             }
-
             Session.Clear();
             return RedirectToAction("Login", "Home");
         }
-
 
         public ActionResult ImportarUsuarios()
         {
@@ -90,9 +94,17 @@ namespace WebObligatorio_2_P3.Controllers
                     ViewBag.Warning = "No se encontraron usuarios nuevos en el archivo y/o los datos no cumplen con el formato requerido";
                 }
             }
-            catch(Exception laExc)
+            catch (Exception laExc)
             {
-                ViewBag.Error = "Error en la importacion: " + laExc.Message;
+                if (laExc.InnerException == null)
+                {
+                    ViewBag.Error = "Error de sistema: " + laExc.Message;
+                }
+                while (laExc.InnerException != null)
+                {
+                    ViewBag.Error = "Error de sistema: " + laExc.InnerException.Message;
+                    laExc = laExc.InnerException;
+                }
             }
 
             return View();
@@ -113,7 +125,15 @@ namespace WebObligatorio_2_P3.Controllers
             }
             catch (Exception laExc)
             {
-                ViewBag.Error = "Error en la importacion: " + laExc.Message;
+                if (laExc.InnerException == null)
+                {
+                    ViewBag.Error = "Error de sistema: " + laExc.Message;
+                }
+                while (laExc.InnerException != null)
+                {
+                    ViewBag.Error = "Error de sistema: " + laExc.InnerException.Message;
+                    laExc = laExc.InnerException;
+                }
             }
             return View();
         }

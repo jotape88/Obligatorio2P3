@@ -36,14 +36,13 @@ namespace ImportarInformacion
                     {
                         if (repoUsuarios.BuscarPorEmail(unUsuario.Email) == null)
                         {
-                            if (repoUsuarios.Alta(unUsuario)) bandera = true; //Seteamos la bandera aca, en caso de que no se agregue ningun usuario, nos devuelve el mensaje correspondiente
+                            bandera = repoUsuarios.Alta(unUsuario); //Al setear la bandera aca, en caso de que no se agregue ningun usuario, nos devuelve el mensaje correspondiente
                         }
                     }
                     unaLinea = miStReader.ReadLine();
                 }
                 miStReader.Close();
             }
-
             catch
             {
                 throw;
@@ -87,14 +86,13 @@ namespace ImportarInformacion
                     {
                         if (repoActividades.BuscarPorId(unaAct.Id) == null) //El unique de la Data Annotation no nos sirve para verificar, ya que tira excepcion y no ingresa el resto de las actividades
                         {
-                            if (repoActividades.Alta(unaAct)) bandera = true;
+                            bandera = repoActividades.Alta(unaAct);
                         }
                     }
                     unaLinea = miStReader.ReadLine();
                 }
                 miStReader.Close();
                 ImportarDiasYHoras();
-                //bandera = true;
             }
             catch
             {
@@ -114,8 +112,6 @@ namespace ImportarInformacion
             return null;
         }
 
-        ///////////////////////////////////
-        ///
 
         public static bool ImportarDiasYHoras()
         {
@@ -139,7 +135,7 @@ namespace ImportarInformacion
                     {
                         if (repoDiasHrs.BuscarPorId(unDiaHr.Id) == null) //Agregue buscar por id para que no se repitan los ingresos
                         {
-                            if (repoDiasHrs.Alta(unDiaHr)) bandera = true; //Mismo que actividades
+                            bandera = repoDiasHrs.Alta(unDiaHr); //Mismo que actividades
                         }
                     }
                     unaLinea = miStReader.ReadLine();

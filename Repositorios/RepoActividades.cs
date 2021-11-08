@@ -16,7 +16,7 @@ namespace Repositorios
             bool bandera = false;
             if (unaAct != null)
             {
-                if (unaAct.ValidarEdadActiv(unaAct.EdadMinima, unaAct.EdadMaxima))
+                if (unaAct.ValidarEdadActiv(unaAct.EdadMinima, unaAct.EdadMaxima) && unaAct.ValidarNombreAct(unaAct.Nombre)) //Aca validamos que el nombre no sea vacio
                 {
                     try
                     {
@@ -80,7 +80,6 @@ namespace Repositorios
             {
                 throw;
             }
-
             return actividades;
         }
     }

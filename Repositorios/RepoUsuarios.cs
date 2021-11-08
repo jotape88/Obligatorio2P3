@@ -19,25 +19,24 @@ namespace Repositorios
             bool bandera = false;
             if (unUsuario != null)
             {
-                    if (unUsuario.ValidarContrasenia(unUsuario.ContraseniaDesencriptada) && unUsuario.ValidarMail(unUsuario.Email)) //Tenemos que validar la contrasenia desencriptada
-                   //if (unUsuario.ValidarMail(unUsuario.Email)) //Tenemos que validar la contrasenia desencriptada
+                if (unUsuario.ValidarContrasenia(unUsuario.ContraseniaDesencriptada) && unUsuario.ValidarMail(unUsuario.Email)) //Tenemos que validar la contrasenia desencriptada
+                //if (unUsuario.ValidarMail(unUsuario.Email)) //Tenemos que validar la contrasenia desencriptada
+                {
+                try
+                {
+                    using(ClubContext db = new ClubContext())
                     {
-                        try
-                    {
-                        using(ClubContext db = new ClubContext())
-                        {
-                            db.Usuarios.Add(unUsuario);
-                            db.SaveChanges();
-                            bandera = true;
-                        }
+                        db.Usuarios.Add(unUsuario);
+                        db.SaveChanges();
+                        bandera = true;
                     }
-                    catch
-                    {
-                        throw;
-                    }
-
+                }
+                catch
+                {
+                    throw;
                 }
 
+                }
             }
             return bandera;
         }
@@ -49,7 +48,7 @@ namespace Repositorios
             {
                 using (ClubContext db = new ClubContext())
                 {
-                unUsuario = db.Usuarios.Where(u => u.Email == email).SingleOrDefault(); 
+                    unUsuario = db.Usuarios.Where(u => u.Email == email).SingleOrDefault(); 
                 }
             }
             catch
