@@ -1,6 +1,9 @@
 20|   |13|60
 1|Boxeo|13|60
+14|Boxeo|13|60
 2|Abdominales|13|60
+15|Karate|1|60
+16|KarateAvanzado|85|15
 3|Pilates|3|90
 4|Pileta|3|90
 5|Funcional|12|90

@@ -13,7 +13,6 @@ namespace ImportarInformacion
 {
     public class Importar
     {
-
         public static bool ImportarUsuarios()
         {
             bool bandera = false;
@@ -63,7 +62,6 @@ namespace ImportarInformacion
             return null;
         }
 
-
         public static bool ImportarActividades()
         {
             bool bandera = false;
@@ -111,7 +109,6 @@ namespace ImportarInformacion
             }
             return null;
         }
-
 
         public static bool ImportarDiasYHoras()
         {

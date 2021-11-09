@@ -2,6 +2,7 @@
 25|1|Lunes|7.00|10
 3|1|Miercoles|7.00|10
 3|1|Miercoles|7.00|10
+26|1|Viernes|3.00|10
 4|1|Viernes|7.00|10
 5|1|Lunes|15.00|10
 6|1|Miercoles|15.00|10

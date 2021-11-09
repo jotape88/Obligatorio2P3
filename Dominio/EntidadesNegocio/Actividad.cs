@@ -12,6 +12,7 @@ namespace Dominio
     public class Actividad
     {
         #region Propiedades
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)] //Usamos las ids del Archivo (sino hay errores)
         public int Id { get; set; }
         [Required, Index (IsUnique = true), StringLength(20)] //Para el punto de validar el nombre y tampoco unique, porque tira exception y no ingresa el resto de las actividades cuando la letra pide que si
         public string Nombre { get; set; }
