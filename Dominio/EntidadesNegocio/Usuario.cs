@@ -15,32 +15,31 @@ namespace Dominio
     {
         #region Propiedades
         public int Id { get; set; }
-        [Required, Index(IsUnique = true), EmailAddress, StringLength(50)] //El mail lo validamos con EmailAdress, si dato con un formato incorrecto, el resto de los usuarios no los carga, es unico y el strenth length es para el unique
+        [Required, Index(IsUnique = true), EmailAddress, StringLength(60)] //El mail lo validamos con EmailAdress, strenth length es para el largo de la tabla en la bd
         public string Email { get; set; }
         [Required]
         public string Contrasenia { get; set; }
-        [Required, RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$")] //Que requiera mayusculas y minusculas y que requiera digitos (\d)
+        [Required, RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$"), StringLength(50)] 
         public string ContraseniaDesencriptada { get; set; }
         #endregion
 
+        //Validamos por DataAnnotations y a su vez también por métodos
+
         #region Validaciones
-        public bool ValidarContrasenia(string contrasenia)
+        public bool ValidarContrasenia(string contrasenia) 
         {
             if(contrasenia != null) 
             {
                 return contrasenia.Length >= 6 && contrasenia.Any(char.IsDigit) && contrasenia.Any(char.IsLower) && contrasenia.Any(char.IsUpper);
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
-        public bool ValidarMail(string mail)
+        public bool ValidarMail(string mail) 
         {
             try
             {
-                var unEmail = new System.Net.Mail.MailAddress(mail);
+                var unEmail = new System.Net.Mail.MailAddress(mail); //Si pasamos algo que no es un mail (ej numeros), nos devuelve una exception, por lo tanto retornamos false
                 return unEmail.Address == mail && mail.Length > 4;
             }
             catch

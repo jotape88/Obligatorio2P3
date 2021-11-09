@@ -8,8 +8,8 @@ namespace Dominio
 {
     public interface IRepoDiaYHora: IRepositorio<DiaYHora>
     {
-
         List<DiaYHora> TraerTodoFiltrado(string dia, decimal hora);
 
+        bool BuscarActivsEnMismoDiaYHora(DiaYHora unDhYHr);
     }
 }

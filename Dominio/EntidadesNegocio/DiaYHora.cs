@@ -17,8 +17,6 @@ namespace Dominio
         public string Dia { get; set; }
         public decimal Hora { get; set; }
         public Actividad Activ { get; set; }
-
-
         public int CuposMaximos { get; set; }
         #endregion
 

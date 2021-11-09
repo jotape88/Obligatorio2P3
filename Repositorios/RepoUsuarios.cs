@@ -17,25 +17,25 @@ namespace Repositorios
         public bool Alta(Usuario unUsuario)
         {
             bool bandera = false;
+            int filasAf = 0;
             if (unUsuario != null)
             {
-                if (unUsuario.ValidarContrasenia(unUsuario.ContraseniaDesencriptada) && unUsuario.ValidarMail(unUsuario.Email)) //Tenemos que validar la contrasenia desencriptada
-                //if (unUsuario.ValidarMail(unUsuario.Email)) //Tenemos que validar la contrasenia desencriptada
+                if(unUsuario.ValidarContrasenia(unUsuario.ContraseniaDesencriptada) && unUsuario.ValidarMail(unUsuario.Email)) //Tenemos que validar la contrasenia desencriptada
+                //if (unUsuario.ValidarMail(unUsuario.Email)) //Si validamos por data annotations, no podemos ingresar el resto de los usuarios
                 {
-                try
-                {
-                    using(ClubContext db = new ClubContext())
+                    try
                     {
-                        db.Usuarios.Add(unUsuario);
-                        db.SaveChanges();
-                        bandera = true;
+                        using(ClubContext db = new ClubContext())
+                        {
+                            db.Usuarios.Add(unUsuario);
+                            filasAf = db.SaveChanges();
+                            bandera = filasAf > 0;
+                        }
                     }
-                }
-                catch
-                {
-                    throw;
-                }
-
+                    catch
+                    {
+                        return false;
+                    }
                 }
             }
             return bandera;

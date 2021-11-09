@@ -16,6 +16,7 @@ namespace Repositorios
         public bool Alta(DiaYHora unDiaYHr)
         {
             bool bandera = false;
+            int filasAf = 0;
             if (unDiaYHr != null)
             {
                 if (unDiaYHr.ValidarDiaYHora(unDiaYHr.Dia, unDiaYHr.Hora))
@@ -26,16 +27,14 @@ namespace Repositorios
                         {
                             db.DiasYHoras.Add(unDiaYHr);
                             db.Entry(unDiaYHr.Activ).State = EntityState.Unchanged;
-                            db.SaveChanges();
-
-                            bandera = true;
+                            filasAf = db.SaveChanges();
+                            bandera = filasAf > 0;
                         }
                     }
                     catch
                     {
-                        throw;
+                        return false;
                     }
-
                 }
 
             }
@@ -47,7 +46,15 @@ namespace Repositorios
             throw new NotImplementedException();
         }
 
-        public DiaYHora BuscarPorId(int id) //Implemente este metodo
+        public bool BuscarActivsEnMismoDiaYHora(DiaYHora unDhYHr) //Con esto verificamos si hay actividades repetidas (mismo idact, dia y hora) en el archivo DiasYhoras
+        {
+            using (ClubContext db = new ClubContext())
+            {
+                return db.DiasYHoras.Any(dh => dh.Activ.Id == unDhYHr.Activ.Id && dh.Dia == unDhYHr.Dia && dh.Hora == unDhYHr.Hora);
+            }
+        }
+
+        public DiaYHora BuscarPorId(int id)
         {
             DiaYHora unDiaYHora = null;
             try

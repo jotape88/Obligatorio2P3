@@ -14,6 +14,7 @@ namespace Repositorios
         public bool Alta(Actividad unaAct)
         {
             bool bandera = false;
+            int filasAf = 0;
             if (unaAct != null)
             {
                 if (unaAct.ValidarEdadActiv(unaAct.EdadMinima, unaAct.EdadMaxima) && unaAct.ValidarNombreAct(unaAct.Nombre)) //Aca validamos que el nombre no sea vacio
@@ -23,13 +24,13 @@ namespace Repositorios
                         using (ClubContext db = new ClubContext())
                         {
                             db.Actividades.Add(unaAct);
-                            db.SaveChanges();
-                            bandera = true;
+                            filasAf = db.SaveChanges();
+                            bandera = filasAf > 0;
                         }
                     }
                     catch
                     {
-                        throw;
+                        return false;
                     }
 
                 }

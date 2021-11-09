@@ -84,7 +84,7 @@ namespace ImportarInformacion
 
                     if (unaAct != null)
                     {
-                        if (repoActividades.BuscarPorId(unaAct.Id) == null) //El unique de la Data Annotation no nos sirve para verificar, ya que tira excepcion y no ingresa el resto de las actividades
+                        if (repoActividades.BuscarPorId(unaAct.Id) == null) 
                         {
                             bandera = repoActividades.Alta(unaAct);
                         }
@@ -133,7 +133,7 @@ namespace ImportarInformacion
 
                     if (unDiaHr != null)
                     {
-                        if (repoDiasHrs.BuscarPorId(unDiaHr.Id) == null) //Agregue buscar por id para que no se repitan los ingresos
+                        if (repoDiasHrs.BuscarPorId(unDiaHr.Id) == null && !repoDiasHrs.BuscarActivsEnMismoDiaYHora(unDiaHr)) //Agregue buscar por id para que no se repitan los ingresos y tambien buscamos que no se repitan en el mismo dia las actividades
                         {
                             bandera = repoDiasHrs.Alta(unDiaHr); //Mismo que actividades
                         }

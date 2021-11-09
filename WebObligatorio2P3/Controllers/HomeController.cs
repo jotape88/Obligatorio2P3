@@ -65,7 +65,7 @@ namespace WebObligatorio_2_P3.Controllers
                     return View();
                 }
             }
-            catch (Exception laExc)
+            catch
             {
                 return View("~/Views/Shared/Error.cshtml"); //Al ser el Login un campo sensisble con respecto a la seguridad, no devolvemos ningún mensaje proveniente de la exception/innerException
             }

@@ -13,7 +13,7 @@ namespace Dominio
     {
         #region Propiedades
         public int Id { get; set; }
-        [Index (IsUnique = true), StringLength(20)] //Para el punto de validar el nombre y tampoco unique, porque tira exception y no ingresa el resto de las actividades cuando la letra pide que si
+        [Required, Index (IsUnique = true), StringLength(20)] //Para el punto de validar el nombre y tampoco unique, porque tira exception y no ingresa el resto de las actividades cuando la letra pide que si
         public string Nombre { get; set; }
         [Range(3, 90)]
         public int EdadMinima { get; set; }
@@ -21,17 +21,17 @@ namespace Dominio
         public int EdadMaxima { get; set; }
         #endregion
 
+        //Validamos por DataAnnotations y a su vez también por métodos
+
         #region Metodos
         public bool ValidarEdadActiv(int edadMinima, int edadMaxima)
         {
-            return edadMinima < edadMaxima;
+            return edadMinima >= 3 && edadMaxima <= 90 && edadMinima < edadMaxima;
         }
 
         public bool ValidarNombreAct(string nom)
         {
-            //nom = nom.Trim();
-            //return nom.Length > 2;
-            return !string.IsNullOrWhiteSpace(nom); //Es lo mismo que lo anterior lo seteamos en false, porque sino nos devuelve true cuando se cumple la condicion
+            return !string.IsNullOrWhiteSpace(nom); //Validamos que no hayan espacios en blanco o que sea null
         }
 
         #endregion
