@@ -13,7 +13,7 @@ namespace Repositorios
     {
         public bool Alta(Actividad unaAct)
         {
-           bool bandera = false;
+            bool bandera = false;
             int filasAf = 0;
             if (unaAct != null)
             {

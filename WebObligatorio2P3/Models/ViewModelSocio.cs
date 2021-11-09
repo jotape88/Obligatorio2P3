@@ -12,16 +12,16 @@ namespace WebObligatorio_2_P3.Models
     {
         #region Propiedades
         public int Id { get; set; }
-
-        [Range(0, int.MaxValue, ErrorMessage = "Ingrese un número válido")]
-        [Required, Display(Name = "Cédula")]
+        //@"^.*[a-zA-Z0-9][/\\]$"
+        [RegularExpression(@"^[0-9]{7,9}$", ErrorMessage = "Ingrese un cédula válida de entre 7 y 9 dígitos sin puntos ni guíones")] //Modificado
+        [Required, Display(Name = "Cédula"), StringLength(10)]
         public string Cedula { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Debe ingresar solo letras")]
+        [RegularExpression(@"^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]{6,}$", ErrorMessage = "Mínimo 6 caracteres, debe ingresar solo letras y sin espacios en blanco ni al inicio ni al final")] //Modificado                                                                                                                                                                      //Modificado
         [Required, Display(Name = "Nombre y apellido")] 
         public string NombreYapellido { get; set; }
 
-        [Required, Display(Name = "Fecha de Nacimiento"), DataType(DataType.Date)] //Agregado DataType para mostrar fecha corta
+        [Required, Display(Name = "Fecha de Nacimiento"), DataType(DataType.Date)] //DataType.Date muestra una fecha corta
         public DateTime FechaNacimiento { get; set; }
 
         [Display(Name = "Activo")] 

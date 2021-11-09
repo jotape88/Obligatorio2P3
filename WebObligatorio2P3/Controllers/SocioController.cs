@@ -202,7 +202,8 @@ namespace WebObligatorio_2_P3.Controllers
                 return View("~/Views/Shared/NoAutorizado.cshtml");
             }
             Socio unSoc = new Socio(); 
-            if (unSoc.ValidarNomYApell(vMSocio.NombreYapellido) && unSoc.ValidarEdad(vMSocio.FechaNacimiento) && unSoc.ValidarCi(vMSocio.Cedula))
+           // if (unSoc.ValidarNomYApell(vMSocio.NombreYapellido) && unSoc.ValidarEdad(vMSocio.FechaNacimiento) && unSoc.ValidarCi(vMSocio.Cedula)) El mensaje del else de este if estaba mal
+            if (unSoc.ValidarEdad(vMSocio.FechaNacimiento))
             {
                 unSoc = repoSoc.BuscarPorCedula(vMSocio.Cedula); 
                 if (unSoc == null)
@@ -228,7 +229,7 @@ namespace WebObligatorio_2_P3.Controllers
             }
             else
             {
-                ViewBag.Error = "El formato del nombre-apellido y/o cédula no es válido, intente nuevamente";
+                ViewBag.Error = "La edad debe estar comprendida entre 3 y 90 años inclusive"; //Inclusive o exclusive? En la bd hay actividades de 3 y 90 años
                 return View();
             }
             return View();

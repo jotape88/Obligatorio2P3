@@ -69,7 +69,7 @@ namespace Dominio
             {
                 --edad;
             }
-            return edad > 3 && edad < 90;
+            return edad >= 3 && edad <= 90; //lo cambie porque en la bd hay edades de 3 y 90
         }
         #endregion
 
