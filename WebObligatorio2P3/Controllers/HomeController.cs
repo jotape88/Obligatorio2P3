@@ -55,13 +55,13 @@ namespace WebObligatorio_2_P3.Controllers
                     }
                     else
                     {
-                        ViewBag.Warning = "Los datos ingresados no son correctos, intente nuevamente y/o verifique que se hayan importado los usuarios"; //El mensaje se repite dos veces porque validamos mail y contraseña en forma separada, y por seguridad no decimos que es lo que falló
+                        ViewBag.Warning = "Los datos ingresados no son correctos, intente nuevamente y/o verifique que se hayan importado los usuarios"; 
                         return View();
                     }
                 }
                 else
                 {
-                    ViewBag.Warning = "El formato del email y/o contraseña no es válido, intente nuevamente";
+                    ViewBag.Warning = "Los datos ingresados no son correctos, intente nuevamente y/o verifique que se hayan importado los usuarios"; //El mensaje se repite porque validamos mail y contraseña en forma separada, y por seguridad no decimos que es lo que falló
                     return View();
                 }
             }

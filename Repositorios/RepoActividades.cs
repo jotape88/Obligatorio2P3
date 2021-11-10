@@ -39,17 +39,12 @@ namespace Repositorios
             return bandera;
         }
 
-        public bool Baja(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Actividad BuscarPorId(int id)
         {
             Actividad unaAct = null;
             try
             {
-                using(ClubContext db = new ClubContext())
+                using (ClubContext db = new ClubContext())
                 {
                     unaAct = db.Actividades.Find(id);
                 }
@@ -60,11 +55,6 @@ namespace Repositorios
             }
 
             return unaAct;
-        }
-
-        public bool Modificacion(Actividad obj)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Actividad> TraerTodo()
@@ -82,6 +72,16 @@ namespace Repositorios
                 throw;
             }
             return actividades;
+        }
+
+        public bool Baja(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Modificacion(Actividad obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

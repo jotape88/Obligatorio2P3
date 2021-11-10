@@ -58,7 +58,22 @@ namespace Repositorios
             return unUsuario;
         }
 
-
+        public List<Usuario> TraerTodo()
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            try
+            {
+                using (ClubContext db = new ClubContext())
+                {
+                    usuarios = db.Usuarios.ToList();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            return usuarios;
+        }
 
         public bool Baja(int id)
         {
@@ -73,23 +88,6 @@ namespace Repositorios
         public bool Modificacion(Usuario obj)
         {
             throw new NotImplementedException();
-        }
-
-        public List<Usuario> TraerTodo()
-        {
-            List<Usuario> usuarios = new List<Usuario>();
-            try
-            {
-                using(ClubContext db = new ClubContext())
-                {
-                    usuarios = db.Usuarios.ToList();
-                }
-            }
-            catch
-            {
-                throw;
-            }
-            return usuarios;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Dominio
         #region Metodos
         public bool ValidarEdadActiv(int edadMinima, int edadMaxima)
         {
-            return edadMinima >= 3 && edadMaxima <= 90 && edadMinima < edadMaxima;
+            return edadMinima < edadMaxima;
         }
 
         public bool ValidarNombreAct(string nom)

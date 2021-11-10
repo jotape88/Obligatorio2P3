@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Dominio;
-using Auxiliar;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebObligatorio_2_P3.Models

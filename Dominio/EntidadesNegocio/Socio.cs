@@ -14,9 +14,11 @@ namespace Dominio
         #region Propiedades
 
         public int Id { get; set; }
-
+        [RegularExpression(@"^[0-9]{7,9}$")]
+        [Required, StringLength(10)]
         public string Cedula { get; set; }
-
+        [RegularExpression(@"^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]{6,}$")]                                                                                                                                                                       //Modificado
+        [Required, StringLength(50)]
         public string NombreYapellido { get; set; }
 
         public DateTime FechaNacimiento { get; set; }

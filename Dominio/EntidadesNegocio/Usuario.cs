@@ -19,7 +19,8 @@ namespace Dominio
         public string Email { get; set; }
         [Required]
         public string Contrasenia { get; set; }
-        [Required, RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$"), StringLength(50)] 
+        [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$")]
+        [Required, StringLength(50)] 
         public string ContraseniaDesencriptada { get; set; }
         #endregion
 

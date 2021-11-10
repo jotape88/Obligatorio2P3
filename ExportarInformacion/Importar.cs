@@ -152,7 +152,7 @@ namespace ImportarInformacion
             string[] vecDiasHrs = unaLinea.Split(separador.ToCharArray());
             if (vecDiasHrs.Length == 5)
             {
-                DiaYHora unDhr = new DiaYHora { Id = Int32.Parse(vecDiasHrs[0]), Activ = repoACt.BuscarPorId(Int32.Parse(vecDiasHrs[1])), Dia = vecDiasHrs[2], Hora = Decimal.Parse(vecDiasHrs[3]), CuposMaximos = Int32.Parse(vecDiasHrs[4]) };
+                DiaYHora unDhr = new DiaYHora { Id = Int32.Parse(vecDiasHrs[0]), Activ = repoACt.BuscarPorId(Int32.Parse(vecDiasHrs[1])), Dia = vecDiasHrs[2], Hora = (int)Decimal.Parse(vecDiasHrs[3]), CuposMaximos = Int32.Parse(vecDiasHrs[4]) };
                 return unDhr;
             }
             return null;

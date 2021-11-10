@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Dominio;
-using Auxiliar;
 using System.ComponentModel.DataAnnotations; 
 
 namespace WebObligatorio_2_P3.Models
@@ -12,7 +10,6 @@ namespace WebObligatorio_2_P3.Models
     {
         #region Propiedades
         public int Id { get; set; }
-        //@"^.*[a-zA-Z0-9][/\\]$"
         [RegularExpression(@"^[0-9]{7,9}$", ErrorMessage = "Ingrese un cédula válida de entre 7 y 9 dígitos sin puntos ni guíones")] //Modificado
         [Required, Display(Name = "Cédula"), StringLength(10)]
         public string Cedula { get; set; }
