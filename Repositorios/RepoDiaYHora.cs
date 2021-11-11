@@ -19,8 +19,8 @@ namespace Repositorios
             int filasAf = 0;
             if (unDiaYHr != null)
             {
-                if (unDiaYHr.ValidarDiaYHora(unDiaYHr.Dia, unDiaYHr.Hora))
-                {
+                //if (unDiaYHr.ValidarDiaYHora(unDiaYHr.Dia, unDiaYHr.Hora))
+                //{
                     try
                     {
                         using (ClubContext db = new ClubContext())
@@ -31,27 +31,14 @@ namespace Repositorios
                             bandera = filasAf > 0;
                         }
                     }
-                    catch
+                    catch(Exception laExc)
                     {
                         return false;
                     }
-                }
+                //}
 
             }
             return bandera;
-        }
-
-        public bool Baja(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool BuscarActivsEnMismoDiaYHora(DiaYHora unDhYHr) //Con esto verificamos si hay actividades repetidas (mismo idact, dia y hora) en el archivo DiasYhoras
-        {
-            using (ClubContext db = new ClubContext())
-            {
-                return db.DiasYHoras.Any(dh => dh.Activ.Id == unDhYHr.Activ.Id && dh.Dia == unDhYHr.Dia && dh.Hora == unDhYHr.Hora);
-            }
         }
 
         public DiaYHora BuscarPorId(int id)
@@ -69,6 +56,19 @@ namespace Repositorios
                 throw;
             }
             return unDiaYHora;
+        }
+
+        public bool BuscarActivsEnMismoDiaYHora(DiaYHora unDhYHr) //Con esto verificamos si hay actividades repetidas (misma activ en un mismo dia y hora) en el archivo DiasYhoras
+        {
+            using (ClubContext db = new ClubContext())
+            {
+                return db.DiasYHoras.Any(dh => dh.Activ.Id == unDhYHr.Activ.Id && dh.Dia == unDhYHr.Dia && dh.Hora == unDhYHr.Hora);
+            }
+        }
+
+        public bool Baja(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Modificacion(DiaYHora obj)

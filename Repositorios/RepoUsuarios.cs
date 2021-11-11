@@ -20,9 +20,8 @@ namespace Repositorios
             int filasAf = 0;
             if (unUsuario != null)
             {
-                if(unUsuario.ValidarContrasenia(unUsuario.ContraseniaDesencriptada) && unUsuario.ValidarMail(unUsuario.Email)) //Tenemos que validar la contrasenia desencriptada
-                //if (unUsuario.ValidarMail(unUsuario.Email)) //Si validamos por data annotations, no podemos ingresar el resto de los usuarios
-                {
+                //if(unUsuario.ValidarContrasenia(unUsuario.ContraseniaDesencriptada) && unUsuario.ValidarMail(unUsuario.Email)) 
+               // {
                     try
                     {
                         using(ClubContext db = new ClubContext())
@@ -32,11 +31,11 @@ namespace Repositorios
                             bandera = filasAf > 0;
                         }
                     }
-                    catch
+                    catch(Exception laExc)
                     {
                         return false;
                     }
-                }
+               // }
             }
             return bandera;
         }

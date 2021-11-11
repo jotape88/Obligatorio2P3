@@ -41,7 +41,7 @@ namespace WebObligatorio_2_P3.Controllers
 
                 if (unUsu.ValidarMail(vMUsu.Email) && unUsu.ValidarContrasenia(vMUsu.Contrasenia))
                 {
-                    unUsu = repousu.BuscarPorEmail(vMUsu.Email);
+                    unUsu = repousu.BuscarPorEmail(vMUsu.Email); //Buscamos (por el mail que es unico) si existe el usuario
                     if (unUsu != null)
                     {
                         string passEncriptada = unUsu.Encriptacion(vMUsu.Contrasenia); //Encripto la contrasenia recibida desde el viewModel

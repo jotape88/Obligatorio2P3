@@ -17,7 +17,8 @@ namespace Repositorios
             int filasAf = 0;
             if (unaAct != null)
             {
-                if (unaAct.ValidarEdadActiv(unaAct.EdadMinima, unaAct.EdadMaxima) && unaAct.ValidarNombreAct(unaAct.Nombre)) //Aca validamos que el nombre no sea vacio
+                //if (unaAct.ValidarEdadActiv(unaAct.EdadMinima, unaAct.EdadMaxima) && unaAct.ValidarNombreAct(unaAct.Nombre))
+                if(unaAct.ValidarEdadActiv(unaAct.EdadMinima, unaAct.EdadMaxima))
                 {
                     try
                     {
@@ -28,11 +29,10 @@ namespace Repositorios
                             bandera = filasAf > 0;
                         }
                     }
-                    catch
+                    catch(Exception laExc)
                     {
                         return false;
                     }
-
                 }
 
             }
