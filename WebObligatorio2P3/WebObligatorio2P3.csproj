@@ -204,7 +204,6 @@
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Socio\Create.cshtml" />
     <Content Include="Views\Socio\Delete.cshtml" />
-    <Content Include="Views\Socio\Buscar.cshtml" />
     <Content Include="Views\Socio\Edit.cshtml" />
     <Content Include="Views\Socio\Index.cshtml" />
     <Content Include="Views\Socio\DetalleSocio.cshtml" />
@@ -219,6 +218,7 @@
     <Content Include="Views\Home\ImportarUsuarios.cshtml" />
     <Content Include="Views\Home\ImportarActividades.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Socio\Buscar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

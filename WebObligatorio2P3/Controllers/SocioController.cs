@@ -29,7 +29,6 @@ namespace WebObligatorio_2_P3.Controllers
             List<ViewModelSocio> losSocModel = ConvertirListSocioAModel(losSoc);
             return View(losSocModel);  
         }
-        #region ActionResults
         public ActionResult Buscar()
         {
             if (Session["usuarioLogueado"] == null)
@@ -40,7 +39,7 @@ namespace WebObligatorio_2_P3.Controllers
         }
 
         [HttpPost]
-        public ActionResult Buscar(ViewModelSocio vmSocio)
+        public ActionResult Buscar(ViewModelSocio vMSocio)
         {
             if (Session["usuarioLogueado"] == null)
             {
@@ -48,10 +47,10 @@ namespace WebObligatorio_2_P3.Controllers
             }
 
             Socio unSoc = new Socio();
-            unSoc = repoSoc.BuscarPorCedula(vmSocio.Cedula);
+            unSoc = repoSoc.BuscarPorCedula(vMSocio.Cedula);
 
             if (unSoc != null && unSoc.EstaActivo != "0")
-            { 
+            {
                 return RedirectToAction("DetalleSocio", new { unSoc.Id });
             }
             else
@@ -202,7 +201,7 @@ namespace WebObligatorio_2_P3.Controllers
                 return View("~/Views/Shared/NoAutorizado.cshtml");
             }
             Socio unSoc = new Socio(); 
-           // if (unSoc.ValidarNomYApell(vMSocio.NombreYapellido) && unSoc.ValidarEdad(vMSocio.FechaNacimiento) && unSoc.ValidarCi(vMSocio.Cedula)) El mensaje del else de este if estaba mal
+           // if (unSoc.ValidarNomYApell(vMSocio.NombreYapellido) && unSoc.ValidarEdad(vMSocio.FechaNacimiento) && unSoc.ValidarCi(vMSocio.Cedula)) 
             if (unSoc.ValidarEdad(vMSocio.FechaNacimiento))
             {
                 unSoc = repoSoc.BuscarPorCedula(vMSocio.Cedula); 
@@ -411,9 +410,6 @@ namespace WebObligatorio_2_P3.Controllers
 
             return View(listaIngrActVM);
         }
-        #endregion
-
-
         #endregion
 
         #region Conversión Listas ViewModel
