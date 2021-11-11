@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using Dominio;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.Entity;
+
 
 namespace Repositorios
 {
     public class RepoSocios : IRepoSocios
     {
+        #region Metodos de manejo de datos
         public bool Alta(Socio unSocio)
         {
             bool bandera = false;
@@ -269,5 +272,6 @@ namespace Repositorios
             }
             return socios;
         }
+        #endregion
     }
 }

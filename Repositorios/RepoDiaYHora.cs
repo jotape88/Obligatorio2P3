@@ -13,10 +13,10 @@ namespace Repositorios
 {
     public class RepoDiaYHora : IRepoDiaYHora
     {
+        #region Metodos de manejo de datos
         public bool Alta(DiaYHora unDiaYHr)
         {
             bool bandera = false;
-            int filasAf = 0;
             if (unDiaYHr != null)
             {
                 //if (unDiaYHr.ValidarDiaYHora(unDiaYHr.Dia, unDiaYHr.Hora))
@@ -27,8 +27,7 @@ namespace Repositorios
                         {
                             db.DiasYHoras.Add(unDiaYHr);
                             db.Entry(unDiaYHr.Activ).State = EntityState.Unchanged;
-                            filasAf = db.SaveChanges();
-                            bandera = filasAf > 0;
+                            bandera = db.SaveChanges() != 0;
                         }
                     }
                     catch(Exception laExc)
@@ -65,6 +64,9 @@ namespace Repositorios
                 return db.DiasYHoras.Any(dh => dh.Activ.Id == unDhYHr.Activ.Id && dh.Dia == unDhYHr.Dia && dh.Hora == unDhYHr.Hora);
             }
         }
+        #endregion
+
+        #region Metodos no implementados
 
         public bool Baja(int id)
         {
@@ -166,5 +168,6 @@ namespace Repositorios
             //}
             return diasYHoras;
         }
+        #endregion
     }
 }

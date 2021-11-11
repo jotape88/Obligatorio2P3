@@ -14,10 +14,10 @@ namespace Repositorios
 {
     public class RepoUsuarios : IRepoUsuarios
     {
+        #region Metodos de manejo de datos
         public bool Alta(Usuario unUsuario)
         {
             bool bandera = false;
-            int filasAf = 0;
             if (unUsuario != null)
             {
                 //if(unUsuario.ValidarContrasenia(unUsuario.ContraseniaDesencriptada) && unUsuario.ValidarMail(unUsuario.Email)) 
@@ -27,8 +27,7 @@ namespace Repositorios
                         using(ClubContext db = new ClubContext())
                         {
                             db.Usuarios.Add(unUsuario);
-                            filasAf = db.SaveChanges();
-                            bandera = filasAf > 0;
+                            bandera = db.SaveChanges() != 0;
                         }
                     }
                     catch(Exception laExc)
@@ -73,7 +72,9 @@ namespace Repositorios
             }
             return usuarios;
         }
+        #endregion
 
+        #region Metodos no implementados
         public bool Baja(int id)
         {
             throw new NotImplementedException();
@@ -88,5 +89,6 @@ namespace Repositorios
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

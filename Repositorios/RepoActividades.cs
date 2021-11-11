@@ -11,10 +11,10 @@ namespace Repositorios
 {
     public class RepoActividades : IRepoActividades
     {
+        #region Metodos de manejo de datos
         public bool Alta(Actividad unaAct)
         {
             bool bandera = false;
-            int filasAf = 0;
             if (unaAct != null)
             {
                 //if (unaAct.ValidarEdadActiv(unaAct.EdadMinima, unaAct.EdadMaxima) && unaAct.ValidarNombreAct(unaAct.Nombre))
@@ -25,8 +25,7 @@ namespace Repositorios
                         using (ClubContext db = new ClubContext())
                         {
                             db.Actividades.Add(unaAct);
-                            filasAf = db.SaveChanges();
-                            bandera = filasAf > 0;
+                            bandera = db.SaveChanges() != 0;
                         }
                     }
                     catch(Exception laExc)
@@ -74,6 +73,9 @@ namespace Repositorios
             return actividades;
         }
 
+        #endregion
+
+        #region Metodos de manejo de datos
         public bool Baja(int id)
         {
             throw new NotImplementedException();
@@ -83,5 +85,6 @@ namespace Repositorios
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }
