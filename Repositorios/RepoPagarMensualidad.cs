@@ -11,6 +11,7 @@ namespace Repositorios
 {
     public class RepoPagarMensualidad : IRepoPagarMensualidad
     {
+        #region Metodos de manejo de datos
         public bool AltaPago(int idSocio, int cantidadActiv = 0) //Por defecto cantidadActiv siempre va a estar en 0, aun cuando no le pasemos parametros desde afuera
         {
             bool bandera = false;
@@ -120,16 +121,7 @@ namespace Repositorios
         }
 
 
-        public bool Alta(PagarMensualidad obj)     
-        {
-            throw new NotImplementedException();
-        }
 
-
-        public bool Baja(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public FormaPago BuscarUltFormaPago(int idSocio) 
         {
@@ -183,11 +175,6 @@ namespace Repositorios
             return unaForma;
         }
 
-        public bool Modificacion(PagarMensualidad obj)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<PagarMensualidad> TraerTodo()
         {
             List<PagarMensualidad> pagarmensualidades = new List<PagarMensualidad>();
@@ -231,9 +218,29 @@ namespace Repositorios
             return pagarmensualidades;
         }
 
+
+        #endregion
+
+        #region Metodos no implementados
+
+        public bool Alta(PagarMensualidad obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Baja(int id)
+        {
+            throw new NotImplementedException();
+        }
+        public bool Modificacion(PagarMensualidad obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public PagarMensualidad BuscarPorId(int id)
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

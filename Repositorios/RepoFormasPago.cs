@@ -11,7 +11,7 @@ namespace Repositorios
 {
     public class RepoFormasPago : IRepoFormasPago
     {
-
+        #region Metodos de manejo de datos
         public dynamic[] TraerAuxiliares()
         {
             dynamic[] array2 = null;
@@ -53,17 +53,6 @@ namespace Repositorios
                 }
             }
             return array2;
-        }
-
-
-        public bool Alta(FormaPago obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Baja(int id)
-        {
-            throw new NotImplementedException();
         }
 
         public FormaPago BuscarPorId(int id)
@@ -197,11 +186,24 @@ namespace Repositorios
             }
             return formasPagos;
         }
+        #endregion
+
+        #region Metodos no implementados
+        public bool Alta(FormaPago obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Baja(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public bool Modificacion(FormaPago obj)
         {
             throw new NotImplementedException();
         }
+        #endregion
 
     }
 }
