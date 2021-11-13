@@ -102,6 +102,27 @@ namespace WebObligatorio_2_P3.Controllers
             }
         }
 
+        public ActionResult GestionPago(int id)
+        {
+            if (Session["usuarioLogueado"] == null)
+            {
+                return View("~/Views/Shared/NoAutorizado.cshtml");
+            }
+            Socio unSoc = new Socio();
+            unSoc = repoSoc.BuscarPorId(id);
+            ViewModelSocio viewModSoc = new ViewModelSocio()
+            {
+                Id = unSoc.Id,
+                NombreYapellido = unSoc.NombreYapellido,
+                FechaNacimiento = unSoc.FechaNacimiento,
+                Cedula = unSoc.Cedula,
+                EstaActivo = unSoc.EstaActivo,
+                FechaRegistro = unSoc.FechaRegistro
+            };
+            return View(viewModSoc);
+        }
+
+        [HttpPost]
         public ActionResult GestionPago(int id, string tipoPago, int? ctdActiv)  
         {
             if (Session["usuarioLogueado"] == null)

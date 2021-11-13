@@ -15,65 +15,55 @@ namespace Repositorios
         public bool AltaPago(int idSocio, int cantidadActiv = 0) //Por defecto cantidadActiv siempre va a estar en 0, aun cuando no le pasemos parametros desde afuera
         {
             bool bandera = false;
-            int filasAfectadas = 0;
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI";
-            SqlConnection miConexion = new SqlConnection(miString);
-            SqlTransaction miTransaccion = null;
             try
             {
-                SqlCommand miComando = new SqlCommand();
+                //SqlCommand miComando = new SqlCommand();
 
                 if (cantidadActiv != 0)
                 {
-                    string miSqlCuponera = @"INSERT INTO FormasPagos (Tipo, CantidadActividades) VALUES(@tipo, @ctdAct); SELECT CAST(SCOPE_IDENTITY() AS INT);";
-                    miComando = new SqlCommand(miSqlCuponera, miConexion);
-                    miComando.Parameters.AddWithValue("@tipo", "Cuponera");
-                    miComando.Parameters.AddWithValue("@ctdAct", cantidadActiv);
+                    //string miSqlCuponera = @"INSERT INTO FormasPagos (Tipo, CantidadActividades) VALUES(@tipo, @ctdAct); SELECT CAST(SCOPE_IDENTITY() AS INT);";
+                    //miComando = new SqlCommand(miSqlCuponera, miConexion);
+                    //miComando.Parameters.AddWithValue("@tipo", "Cuponera");
+                    //miComando.Parameters.AddWithValue("@ctdAct", cantidadActiv);
+
+                    using (ClubContext db = new ClubContext())
+                    {
+                        db.FormaPagos.Add(null);
+                        bandera = db.SaveChanges() != 0;
+                    }
                 } 
                 else if( cantidadActiv == 0)
                 {
-                    string miSqlPaseLibre = @"INSERT INTO FormasPagos (Tipo) VALUES(@tipo); SELECT CAST(SCOPE_IDENTITY() AS INT);";
-                    miComando = new SqlCommand(miSqlPaseLibre, miConexion);
-                    miComando.Parameters.AddWithValue("@tipo", "PaseLibre");
+                    //string miSqlPaseLibre = @"INSERT INTO FormasPagos (Tipo) VALUES(@tipo); SELECT CAST(SCOPE_IDENTITY() AS INT);";
+                    //miComando = new SqlCommand(miSqlPaseLibre, miConexion);
+                    //miComando.Parameters.AddWithValue("@tipo", "PaseLibre");
                 }
 
-                miConexion.Open();
-                miTransaccion = miConexion.BeginTransaction();
-                miComando.Transaction = miTransaccion;
-                int elId = (int)miComando.ExecuteScalar();
+                //miConexion.Open();
+                //miTransaccion = miConexion.BeginTransaction();
+                //miComando.Transaction = miTransaccion;
+                //int elId = (int)miComando.ExecuteScalar();
 
-                miComando.Parameters.Clear();
+                //miComando.Parameters.Clear();
 
-                string miSql2 = @"INSERT INTO PagarMensualidades(IdSocio, IdFormasPagos, FechasPagos) VALUES(@idSoc, @idFormPag, @fechasPagos);";
-                miComando.CommandText = miSql2;
-                miComando.Parameters.AddWithValue("@idSoc", idSocio);
-                miComando.Parameters.AddWithValue("@idFormPag", elId);
-                miComando.Parameters.AddWithValue("@fechasPagos", DateTime.Now);
+                //string miSql2 = @"INSERT INTO PagarMensualidades(IdSocio, IdFormasPagos, FechasPagos) VALUES(@idSoc, @idFormPag, @fechasPagos);";
+                //miComando.CommandText = miSql2;
+                //miComando.Parameters.AddWithValue("@idSoc", idSocio);
+                //miComando.Parameters.AddWithValue("@idFormPag", elId);
+                //miComando.Parameters.AddWithValue("@fechasPagos", DateTime.Now);
 
-                filasAfectadas = miComando.ExecuteNonQuery();
+                //filasAfectadas = miComando.ExecuteNonQuery();
 
-                bandera = filasAfectadas == 1;
+                //bandera = filasAfectadas == 1;
 
-                miTransaccion.Commit();
+                //miTransaccion.Commit();
 
-                miConexion.Close();
-                miConexion.Dispose();
+                //miConexion.Close();
+                //miConexion.Dispose();
             }
             catch
             {
-                if (miTransaccion != null)
-                {
-                    miTransaccion.Rollback();
-                }
                 throw;
-            }
-            finally
-            {
-                if (miConexion.State == ConnectionState.Open)
-                {
-                    miConexion.Close();
-                    miConexion.Dispose();
-                }
             }
             return bandera;
         }
