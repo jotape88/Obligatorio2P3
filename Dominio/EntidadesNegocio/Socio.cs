@@ -14,15 +14,15 @@ namespace Dominio
         #region Propiedades
 
         public int Id { get; set; }
-        [RegularExpression(@"^[0-9]{7,9}$")]
+        [RegularExpression(@"^[0-9]{7,9}$")] //Solo admitimos de 7 a 9 digitos
         [Required, MaxLength(10)]
         public string Cedula { get; set; }
-        [RegularExpression(@"^([a-zA-ZÀ-ÿ\u00f1\u00d1]+ )+[a-zA-ZÀ-ÿ\u00f1\u00d1]+$|^[a-zA-ZÀ-ÿ\u00f1\u00d1]{6,}$")] //Validamos que sean minimo 6 letras, con espacios embebidos y admitimos caracteres especiales                                                                                                                                                              //Modificado
+        [RegularExpression(@"^([a-zA-ZÀ-ÿ\u00f1\u00d1]+ )+[a-zA-ZÀ-ÿ\u00f1\u00d1]+$|^[a-zA-ZÀ-ÿ\u00f1\u00d1]{6,}$")] //Validamos que sean minimo 6 letras, unicamente espacios embebidos y admitimos caracteres especiales para nombres en español
         [Required, MaxLength(50)]
         public string NombreYapellido { get; set; }
 
         public DateTime FechaNacimiento { get; set; }
-
+        [MaxLength(1)]
         public string EstaActivo { get; set; }
 
         public DateTime FechaRegistro { get; set; }

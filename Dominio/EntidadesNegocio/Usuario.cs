@@ -15,11 +15,11 @@ namespace Dominio
     {
         #region Propiedades
         public int Id { get; set; }
-        [Required, Index(IsUnique = true), EmailAddress, MaxLength(60)] //El mail lo validamos con EmailAdress, strenth length es para el largo de la tabla en la bd
+        [Required, Index(IsUnique = true), EmailAddress, MaxLength(50)] //EmailAdress implementa una validacion del formato del correo electronico
         public string Email { get; set; }
         [Required]
         public string Contrasenia { get; set; }
-        [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$")]
+        [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$")] //Validamos que la contraseña sea de 6 caracteres minimos, y que contenga mayusculas, minusculas y digitos
         [Required, MaxLength(50)] 
         public string ContraseniaDesencriptada { get; set; }
         #endregion

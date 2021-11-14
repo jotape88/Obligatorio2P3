@@ -57,52 +57,54 @@ namespace Repositorios
 
         public FormaPago BuscarPorId(int id)
         {
-            FormaPago formaPago = null;        
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            SqlConnection miConexion = new SqlConnection(miString);
-            try
-            {
-                string miSql = "SELECT * FROM FormasPagos WHERE Id=@id;";
-                SqlCommand miComando = new SqlCommand(miSql, miConexion);
-                miComando.Parameters.AddWithValue("@id", id);
+        //    FormaPago formaPago = null;        
+        //    string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
+        //    SqlConnection miConexion = new SqlConnection(miString);
+        //    try
+        //    {
+        //        string miSql = "SELECT * FROM FormasPagos WHERE Id=@id;";
+        //        SqlCommand miComando = new SqlCommand(miSql, miConexion);
+        //        miComando.Parameters.AddWithValue("@id", id);
 
-                miConexion.Open();
-                SqlDataReader miReader = miComando.ExecuteReader();
-                if (miReader.Read())
-                {
-                    if (miReader.GetString(2) == "Cuponera")
-                    {
-                        formaPago = new Cuponera()
-                        {
-                            Id = miReader.GetInt32(0),
-                            CantidadActividades = miReader.GetInt32(1),
-                        };
-                    }
-                    else
-                    {
-                        formaPago = new PaseLibre()
-                        {
-                            Id = miReader.GetInt32(0),
-                        };
-                    }
-                }
-                miConexion.Close();
-                miConexion.Dispose();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (miConexion.State == ConnectionState.Open)
-                {
-                    miConexion.Close();
-                    miConexion.Dispose();
-                }
-            }
-            return formaPago;
-    }
+        //        miConexion.Open();
+        //        SqlDataReader miReader = miComando.ExecuteReader();
+        //        if (miReader.Read())
+        //        {
+        //            if (miReader.GetString(2) == "Cuponera")
+        //            {
+        //                formaPago = new Cuponera()
+        //                {
+        //                    Id = miReader.GetInt32(0),
+        //                    CantidadActividades = miReader.GetInt32(1),
+        //                };
+        //            }
+        //            else
+        //            {
+        //                formaPago = new PaseLibre()
+        //                {
+        //                    Id = miReader.GetInt32(0),
+        //                };
+        //            }
+        //        }
+        //        miConexion.Close();
+        //        miConexion.Dispose();
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        if (miConexion.State == ConnectionState.Open)
+        //        {
+        //            miConexion.Close();
+        //            miConexion.Dispose();
+        //        }
+        //    }
+        //    return formaPago;
+                    throw new NotImplementedException();
+
+        }
 
         //public bool ModificacionCantCuponera(Cuponera unaCuponera)
         //{
