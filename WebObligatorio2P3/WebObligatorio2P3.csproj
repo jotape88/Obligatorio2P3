@@ -132,11 +132,13 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PagarMensualidadController.cs" />
     <Compile Include="Controllers\SocioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModelIngresoActividad.cs" />
+    <Compile Include="Models\ViewModelPagoMensualidad.cs" />
     <Compile Include="Models\ViewModelSocio.cs" />
     <Compile Include="Models\ViewModelUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,7 +208,6 @@
     <Content Include="Views\Socio\DetalleSocio.cshtml" />
     <Content Include="Views\Socio\GestionPago.cshtml" />
     <Content Include="Views\Socio\ConfirmarPago.cshtml" />
-    <Content Include="Views\Home\ExportarInfo.cshtml" />
     <Content Include="Views\Actividad\Index.cshtml" />
     <Content Include="Views\Actividad\ConfirmarIngreso.cshtml" />
     <Content Include="Views\Socio\IngresoFechasLista.cshtml" />
@@ -216,7 +217,8 @@
     <Content Include="Views\Home\ImportarActividades.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Socio\Buscar.cshtml" />
-    <Content Include="Views\Home\ListarFormasPagosVigentes.cshtml" />
+    <Content Include="Views\PagarMensualidad\Index.cshtml" />
+    <Content Include="Views\PagarMensualidad\FormasPagosVigentesXFecha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

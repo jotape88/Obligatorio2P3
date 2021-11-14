@@ -84,14 +84,22 @@ namespace Repositorios
         }
 
 
-        public List<PagarMensualidad> ListarFormasPagoPorMesYAnio(int mes, int anio)
+        public List<DTOMensualidad> ListarFormasPagoPorMesYAnio(int mes, int anio)
         {
-            List<PagarMensualidad> mensualidades = new List<PagarMensualidad>();
+            List<DTOMensualidad> mensualidades = new List<DTOMensualidad>();
 
             using(ClubContext db = new ClubContext())
             {
-                return mensualidades = db.PagarMensualidades.Where(pg => pg.FechaPago.Year == anio && pg.FechaPago.Month == mes).ToList();
-                                                             
+                return mensualidades = db.PagarMensualidades.Where(pg => pg.FechaPago.Year == anio && pg.FechaPago.Month == mes)
+                                                     .Select(pg => new DTOMensualidad() {                                                       
+                                                         TipoForma = pg.UnaFormaPago,
+                                                         FechaPago = pg.FechaPago,
+                                                         MontoPago = pg.MontoPagado,
+                                                         DescuentoPago = pg.MontoDescontado,
+                                                         CedulaSocio = pg.UnSocio.Cedula,
+                                                         NombreSocio = pg.UnSocio.NombreYapellido
+                                                     })
+                                                     .ToList();                                                        
             }
 
         }

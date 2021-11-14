@@ -137,31 +137,6 @@ namespace WebObligatorio_2_P3.Controllers
             }
             return View();
         }
-
-        public ActionResult ListarFormasPagosVigentes()
-        {
-            if (Session["usuarioLogueado"] == null)
-            {
-                return View("~/Views/Shared/NoAutorizado.cshtml");
-            }
-
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult ListarFormasPagosVigentes(int anio, int mes)
-        {
-            if (Session["usuarioLogueado"] == null)
-            {
-                return View("~/Views/Shared/NoAutorizado.cshtml");
-            }
-            IRepoPagarMensualidad repoPagarM = FabricaRepositorios.ObtenerRepositorioPagarMensualidad();
-
-            List<PagarMensualidad> unaLista = repoPagarM.ListarFormasPagoPorMesYAnio(mes, anio);
-
-            return View();
-        }
-
         #endregion
     }
 }

@@ -137,6 +137,7 @@ namespace Repositorios
             using (ClubContext db = new ClubContext())
             {
                 socios = db.Socios.OrderBy(s => s.NombreYapellido)
+                                  .ThenByDescending(s => s.Cedula.Length) //Tuve que agregar porque la ci es un string
                                   .ThenByDescending(s => s.Cedula)
                                   .ToList();
             }

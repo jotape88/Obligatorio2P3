@@ -13,8 +13,6 @@ namespace Dominio
 
         FormaPago BuscarUltFormaPago(int idSocio);
 
-        List<PagarMensualidad> ListarFormasPagoPorMesYAnio(int mes, int anio);
-
-
+        List<DTOMensualidad> ListarFormasPagoPorMesYAnio(int mes, int anio);
     }
 }
