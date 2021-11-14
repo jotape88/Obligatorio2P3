@@ -24,6 +24,11 @@ namespace WebObligatorio_1_P3.Controllers
 
             List<ViewModelPagoMensualidad> listVmPagoMensualidad = ConvertirFormasPagosVigentesAModel(unaLista);
 
+            if(listVmPagoMensualidad.Count == 0)
+            {
+                ViewBag.SinResultados = "No se encontraron formas de pago vigentes en la fecha proporcionada";
+                return View();
+            }
             return View(listVmPagoMensualidad);
         }
 

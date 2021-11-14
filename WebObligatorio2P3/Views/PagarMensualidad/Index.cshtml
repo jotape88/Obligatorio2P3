@@ -4,57 +4,71 @@
     ViewBag.Title = "Pases libres y cuponeras vigentes";
 }
 
-<h2>Pases libres y cuponeras vigentes</h2>
+<hr />
+
+@if (ViewBag.SinResultados == null)
+{
+    <h2>Pases libres y cuponeras vigentes</h2>
+    <hr />
+    <table class="table table-bordered">
+        <tr class="info">
+            <th>
+                @Html.DisplayNameFor(model => model.TipoPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MontoPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescuentoPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CedulaSocio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreSocio)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoPago)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaPago)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoPago)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescuentoPago)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CedulaSocio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreSocio)
+                </td>
+            </tr>
+        }
+    </table>
+}
+@if(ViewBag.SinResultados != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <h4>
+            @ViewBag.SinResultados
+        </h4>
+    </div>
+}
 
 <hr />
 
-<table class="table table-bordered">
-    <tr class="info">
-        <th>
-            @Html.DisplayNameFor(model => model.TipoPago)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaPago)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MontoPago)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DescuentoPago)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CedulaSocio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreSocio)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoPago)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaPago)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MontoPago)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescuentoPago)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CedulaSocio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreSocio)
-            </td>
-        </tr>
-    }
-</table>
 
 
 <div>

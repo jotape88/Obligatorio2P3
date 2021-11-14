@@ -9,11 +9,17 @@ namespace WebObligatorio_2_P3.Models
 {
     public class ViewModelPagoMensualidad
     {
+        [Display(Name = "Tipo de pase")]
         public string TipoPago { get; set; }
+        [Display(Name = "Fecha de pago"), DataType(DataType.Date)]
         public DateTime FechaPago { get; set; }
+        [Display(Name = "Monto pagado")]
         public decimal MontoPago { get; set; }
+        [Display(Name = "Monto de descuento aplicado")]
         public decimal DescuentoPago { get; set; }
+        [Display(Name = "Cédula del socio")]
         public string CedulaSocio { get; set; }
+        [Display(Name ="Nombres y apellidos del socio")]
         public string NombreSocio { get; set; }
         
         [Required, Range(1,12, ErrorMessage = "Debe ingresar un mes válido")]
