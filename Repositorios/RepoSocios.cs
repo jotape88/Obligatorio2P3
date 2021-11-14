@@ -17,7 +17,6 @@ namespace Repositorios
         public bool Alta(Socio unSocio)
         {
             bool bandera = false;
-            int filasAf = 0;
             if (unSocio != null)
             {
                 //if(unSocio.ValidarNomYApell(unSocio.NombreYapellido) && unSocio.ValidarEdad(unSocio.FechaNacimiento) && unSocio.ValidarCi(unSocio.Cedula)) 
@@ -26,11 +25,10 @@ namespace Repositorios
                 {
                     using (ClubContext db = new ClubContext())
                     {
-                        unSocio.FechaRegistro = DateTime.Now;
-                        unSocio.EstaActivo = "1";
+                        //unSocio.FechaRegistro = DateTime.Now;
+                        //unSocio.EstaActivo = "1";
                         db.Socios.Add(unSocio);
-                        filasAf = db.SaveChanges();
-                        bandera = filasAf > 0;
+                        bandera = db.SaveChanges() != 0;
                     }
                 }
                 catch (Exception laExc)
@@ -45,18 +43,15 @@ namespace Repositorios
         public bool Baja(int id)
         {
             bool bandera = false;
-            int filasAf = 0;
             try
             {
-
                 using (ClubContext db = new ClubContext())
                 {
+                    //Socio unSoc = new Socio() { Id = id };
+                    //db.Entry(unSoc);
                     Socio unSoc = db.Socios.Find(id);
-                    //Socio aBorrar = new Socio() { Id = id };
-
                     unSoc.EstaActivo = "0";
-                    filasAf = db.SaveChanges();
-                    bandera = filasAf > 0;
+                    bandera = db.SaveChanges() != 0;
                 }
             }
             catch (Exception laExc)
@@ -118,12 +113,13 @@ namespace Repositorios
 
                     if (unSoc != null)
                     {
-                        //db.Entry(unSocio).State = EntityState.Modified;
-                        //bandera = db.SaveChanges() != 0;
-
-                        unSoc.NombreYapellido = unSocio.NombreYapellido;
-                        unSoc.FechaNacimiento = unSocio.FechaNacimiento;
+                        db.Entry(unSoc).State = EntityState.Detached;
+                        db.Entry(unSocio).State = EntityState.Modified;
                         bandera = db.SaveChanges() != 0;
+
+                        //unSoc.NombreYapellido = unSocio.NombreYapellido;
+                        //unSoc.FechaNacimiento = unSocio.FechaNacimiento;
+                        //bandera = db.SaveChanges() != 0;
                     }
                 }
             }
@@ -137,7 +133,7 @@ namespace Repositorios
             using (ClubContext db = new ClubContext())
             {
                 socios = db.Socios.OrderBy(s => s.NombreYapellido)
-                                  .ThenByDescending(s => s.Cedula.Length) //Tuve que agregar porque la ci es un string
+                                  .ThenByDescending(s => s.Cedula.Length) //Como la Cedula es un string, tambien tenemos que ordenar por el largo
                                   .ThenByDescending(s => s.Cedula)
                                   .ToList();
             }

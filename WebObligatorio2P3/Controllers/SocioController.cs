@@ -252,6 +252,8 @@ namespace WebObligatorio_2_P3.Controllers
                         Cedula = vMSocio.Cedula,
                         NombreYapellido = vMSocio.NombreYapellido,
                         FechaNacimiento = vMSocio.FechaNacimiento,
+                        EstaActivo = "1",
+                        FechaRegistro = DateTime.Now
                     };
 
                     if (repoSoc.Alta(socAux))
@@ -311,6 +313,9 @@ namespace WebObligatorio_2_P3.Controllers
                         Id = vmSocio.Id,
                         NombreYapellido = vmSocio.NombreYapellido,
                         FechaNacimiento = vmSocio.FechaNacimiento,
+                        Cedula = unSoc.Cedula,
+                        EstaActivo = unSoc.EstaActivo,
+                        FechaRegistro = unSoc.FechaRegistro
                     };
                     if (repoSoc.Modificacion(unSoc))
                     {

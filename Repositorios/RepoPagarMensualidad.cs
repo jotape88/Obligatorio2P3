@@ -92,12 +92,12 @@ namespace Repositorios
             {
                 return mensualidades = db.PagarMensualidades.Where(pg => pg.FechaPago.Year == anio && pg.FechaPago.Month == mes)
                                                      .Select(pg => new DTOMensualidad() {                                                       
-                                                         TipoForma = pg.UnaFormaPago,
-                                                         FechaPago = pg.FechaPago,
-                                                         MontoPago = pg.MontoPagado,
-                                                         DescuentoPago = pg.MontoDescontado,
-                                                         CedulaSocio = pg.UnSocio.Cedula,
-                                                         NombreSocio = pg.UnSocio.NombreYapellido
+                                                        TipoForma = pg.UnaFormaPago, //Guardamos la entidad
+                                                        FechaPago = pg.FechaPago,
+                                                        MontoPago = pg.MontoPagado,
+                                                        DescuentoPago = pg.MontoDescontado,
+                                                        CedulaSocio = pg.UnSocio.Cedula,
+                                                        NombreSocio = pg.UnSocio.NombreYapellido
                                                      })
                                                      .ToList();                                                        
             }
@@ -204,7 +204,6 @@ namespace Repositorios
         #endregion
 
         #region Metodos no implementados
-
         public bool Alta(PagarMensualidad obj)
         {
             throw new NotImplementedException();
