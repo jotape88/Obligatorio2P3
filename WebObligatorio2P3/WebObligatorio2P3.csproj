@@ -131,10 +131,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\ActividadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SocioController.cs" />
-    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,6 +216,7 @@
     <Content Include="Views\Home\ImportarActividades.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Socio\Buscar.cshtml" />
+    <Content Include="Views\Home\ListarFormasPagosVigentes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

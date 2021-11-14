@@ -151,9 +151,15 @@ namespace WebObligatorio_2_P3.Controllers
                 if (ctdActiv.Value >= 8 && ctdActiv.Value <= 60)
                 {
                     dynamic[] datos = { ctdActiv.Value };
-                    decimal totalCuponera = unaCupo.CostoTotal(datos); 
+                    decimal totalCuponera = unaCupo.CostoTotal(datos);
+                    decimal descuentoCuponera = (Cuponera.ValorActividad * ctdActiv.Value) - totalCuponera;
                     ViewBag.Cuponera = totalCuponera;
+
+                    TempData["total"] = totalCuponera;
+                    TempData["desc"] = descuentoCuponera;
                     TempData["ctdAct"] = ctdActiv;
+
+
                     return View(viewModSoc);
                 }
                 else
@@ -164,7 +170,12 @@ namespace WebObligatorio_2_P3.Controllers
             else if (tipoPago == "paseLibre")
             {
                 dynamic[] datos = { unSoc.FechaRegistro };
-                decimal totalPaselibre = unPase.CostoTotal(datos); 
+                decimal totalPaselibre = unPase.CostoTotal(datos);
+                decimal descuentoPaseLibre = PaseLibre.ValorMes - totalPaselibre;
+
+                TempData["total"] = totalPaselibre;
+                TempData["desc"] = descuentoPaseLibre;
+
                 ViewBag.Cuponera = totalPaselibre;
                 return View(viewModSoc);
             }
@@ -178,12 +189,16 @@ namespace WebObligatorio_2_P3.Controllers
             {
                 return View("~/Views/Shared/NoAutorizado.cshtml");
             }
+            Socio unSoc = repoSoc.BuscarPorId(id);
 
             string tipoAct = TempData["tipoPago"].ToString();
             if(tipoAct == "cuponera")
             {
                 int ctdAct = (int)TempData["ctdAct"];
-                if (repoMensualidad.AltaPago(id, ctdAct))
+                decimal total = (decimal)TempData["total"];
+                decimal descuento = (decimal)TempData["desc"];
+
+                if (repoMensualidad.AltaPago(id, total, descuento, ctdAct)) 
                 {
                     ViewBag.Success = "El pago se ha realizado correctamente";
                 } 
@@ -193,7 +208,11 @@ namespace WebObligatorio_2_P3.Controllers
                 }
             } else if (tipoAct == "paseLibre")
             {
-                if (repoMensualidad.AltaPago(id))
+
+                decimal total = (decimal)TempData["total"];
+                decimal descuento = (decimal)TempData["desc"];
+
+                if (repoMensualidad.AltaPago(id, total, descuento)) 
                 {
                     ViewBag.Success = "El pago se ha realizado correctamente";
                 }
@@ -285,8 +304,8 @@ namespace WebObligatorio_2_P3.Controllers
             unSoc = repoSoc.BuscarPorId(vmSocio.Id);
             if (unSoc != null && unSoc.EstaActivo != "0")
             {
-                if(unSoc.ValidarEdad(vmSocio.FechaNacimiento) && unSoc.ValidarNomYApell(vmSocio.NombreYapellido))
-                {
+                //if(unSoc.ValidarEdad(vmSocio.FechaNacimiento) && unSoc.ValidarNomYApell(vmSocio.NombreYapellido))
+                //{
                     unSoc = new Socio()
                     {
                         Id = vmSocio.Id,
@@ -303,12 +322,12 @@ namespace WebObligatorio_2_P3.Controllers
                         ViewBag.Error = "Hubo un error en la modificacion";
                         return View();
                     }
-                }
-                else
-                {
-                    ViewBag.Error = "El nombre y/o fecha de nacimiento ingresados no son válidos";
-                    return View();
-                }
+                //}
+                //else
+                //{
+                //    ViewBag.Error = "El nombre y/o fecha de nacimiento ingresados no son válidos";
+                //    return View();
+                //}
             } else
             {
                 ViewBag.Error = "El socio se encuentra deshabilitado";

@@ -104,88 +104,88 @@ namespace Repositorios
             return formaPago;
     }
 
-        public bool ModificacionCantCuponera(Cuponera unaCuponera)
-        {
-            bool bandera = false;
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            SqlConnection miConexion = new SqlConnection(miString);
-            try
-            {
-                string miSql = "UPDATE FormasPagos SET CantidadActividades=@cantidad WHERE Id=@id;";
-                SqlCommand miComando = new SqlCommand(miSql, miConexion);
-                miComando.Parameters.AddWithValue("@id", unaCuponera.Id);
-                miComando.Parameters.AddWithValue("@cantidad", unaCuponera.CantidadActividades -1);
+        //public bool ModificacionCantCuponera(Cuponera unaCuponera)
+        //{
+        //    bool bandera = false;
+        //    string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
+        //    SqlConnection miConexion = new SqlConnection(miString);
+        //    try
+        //    {
+        //        string miSql = "UPDATE FormasPagos SET CantidadActividades=@cantidad WHERE Id=@id;";
+        //        SqlCommand miComando = new SqlCommand(miSql, miConexion);
+        //        miComando.Parameters.AddWithValue("@id", unaCuponera.Id);
+        //        miComando.Parameters.AddWithValue("@cantidad", unaCuponera.CantidadActividades -1);
 
-                miConexion.Open();
-                int filasAfectadas = miComando.ExecuteNonQuery();
-                miConexion.Close();
-                miConexion.Dispose();
-                bandera = filasAfectadas == 1;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (miConexion.State == ConnectionState.Open)
-                {
-                    miConexion.Close();
-                    miConexion.Dispose();
-                }
-            }
-            return bandera;
-        }
+        //        miConexion.Open();
+        //        int filasAfectadas = miComando.ExecuteNonQuery();
+        //        miConexion.Close();
+        //        miConexion.Dispose();
+        //        bandera = filasAfectadas == 1;
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        if (miConexion.State == ConnectionState.Open)
+        //        {
+        //            miConexion.Close();
+        //            miConexion.Dispose();
+        //        }
+        //    }
+        //    return bandera;
+        //}
 
-        public List<FormaPago> TraerTodo()
-        {
-            List<FormaPago> formasPagos = new List<FormaPago>();
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            FormaPago unaFP = null;
-            SqlConnection miConexion = new SqlConnection(miString);
-            try
-            {
-                string miSql = "SELECT * FROM FormasPagos";
-                SqlCommand miComando = new SqlCommand(miSql, miConexion);
+        //public List<FormaPago> TraerTodo()
+        //{
+        //    List<FormaPago> formasPagos = new List<FormaPago>();
+        //    string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
+        //    FormaPago unaFP = null;
+        //    SqlConnection miConexion = new SqlConnection(miString);
+        //    try
+        //    {
+        //        string miSql = "SELECT * FROM FormasPagos";
+        //        SqlCommand miComando = new SqlCommand(miSql, miConexion);
 
-                miConexion.Open();
-                SqlDataReader miReader = miComando.ExecuteReader();
-                while (miReader.Read())
-                {
-                    if (miReader.GetString(2) == "Cuponera")
-                    {
-                        unaFP = new Cuponera()
-                        {
-                            Id = miReader.GetInt32(0),
-                            CantidadActividades = miReader.GetInt32(1),
-                        };
-                    }
-                    else
-                    {
-                        unaFP = new PaseLibre()
-                        {
-                            Id = miReader.GetInt32(0),
-                        };
-                    }
-                    formasPagos.Add(unaFP);
-                }
-                miConexion.Close();
-                miConexion.Dispose();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (miConexion.State == ConnectionState.Open)
-                {
-                    miConexion.Close();
-                    miConexion.Dispose();
-                }
-            }
-            return formasPagos;
-        }
+        //        miConexion.Open();
+        //        SqlDataReader miReader = miComando.ExecuteReader();
+        //        while (miReader.Read())
+        //        {
+        //            if (miReader.GetString(2) == "Cuponera")
+        //            {
+        //                unaFP = new Cuponera()
+        //                {
+        //                    Id = miReader.GetInt32(0),
+        //                    CantidadActividades = miReader.GetInt32(1),
+        //                };
+        //            }
+        //            else
+        //            {
+        //                unaFP = new PaseLibre()
+        //                {
+        //                    Id = miReader.GetInt32(0),
+        //                };
+        //            }
+        //            formasPagos.Add(unaFP);
+        //        }
+        //        miConexion.Close();
+        //        miConexion.Dispose();
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        if (miConexion.State == ConnectionState.Open)
+        //        {
+        //            miConexion.Close();
+        //            miConexion.Dispose();
+        //        }
+        //    }
+        //    return formasPagos;
+        //}
         #endregion
 
         #region Metodos no implementados
@@ -200,6 +200,16 @@ namespace Repositorios
         }
 
         public bool Modificacion(FormaPago obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ModificacionCantCuponera(Cuponera unaCuponera)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<FormaPago> TraerTodo()
         {
             throw new NotImplementedException();
         }

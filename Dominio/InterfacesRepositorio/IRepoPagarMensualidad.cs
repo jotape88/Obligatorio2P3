@@ -8,9 +8,13 @@ namespace Dominio
 {
     public interface IRepoPagarMensualidad: IRepositorio<PagarMensualidad>
     {
-        bool AltaPago(int idSocio, int cantidadActiv = 0);
+        bool AltaPago(int idSocio, decimal total, decimal descuento, int cantidadActiv = 0);
         DateTime BuscarUltFechaPagoXIdSocio(int idSocio);
 
         FormaPago BuscarUltFormaPago(int idSocio);
+
+        List<PagarMensualidad> ListarFormasPagoPorMesYAnio(int mes, int anio);
+
+
     }
 }

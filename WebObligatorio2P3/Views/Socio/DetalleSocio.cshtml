@@ -49,12 +49,7 @@
         @if (ViewBag.TienePago != 1)
         {
             <a href='@Url.Action("GestionPago", "Socio", new { Id = Model.Id })' class="btn btn-primary">Gestionar Pago</a> 
-                }
-        else
-                {
-            <a href= '@Url.Action("Index", "Actividad", new { Id = Model.Id })' class="btn btn-primary">Ingreso de actividad</a>
         }
-
         <a href='@Url.Action("IngresoFechasLista", "Socio", new { id = Model.Id })' class="btn btn-warning">Ver registro de actividades</a>
     </div>
 </div>

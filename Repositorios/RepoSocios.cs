@@ -17,44 +17,27 @@ namespace Repositorios
         public bool Alta(Socio unSocio)
         {
             bool bandera = false;
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            SqlConnection miConexion = new SqlConnection(miString);
+            int filasAf = 0;
             if (unSocio != null)
             {
-                if(unSocio.ValidarNomYApell(unSocio.NombreYapellido) && unSocio.ValidarEdad(unSocio.FechaNacimiento) && unSocio.ValidarCi(unSocio.Cedula)) 
+                //if(unSocio.ValidarNomYApell(unSocio.NombreYapellido) && unSocio.ValidarEdad(unSocio.FechaNacimiento) && unSocio.ValidarCi(unSocio.Cedula)) 
+                // {
+                try
                 {
-                    try
+                    using (ClubContext db = new ClubContext())
                     {
-                        string miSql = "INSERT INTO Socios(Cedula, NombreYapellido, FechaNacimiento, EstaActivo, FechaRegistro) VALUES(@ci, @nomYAp, @fechaNac, @activo, @fechaReg);";
-                        SqlCommand miComando = new SqlCommand(miSql, miConexion);
-                        miComando.Parameters.AddWithValue("@ci", unSocio.Cedula);
-                        miComando.Parameters.AddWithValue("@nomYAp", unSocio.NombreYapellido);
-                        miComando.Parameters.AddWithValue("@fechaNac", unSocio.FechaNacimiento);
-                        miComando.Parameters.AddWithValue("@activo", 1);
-                        miComando.Parameters.AddWithValue("@fechaReg", DateTime.Now);
-
-                        miConexion.Open();
-
-                        int filasAfectadas = miComando.ExecuteNonQuery();
-
-                        miConexion.Close();
-                        miConexion.Dispose();
-
-                        bandera = filasAfectadas == 1;
-                    }
-                    catch
-                    {
-                        throw;
-                    }
-                    finally
-                    {
-                        if (miConexion.State == ConnectionState.Open)
-                        {
-                            miConexion.Close();
-                            miConexion.Dispose();
-                        }
+                        unSocio.FechaRegistro = DateTime.Now;
+                        unSocio.EstaActivo = "1";
+                        db.Socios.Add(unSocio);
+                        filasAf = db.SaveChanges();
+                        bandera = filasAf > 0;
                     }
                 }
+                catch (Exception laExc)
+                {
+                    return false;
+                }
+                // }
             }
             return bandera;
         }
@@ -62,168 +45,85 @@ namespace Repositorios
         public bool Baja(int id)
         {
             bool bandera = false;
-            Socio unSocio = new Socio();
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            SqlConnection miConexion = new SqlConnection(miString);
+            int filasAf = 0;
             try
             {
-                string miSql = "UPDATE Socios SET EstaActivo=@estaActivo WHERE Id=@id;";
-                SqlCommand miComando = new SqlCommand(miSql, miConexion);
-                miComando.Parameters.AddWithValue("@id", id);
-                miComando.Parameters.AddWithValue("@estaActivo", 0);
 
-                miConexion.Open();
-
-                int filasAfectadas = miComando.ExecuteNonQuery();
-
-                miConexion.Close();
-                miConexion.Dispose();
-
-                bandera = filasAfectadas == 1;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (miConexion.State == ConnectionState.Open)
+                using (ClubContext db = new ClubContext())
                 {
-                    miConexion.Close();
-                    miConexion.Dispose();
+                    Socio unSoc = db.Socios.Find(id);
+                    //Socio aBorrar = new Socio() { Id = id };
+
+                    unSoc.EstaActivo = "0";
+                    filasAf = db.SaveChanges();
+                    bandera = filasAf > 0;
                 }
             }
-            
+            catch (Exception laExc)
+            {
+                return false;
+            }
             return bandera;
         }
 
 
         public Socio BuscarPorCedula(string cedula)
         {
-            Socio unSocio = null;
-            if(cedula != null) //Esta validacion es para cuando en el DELETE ingresan campos vacios (ademas de la validacion de los data annotations)
+            Socio unSoc = new Socio();
+            if (cedula != null) //Esta validacion es para cuando en el DELETE ingresan campos vacios (ademas de la validacion de los data annotations)
             {
-                string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-                SqlConnection miConexion = new SqlConnection(miString);
                 try
                 {
-                    string miSql = "SELECT * FROM Socios WHERE Cedula=@ci;";
-                    SqlCommand miComando = new SqlCommand(miSql, miConexion);
-                    miComando.Parameters.AddWithValue("@ci", cedula);
-
-                    miConexion.Open();
-                    SqlDataReader miReader = miComando.ExecuteReader();
-                    if (miReader.Read())
+                    using (ClubContext db = new ClubContext())
                     {
-                        unSocio = new Socio()
-                        {
-                            Id = miReader.GetInt32(0),
-                            Cedula = miReader.GetString(1),
-                            NombreYapellido = miReader.GetString(2),
-                            FechaNacimiento = miReader.GetDateTime(3),
-                            EstaActivo = miReader.GetString(4),
-                            FechaRegistro = miReader.GetDateTime(5)
-                        };
+                        unSoc = db.Socios.Where(s => s.Cedula == cedula).SingleOrDefault();
                     }
-                    miConexion.Close();
-                    miConexion.Dispose();
                 }
                 catch
                 {
-                    throw;
-                }
-                finally
-                {
-                    if (miConexion.State == ConnectionState.Open)
-                    {
-                        miConexion.Close();
-                        miConexion.Dispose();
-                    }
+                    return null;
                 }
             }
-            return unSocio;
+            return unSoc;
         }
 
-        public Socio BuscarPorId(int id) 
+        public Socio BuscarPorId(int id)
         {
-            Socio unSocio = null;
-                string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-                SqlConnection miConexion = new SqlConnection(miString);
+            Socio unSoc = new Socio();
+            {
                 try
                 {
-                    string miSql = "SELECT * FROM Socios WHERE Id=@id;";
-                    SqlCommand miComando = new SqlCommand(miSql, miConexion);
-                    miComando.Parameters.AddWithValue("@id", id);
-
-                    miConexion.Open();
-                    SqlDataReader miReader = miComando.ExecuteReader();
-                    if (miReader.Read())
+                    using (ClubContext db = new ClubContext())
                     {
-                        unSocio = new Socio()
-                        {
-                            Id = miReader.GetInt32(0),
-                            Cedula = miReader.GetString(1),
-                            NombreYapellido = miReader.GetString(2),
-                            FechaNacimiento = miReader.GetDateTime(3),
-                            EstaActivo = miReader.GetString(4),
-                            FechaRegistro = miReader.GetDateTime(5)
-                        };
+                        unSoc = db.Socios.Find(id);
                     }
-                    miConexion.Close();
-                    miConexion.Dispose();
+                }
+                catch
+                {
+                    return null;
+                }
             }
-            catch
-                {
-                    throw;
-                }
-                finally
-                {
-                    if (miConexion.State == ConnectionState.Open)
-                    {
-                        miConexion.Close();
-                        miConexion.Dispose();
-                    }
-                }
-            
-            return unSocio;
+            return unSoc;
         }
-
-
 
         public bool Modificacion(Socio unSocio)
         {
             bool bandera = false;
-            if(unSocio.ValidarNomYApell(unSocio.NombreYapellido) && unSocio.ValidarEdad(unSocio.FechaNacimiento))
+
+            using (ClubContext db = new ClubContext())
             {
-                string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-                SqlConnection miConexion = new SqlConnection(miString);
-                try
+                if (unSocio != null)
                 {
-                    string miSql = "UPDATE Socios SET NombreYapellido=@nomYap, FechaNacimiento=@fechaNac WHERE Id=@id;";
-                    SqlCommand miComando = new SqlCommand(miSql, miConexion);
-                    miComando.Parameters.AddWithValue("@id", unSocio.Id);
-                    miComando.Parameters.AddWithValue("@nomYap", unSocio.NombreYapellido);
-                    miComando.Parameters.AddWithValue("@fechaNac", unSocio.FechaNacimiento);
+                    Socio unSoc = db.Socios.Find(unSocio.Id);
 
-                    miConexion.Open();
-
-                    int filasAfectadas = miComando.ExecuteNonQuery();
-
-                    miConexion.Close();
-                    miConexion.Dispose();
-
-                    bandera = filasAfectadas == 1;
-                }
-                catch
-                {
-                    throw;
-                }
-                finally
-                {
-                    if (miConexion.State == ConnectionState.Open)
+                    if (unSoc != null)
                     {
-                        miConexion.Close();
-                        miConexion.Dispose();
+                        //db.Entry(unSocio).State = EntityState.Modified;
+                        //bandera = db.SaveChanges() != 0;
+
+                        unSoc.NombreYapellido = unSocio.NombreYapellido;
+                        unSoc.FechaNacimiento = unSocio.FechaNacimiento;
+                        bandera = db.SaveChanges() != 0;
                     }
                 }
             }
@@ -233,43 +133,14 @@ namespace Repositorios
         public List<Socio> TraerTodo()
         {
             List<Socio> socios = new List<Socio>();
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            SqlConnection miConexion = new SqlConnection(miString);
-            try
-            {
-                string miSql = "SELECT S.Id, S.Cedula, S.NombreYApellido, S.FechaNacimiento, S.EstaActivo, S.FechaRegistro FROM Socios S ORDER BY NombreYApellido ASC, LEN(Cedula) DESC, Cedula DESC;";
-                SqlCommand miComando = new SqlCommand(miSql, miConexion);
 
-                miConexion.Open();
-                SqlDataReader miReader = miComando.ExecuteReader();
-                while (miReader.Read())
-                {
-                    Socio unSoc = new Socio
-                    {
-                        Id = miReader.GetInt32(0),
-                        Cedula = miReader.GetString(1),
-                        NombreYapellido = miReader.GetString(2),
-                        FechaNacimiento = miReader.GetDateTime(3),
-                        EstaActivo = miReader.GetString(4),
-                        FechaRegistro = miReader.GetDateTime(5)
-                    };
-                        socios.Add(unSoc);
-                    }
-                miConexion.Close();
-                miConexion.Dispose();
-            }
-            catch
+            using (ClubContext db = new ClubContext())
             {
-                throw;
+                socios = db.Socios.OrderBy(s => s.NombreYapellido)
+                                  .ThenByDescending(s => s.Cedula)
+                                  .ToList();
             }
-            finally
-            {
-                if (miConexion.State == ConnectionState.Open)
-                {
-                    miConexion.Close();
-                    miConexion.Dispose();
-                }
-            }
+
             return socios;
         }
         #endregion

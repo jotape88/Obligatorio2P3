@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "ListarFormasPagosVigentes";
+}
+
+<h2>ListarFormasPagosVigentes</h2>
+
+
+@using (Html.BeginForm("ListarFormasPagosVigentes", "Home", FormMethod.Post))
+{
+    <hr />
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div>
+        <input name="mes" id="inputActividades" class="form-control" type="number" placeholder="Ingrese el numero del mes (1 a 12)">
+    </div>
+
+    <div>
+        <input name="anio" id="inputActividades" class="form-control" type="number" placeholder="Ingrese el año (4 cifras)">
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Buscar" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
