@@ -92,7 +92,7 @@ namespace Repositorios
             {
                 return mensualidades = db.PagarMensualidades.Where(pg => pg.FechaPago.Year == anio && pg.FechaPago.Month == mes)
                                                      .Select(pg => new DTOMensualidad() {                                                       
-                                                        TipoForma = pg.UnaFormaPago, //Guardamos la entidad
+                                                        TipoForma = pg.UnaFormaPago, //Guardamos el objeto completo
                                                         FechaPago = pg.FechaPago,
                                                         MontoPago = pg.MontoPagado,
                                                         DescuentoPago = pg.MontoDescontado,

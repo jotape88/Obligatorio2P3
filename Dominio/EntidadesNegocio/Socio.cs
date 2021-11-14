@@ -17,7 +17,7 @@ namespace Dominio
         [RegularExpression(@"^[0-9]{7,9}$")]
         [Required, MaxLength(10)]
         public string Cedula { get; set; }
-        [RegularExpression(@"^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]{6,}$")]                                                                                                                                                                       //Modificado
+        [RegularExpression(@"^([a-zA-ZÀ-ÿ\u00f1\u00d1]+ )+[a-zA-ZÀ-ÿ\u00f1\u00d1]+$|^[a-zA-ZÀ-ÿ\u00f1\u00d1]{6,}$")] //Validamos que sean minimo 6 letras, con espacios embebidos y admitimos caracteres especiales                                                                                                                                                              //Modificado
         [Required, MaxLength(50)]
         public string NombreYapellido { get; set; }
 

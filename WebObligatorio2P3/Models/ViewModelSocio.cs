@@ -14,7 +14,7 @@ namespace WebObligatorio_2_P3.Models
         [Required, Display(Name = "Cédula"), StringLength(10)]
         public string Cedula { get; set; }
 
-        [RegularExpression(@"^([A-Za-z]+ )+[A-Za-z]+$|^[A-Za-z]{6,}$", ErrorMessage = "Mínimo 6 caracteres, debe ingresar solo letras y sin espacios en blanco ni al inicio ni al final")] //Modificado                                                                                                                                                                      //Modificado
+        [RegularExpression(@"^([a-zA-ZÀ-ÿ\u00f1\u00d1]+ )+[a-zA-ZÀ-ÿ\u00f1\u00d1]+$|^[a-zA-ZÀ-ÿ\u00f1\u00d1]{6,}$", ErrorMessage = "Mínimo 6 caracteres, debe ingresar solo letras y sin espacios en blanco ni al inicio ni al final")] //Modificado                                                                                                                                                                      //Modificado
         [Required, Display(Name = "Nombre y apellido")] 
         public string NombreYapellido { get; set; }
 
