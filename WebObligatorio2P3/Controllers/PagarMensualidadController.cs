@@ -6,9 +6,8 @@ using System.Web.Mvc;
 using WebObligatorio_2_P3.Models;
 using Auxiliar;
 using Dominio;
-using ImportarInformacion;
 
-namespace WebObligatorio_1_P3.Controllers
+namespace WebObligatorio_2_P3.Controllers
 {
     public class PagarMensualidadController : Controller
     {
@@ -19,16 +18,13 @@ namespace WebObligatorio_1_P3.Controllers
                 return View("~/Views/Shared/NoAutorizado.cshtml");
             }
             IRepoPagarMensualidad repoPagarM = FabricaRepositorios.ObtenerRepositorioPagarMensualidad();
-
-            List<DTOMensualidad> unaLista = repoPagarM.ListarFormasPagoPorMesYAnio(mes, anio);
-
-            List<ViewModelPagoMensualidad> listVmPagoMensualidad = ConvertirFormasPagosVigentesAModel(unaLista);
-
-            if(listVmPagoMensualidad.Count == 0)
+            List<DTOMensualidad> listaDtoMensualidades = repoPagarM.ListarFormasPagoPorMesYAnio(mes, anio);
+            if(listaDtoMensualidades.Count == 0)
             {
                 ViewBag.SinResultados = "No se encontraron formas de pago vigentes en la fecha proporcionada";
                 return View();
             }
+            List<ViewModelPagoMensualidad> listVmPagoMensualidad = ConvertirFormasPagosVigentesAModel(listaDtoMensualidades);
             return View(listVmPagoMensualidad);
         }
 
@@ -41,7 +37,6 @@ namespace WebObligatorio_1_P3.Controllers
 
             return View();
         }
-
 
         private List<ViewModelPagoMensualidad> ConvertirFormasPagosVigentesAModel(List<DTOMensualidad> listaDtoMens)
         {
