@@ -103,124 +103,6 @@ namespace WebObligatorio_2_P3.Controllers
             }
         }
 
-        public ActionResult GestionPago(int id)
-        {
-            if (Session["usuarioLogueado"] == null)
-            {
-                return View("~/Views/Shared/NoAutorizado.cshtml");
-            }
-            Socio unSoc = new Socio();
-            unSoc = repoSoc.BuscarPorId(id);
-            ViewModelSocio viewModSoc = new ViewModelSocio()
-            {
-                Id = unSoc.Id,
-                NombreYapellido = unSoc.NombreYapellido,
-                FechaNacimiento = unSoc.FechaNacimiento,
-                Cedula = unSoc.Cedula,
-                EstaActivo = unSoc.EstaActivo,
-                FechaRegistro = unSoc.FechaRegistro
-            };
-            return View(viewModSoc);
-        }
-
-        [HttpPost]
-        public ActionResult GestionPago(int id, string tipoPago, int? ctdActiv)  
-        {
-            if (Session["usuarioLogueado"] == null)
-            {
-                return View("~/Views/Shared/NoAutorizado.cshtml");
-            }
-            PaseLibre unPase = new PaseLibre();
-            Cuponera unaCupo = new Cuponera();
-            Socio unSoc = new Socio();
-
-            unSoc = repoSoc.BuscarPorId(id);
-
-            ViewModelSocio viewModSoc = new ViewModelSocio()
-            {
-                Id = unSoc.Id,
-                NombreYapellido = unSoc.NombreYapellido,
-                FechaNacimiento = unSoc.FechaNacimiento,
-                Cedula = unSoc.Cedula,
-                EstaActivo = unSoc.EstaActivo,
-                FechaRegistro = unSoc.FechaRegistro
-            };
-
-            if (ctdActiv.HasValue && tipoPago == "cuponera")
-            {
-                if (ctdActiv.Value >= 8 && ctdActiv.Value <= 60)
-                {
-                    dynamic[] datos = { ctdActiv.Value };
-                    decimal totalCuponera = unaCupo.CostoTotal(datos);
-                    decimal descuentoCuponera = (Cuponera.ValorActividad * ctdActiv.Value) - totalCuponera;
-                    ViewBag.Cuponera = totalCuponera;
-
-                    dynamic[] arrayDatosPagos = { TempData["tipoPago"] = tipoPago, TempData["total"]=totalCuponera, TempData["desc"]=descuentoCuponera, TempData["ctdAct"]=ctdActiv};
-                    TempData["datosPago"] = arrayDatosPagos;
-
-                    return View(viewModSoc);
-                }
-                else
-                {
-                    ViewBag.Error = "La cantidad de actividades seleccionada debe estar comprendida entre 8 y 60";
-                }
-            }
-            else if (tipoPago == "paseLibre")
-            {
-                dynamic[] datos = { unSoc.FechaRegistro };
-                decimal totalPaselibre = unPase.CostoTotal(datos);
-                decimal descuentoPaseLibre = PaseLibre.ValorMes - totalPaselibre;
-
-                dynamic[] arrayDatosPagos = { TempData["tipoPago"] = tipoPago, TempData["total"] = totalPaselibre, TempData["desc"] = descuentoPaseLibre};
-                TempData["datosPago"] = arrayDatosPagos;
-
-                ViewBag.Cuponera = totalPaselibre;
-                return View(viewModSoc);
-            }
-            return View(viewModSoc);
-        }
-
-        
-        public ActionResult ConfirmarPago(int id)
-        {
-            if (Session["usuarioLogueado"] == null)
-            {
-                return View("~/Views/Shared/NoAutorizado.cshtml");
-            }
-            Socio unSoc = repoSoc.BuscarPorId(id);
-            dynamic[] datosPagos = (dynamic[])TempData["datosPago"];
-
-            string tipoAct = datosPagos[0];
-            if(tipoAct == "cuponera")
-            {
-                decimal total = datosPagos[1];
-                decimal descuento = datosPagos[2];
-                int ctdAct = datosPagos[3];
-
-                if (repoMensualidad.AltaPago(id, total, descuento, ctdAct)) 
-                {
-                    ViewBag.Success = "El pago se ha realizado correctamente";
-                } 
-                else
-                {
-                    ViewBag.Error = "Hubo un error al procesar el pago";
-                }
-            } else if (tipoAct == "paseLibre")
-            {
-                decimal total = datosPagos[1];
-                decimal descuento = datosPagos[2];
-
-                if (repoMensualidad.AltaPago(id, total, descuento)) 
-                {
-                    ViewBag.Success = "El pago se ha realizado correctamente";
-                }
-                else
-                {
-                    ViewBag.Error = "Hubo un error al procesar el pago";
-                }
-            }
-            return View();
-        }
 
         public ActionResult Create()
         {
@@ -402,7 +284,6 @@ namespace WebObligatorio_2_P3.Controllers
             TempData["idSocio"] = id;
             return View();
         }
-
 
         [HttpPost]
         public ActionResult ListarIngresos(DateTime? fechaInicio, DateTime? fechaFin) 

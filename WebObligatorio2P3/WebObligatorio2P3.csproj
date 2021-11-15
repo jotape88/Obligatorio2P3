@@ -206,8 +206,6 @@
     <Content Include="Views\Socio\Edit.cshtml" />
     <Content Include="Views\Socio\Index.cshtml" />
     <Content Include="Views\Socio\DetalleSocio.cshtml" />
-    <Content Include="Views\Socio\GestionPago.cshtml" />
-    <Content Include="Views\Socio\ConfirmarPago.cshtml" />
     <Content Include="Views\Actividad\Index.cshtml" />
     <Content Include="Views\Actividad\ConfirmarIngreso.cshtml" />
     <Content Include="Views\Socio\IngresoFechasLista.cshtml" />
@@ -219,6 +217,8 @@
     <Content Include="Views\Socio\Buscar.cshtml" />
     <Content Include="Views\PagarMensualidad\Index.cshtml" />
     <Content Include="Views\PagarMensualidad\FormasPagosVigentesXFecha.cshtml" />
+    <Content Include="Views\PagarMensualidad\GestionPago.cshtml" />
+    <Content Include="Views\PagarMensualidad\ConfirmarPago.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
