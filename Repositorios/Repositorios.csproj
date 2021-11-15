@@ -59,6 +59,30 @@
     <Compile Include="Migrations\202111142110385_Removido nvarcharmax de estaactivo.Designer.cs">
       <DependentUpon>202111142110385_Removido nvarcharmax de estaactivo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111150534196_Tabla aux agregada.cs" />
+    <Compile Include="Migrations\202111150534196_Tabla aux agregada.Designer.cs">
+      <DependentUpon>202111150534196_Tabla aux agregada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111150535341_Tabla aux cambio nombre.cs" />
+    <Compile Include="Migrations\202111150535341_Tabla aux cambio nombre.Designer.cs">
+      <DependentUpon>202111150535341_Tabla aux cambio nombre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111150542458_Tabla aux agregado id.cs" />
+    <Compile Include="Migrations\202111150542458_Tabla aux agregado id.Designer.cs">
+      <DependentUpon>202111150542458_Tabla aux agregado id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111150554448_Tabla aux cambiado orden ID.cs" />
+    <Compile Include="Migrations\202111150554448_Tabla aux cambiado orden ID.Designer.cs">
+      <DependentUpon>202111150554448_Tabla aux cambiado orden ID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111151613062_Tabla aux id sin autogenerar.cs" />
+    <Compile Include="Migrations\202111151613062_Tabla aux id sin autogenerar.Designer.cs">
+      <DependentUpon>202111151613062_Tabla aux id sin autogenerar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111152256463_Tabla_param_cambio_nombre.cs" />
+    <Compile Include="Migrations\202111152256463_Tabla_param_cambio_nombre.Designer.cs">
+      <DependentUpon>202111152256463_Tabla_param_cambio_nombre.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepoActividades.cs" />
@@ -85,6 +109,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111142110385_Removido nvarcharmax de estaactivo.resx">
       <DependentUpon>202111142110385_Removido nvarcharmax de estaactivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111150534196_Tabla aux agregada.resx">
+      <DependentUpon>202111150534196_Tabla aux agregada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111150535341_Tabla aux cambio nombre.resx">
+      <DependentUpon>202111150535341_Tabla aux cambio nombre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111150542458_Tabla aux agregado id.resx">
+      <DependentUpon>202111150542458_Tabla aux agregado id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111150554448_Tabla aux cambiado orden ID.resx">
+      <DependentUpon>202111150554448_Tabla aux cambiado orden ID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111151613062_Tabla aux id sin autogenerar.resx">
+      <DependentUpon>202111151613062_Tabla aux id sin autogenerar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111152256463_Tabla_param_cambio_nombre.resx">
+      <DependentUpon>202111152256463_Tabla_param_cambio_nombre.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

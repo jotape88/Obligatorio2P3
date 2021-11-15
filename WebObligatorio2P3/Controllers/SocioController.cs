@@ -186,8 +186,8 @@ namespace WebObligatorio_2_P3.Controllers
             unSoc = repoSoc.BuscarPorId(vmSocio.Id);
             if (unSoc != null && unSoc.EstaActivo != "0")
             {
-                //if(unSoc.ValidarEdad(vmSocio.FechaNacimiento) && unSoc.ValidarNomYApell(vmSocio.NombreYapellido))
-                //{
+                if(unSoc.ValidarEdad(vmSocio.FechaNacimiento))
+                {
                     unSoc = new Socio()
                     {
                         Id = vmSocio.Id,
@@ -207,12 +207,12 @@ namespace WebObligatorio_2_P3.Controllers
                         ViewBag.Error = "Hubo un error en la modificacion";
                         return View();
                     }
-                //}
-                //else
-                //{
-                //    ViewBag.Error = "El nombre y/o fecha de nacimiento ingresados no son válidos";
-                //    return View();
-                //}
+                }
+                else
+                {
+                    ViewBag.Error = "El socio debe tener por lo menos 3 años de edad";
+                    return View();
+                }
             } else
             {
                 ViewBag.Error = "El socio se encuentra deshabilitado";

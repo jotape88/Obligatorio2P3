@@ -9,6 +9,5 @@ namespace Dominio
     public interface IRepoSocios: IRepositorio<Socio>
     {
         Socio BuscarPorCedula(string cedula);
-
     }
 }

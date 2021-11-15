@@ -19,15 +19,18 @@ namespace WebObligatorio_2_P3
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-
             IRepoFormasPago repoFormas = FabricaRepositorios.ObtenerRepositorioFormasPagos();
-            dynamic[] arrayAuxiliares = repoFormas.TraerAuxiliares();
-            PaseLibre.DescuentoPorAntiguedad = arrayAuxiliares[0];     
-            PaseLibre.TopeAntiguedad = arrayAuxiliares[1];  
-            Cuponera.DescPorTopeActiv = arrayAuxiliares[2];  
-            Cuponera.TopeActividades = arrayAuxiliares[3];       
-            PaseLibre.ValorMes = arrayAuxiliares[4];         
-            Cuponera.ValorActividad = arrayAuxiliares[5];
+            dynamic[] arrayDeParametros = repoFormas.TraerAuxiliares();
+
+            foreach(Parametros x in arrayDeParametros)
+            {
+                PaseLibre.DescuentoPorAntiguedad = x.DescuentoPorAntiguedad;
+                PaseLibre.TopeAntiguedad = x.TopeAntiguedad;
+                Cuponera.DescPorTopeActiv = x.DescPorTopeActiv;
+                Cuponera.TopeActividades = x.TopeActividades;
+                PaseLibre.ValorMes = x.ValorMes;
+                Cuponera.ValorActividad = x.ValorActividad;
+            }
 
             Utilidades.GenerarBDAlInicio(); //Llamamos al metodo estatico que se encarga de crear la BD mediante E.F si esta aún no existe
         }

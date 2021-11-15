@@ -17,6 +17,7 @@ namespace Repositorios
         public DbSet<PagarMensualidad> PagarMensualidades { get; set; }
         public DbSet<Socio> Socios { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Parametros> Parametros { get; set; }
 
         public ClubContext() : base("miConexion")
         {

@@ -11,49 +11,61 @@ namespace Repositorios
 {
     public class RepoFormasPago : IRepoFormasPago
     {
-        #region Metodos de manejo de datos
         public dynamic[] TraerAuxiliares()
         {
-            dynamic[] array2 = null;
-            string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            SqlConnection miConexion = new SqlConnection(miString);
-            try
-            {
-                string miSql = "SELECT * FROM Auxiliares;";
-                SqlCommand miComando = new SqlCommand(miSql, miConexion);
+            dynamic[] arrayDatos = null;
 
-                miConexion.Open();
-                SqlDataReader miReader = miComando.ExecuteReader();
-                if (miReader.Read())
-                {
-                    decimal descuentoPorAntiguedad = miReader.GetDecimal(0);
-                    int topeAntiguedad = miReader.GetInt32(1);
-                    decimal descPorTopeActiv = miReader.GetDecimal(2);
-                    int topeActividades = miReader.GetInt32(3);
-                    decimal valorMes = miReader.GetDecimal(4);
-                    decimal valorActividad = miReader.GetDecimal(5);
-
-                    dynamic[] array = { descuentoPorAntiguedad, topeAntiguedad, descPorTopeActiv, topeActividades, valorMes, valorActividad };
-                  
-                    return array;
-                };
-                miConexion.Close();
-                miConexion.Dispose();
-            }
-            catch
+            using (ClubContext db = new ClubContext())
             {
-                throw;
+                return arrayDatos = db.Parametros.Where(a => a.Id == 1)
+                                                 .ToArray();
             }
-            finally
-            {
-                if (miConexion.State == ConnectionState.Open)
-                {
-                    miConexion.Close();
-                    miConexion.Dispose();
-                }
-            }
-            return array2;
         }
+
+        #region Metodos de manejo de datos
+        //public dynamic[] TraerAuxiliares()
+        //{
+        //    dynamic[] array2 = null;
+        //    string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
+        //    SqlConnection miConexion = new SqlConnection(miString);
+        //    try
+        //    {
+        //        string miSql = "SELECT * FROM Auxiliares;";
+        //        SqlCommand miComando = new SqlCommand(miSql, miConexion);
+
+        //        miConexion.Open();
+        //        SqlDataReader miReader = miComando.ExecuteReader();
+        //        if (miReader.Read())
+        //        {
+        //            decimal descuentoPorAntiguedad = miReader.GetDecimal(0);
+        //            int topeAntiguedad = miReader.GetInt32(1);
+        //            decimal descPorTopeActiv = miReader.GetDecimal(2);
+        //            int topeActividades = miReader.GetInt32(3);
+        //            decimal valorMes = miReader.GetDecimal(4);
+        //            decimal valorActividad = miReader.GetDecimal(5);
+
+        //            dynamic[] array = { descuentoPorAntiguedad, topeAntiguedad, descPorTopeActiv, topeActividades, valorMes, valorActividad };
+
+        //            return array;
+        //        };
+        //        miConexion.Close();
+        //        miConexion.Dispose();
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        if (miConexion.State == ConnectionState.Open)
+        //        {
+        //            miConexion.Close();
+        //            miConexion.Dispose();
+        //        }
+        //    }
+        //    return array2;
+        //}
+
 
         public FormaPago BuscarPorId(int id)
         {
