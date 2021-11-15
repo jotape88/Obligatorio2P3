@@ -15,9 +15,7 @@ namespace Dominio
         public int Id { get; set; }
         //[DatabaseGenerated(DatabaseGeneratedOption.None)] 
         public Socio UnSocio { get; set; }
-
         public FormaPago UnaFormaPago { get; set; }
-
         public DateTime FechaPago { get; set; }
         public decimal MontoPagado { get; set; }
         public decimal MontoDescontado { get; set; }

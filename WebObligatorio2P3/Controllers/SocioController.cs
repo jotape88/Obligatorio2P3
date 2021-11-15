@@ -29,6 +29,7 @@ namespace WebObligatorio_2_P3.Controllers
             List<ViewModelSocio> losSocModel = ConvertirListSocioAModel(losSoc);
             return View(losSocModel);  
         }
+
         public ActionResult Buscar()
         {
             if (Session["usuarioLogueado"] == null)
@@ -132,6 +133,7 @@ namespace WebObligatorio_2_P3.Controllers
             PaseLibre unPase = new PaseLibre();
             Cuponera unaCupo = new Cuponera();
             Socio unSoc = new Socio();
+
             unSoc = repoSoc.BuscarPorId(id);
 
             ViewModelSocio viewModSoc = new ViewModelSocio()
@@ -144,8 +146,6 @@ namespace WebObligatorio_2_P3.Controllers
                 FechaRegistro = unSoc.FechaRegistro
             };
 
-            TempData["tipoPago"] = tipoPago; 
-            
             if (ctdActiv.HasValue && tipoPago == "cuponera")
             {
                 if (ctdActiv.Value >= 8 && ctdActiv.Value <= 60)
@@ -155,10 +155,8 @@ namespace WebObligatorio_2_P3.Controllers
                     decimal descuentoCuponera = (Cuponera.ValorActividad * ctdActiv.Value) - totalCuponera;
                     ViewBag.Cuponera = totalCuponera;
 
-                    TempData["total"] = totalCuponera;
-                    TempData["desc"] = descuentoCuponera;
-                    TempData["ctdAct"] = ctdActiv;
-
+                    dynamic[] arrayDatosPagos = { TempData["tipoPago"] = tipoPago, TempData["total"]=totalCuponera, TempData["desc"]=descuentoCuponera, TempData["ctdAct"]=ctdActiv};
+                    TempData["datosPago"] = arrayDatosPagos;
 
                     return View(viewModSoc);
                 }
@@ -173,8 +171,8 @@ namespace WebObligatorio_2_P3.Controllers
                 decimal totalPaselibre = unPase.CostoTotal(datos);
                 decimal descuentoPaseLibre = PaseLibre.ValorMes - totalPaselibre;
 
-                TempData["total"] = totalPaselibre;
-                TempData["desc"] = descuentoPaseLibre;
+                dynamic[] arrayDatosPagos = { TempData["tipoPago"] = tipoPago, TempData["total"] = totalPaselibre, TempData["desc"] = descuentoPaseLibre};
+                TempData["datosPago"] = arrayDatosPagos;
 
                 ViewBag.Cuponera = totalPaselibre;
                 return View(viewModSoc);
@@ -190,13 +188,14 @@ namespace WebObligatorio_2_P3.Controllers
                 return View("~/Views/Shared/NoAutorizado.cshtml");
             }
             Socio unSoc = repoSoc.BuscarPorId(id);
+            dynamic[] datosPagos = (dynamic[])TempData["datosPago"];
 
-            string tipoAct = TempData["tipoPago"].ToString();
+            string tipoAct = datosPagos[0];
             if(tipoAct == "cuponera")
             {
-                int ctdAct = (int)TempData["ctdAct"];
-                decimal total = (decimal)TempData["total"];
-                decimal descuento = (decimal)TempData["desc"];
+                decimal total = datosPagos[1];
+                decimal descuento = datosPagos[2];
+                int ctdAct = datosPagos[3];
 
                 if (repoMensualidad.AltaPago(id, total, descuento, ctdAct)) 
                 {
@@ -208,9 +207,8 @@ namespace WebObligatorio_2_P3.Controllers
                 }
             } else if (tipoAct == "paseLibre")
             {
-
-                decimal total = (decimal)TempData["total"];
-                decimal descuento = (decimal)TempData["desc"];
+                decimal total = datosPagos[1];
+                decimal descuento = datosPagos[2];
 
                 if (repoMensualidad.AltaPago(id, total, descuento)) 
                 {
