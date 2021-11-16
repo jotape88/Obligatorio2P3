@@ -150,7 +150,7 @@ namespace WebObligatorio_2_P3.Controllers
             }
             else
             {
-                ViewBag.Error = "La edad debe estar comprendida entre 3 y 90 años inclusive"; //Inclusive o exclusive? En la bd hay actividades de 3 y 90 años
+                ViewBag.Error = "La edad debe estar comprendida entre 3 y 90 años inclusive";
                 return View();
             }
             return View();
@@ -186,7 +186,7 @@ namespace WebObligatorio_2_P3.Controllers
             unSoc = repoSoc.BuscarPorId(vmSocio.Id);
             if (unSoc != null && unSoc.EstaActivo != "0")
             {
-                if(unSoc.ValidarEdad(vmSocio.FechaNacimiento))
+                if(unSoc.ValidarEdad(vmSocio.FechaNacimiento)) //Esto estaba comentado, tenemos que validar la edad al editar
                 {
                     unSoc = new Socio()
                     {

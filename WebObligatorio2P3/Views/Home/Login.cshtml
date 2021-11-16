@@ -25,7 +25,8 @@
             @Html.LabelFor(model => model.Contrasenia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Contrasenia, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingrese su contraseña" } })
-                <label for="mostrarContrasenia" style="font-size: 13px; padding: 12px 8px 10px 0">Mostrar la contraseña</label> <input type="checkbox" id="mostrarContrasenia" />
+                <label for="mostrarContrasenia" style="font-size: 13px; padding: 12px 8px 10px 0">Mostrar la contraseña</label> 
+                <input type="checkbox" id="mostrarContrasenia" />
                 @Html.ValidationMessageFor(model => model.Contrasenia, "", new { @class = "text-danger" })
             </div>
         </div>

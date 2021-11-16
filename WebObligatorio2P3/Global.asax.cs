@@ -21,7 +21,6 @@ namespace WebObligatorio_2_P3
 
             IRepoFormasPago repoFormas = FabricaRepositorios.ObtenerRepositorioFormasPagos();
             dynamic[] arrayDeParametros = repoFormas.TraerAuxiliares();
-
             foreach(Parametros x in arrayDeParametros)
             {
                 PaseLibre.DescuentoPorAntiguedad = x.DescuentoPorAntiguedad;

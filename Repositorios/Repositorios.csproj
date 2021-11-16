@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClubContext.cs" />
+    <Compile Include="Contexto\ClubContext.cs" />
     <Compile Include="Migrations\202111142105121_InitialCreate.cs" />
     <Compile Include="Migrations\202111142105121_InitialCreate.Designer.cs">
       <DependentUpon>202111142105121_InitialCreate.cs</DependentUpon>
@@ -85,13 +85,13 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepoActividades.cs" />
-    <Compile Include="RepoDiaYHora.cs" />
-    <Compile Include="RepoFormasPago.cs" />
-    <Compile Include="RepoIngresosActividades.cs" />
-    <Compile Include="RepoPagarMensualidad.cs" />
-    <Compile Include="RepoSocios.cs" />
-    <Compile Include="RepoUsuarios.cs" />
+    <Compile Include="Repos\RepoActividades.cs" />
+    <Compile Include="Repos\RepoDiaYHora.cs" />
+    <Compile Include="Repos\RepoFormasPago.cs" />
+    <Compile Include="Repos\RepoIngresosActividades.cs" />
+    <Compile Include="Repos\RepoPagarMensualidad.cs" />
+    <Compile Include="Repos\RepoSocios.cs" />
+    <Compile Include="Repos\RepoUsuarios.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dominio\Dominio.csproj">
