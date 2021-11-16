@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportarInformacion", "Expo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngresoActividadWCF", "IngresoActividadWCF\IngresoActividadWCF.csproj", "{99E9DD98-A5FC-4159-938B-7A3CF2DBAF13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIObligatorio2P3", "WebAPIObligatorio2P3\WebAPIObligatorio2P3.csproj", "{605E2B20-1977-4123-8DAB-B8206F6C4245}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{99E9DD98-A5FC-4159-938B-7A3CF2DBAF13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99E9DD98-A5FC-4159-938B-7A3CF2DBAF13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99E9DD98-A5FC-4159-938B-7A3CF2DBAF13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{605E2B20-1977-4123-8DAB-B8206F6C4245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{605E2B20-1977-4123-8DAB-B8206F6C4245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{605E2B20-1977-4123-8DAB-B8206F6C4245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{605E2B20-1977-4123-8DAB-B8206F6C4245}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
