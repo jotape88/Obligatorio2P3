@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "IngresoNombreActYCedulaSocio";
+}
+
+<h2>IngresoNombreYCedulaSocio</h2>
+
+
+@using (Html.BeginForm("ListarIngresosActXSocio", "Actividad", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="cedula">Cedula</label>
+        <small class="form-text text-muted">Ingrese un numero de entre 7 y 9 digitos</small>
+        <input type="number" class="form-control" name="cedula" id="cedula" placeholder="Ingrese la cedula" required />
+    </div>
+    <div class="form-group">
+        <label for="nombreActiv">Nombre actividad</label>
+        <input type="text" class="form-control" name="nombreActiv" id="nombreActiv" placeholder="Ingrese el nombre de la actividad" required />
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Buscar" />
+}
+
+
+
