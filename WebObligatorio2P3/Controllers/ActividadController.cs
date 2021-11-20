@@ -21,13 +21,13 @@ namespace WebObligatorio_1_P3.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ListarIngresosActXSocio(string cedula, string nombreActiv)
+        public ActionResult ListarIngresosActXSocio(string CedulaSocio, string NombreActiv)
         {
             List<DTOIngresos> ingresosActivs = new List<DTOIngresos>();
 
             string laUbicacion = ConfigurationManager.AppSettings["UbicacionWebAPI"];
             string laUrl = laUbicacion + "obligatorio/actividades/GetIngresosActividadPorSocio/";
-            Uri laUri = new Uri(laUrl+cedula+"/"+nombreActiv);
+            Uri laUri = new Uri(laUrl+ CedulaSocio + "/"+ NombreActiv);
 
             HttpClient proxy = new HttpClient();
             Task<HttpResponseMessage> tarea1 = proxy.GetAsync(laUri);
@@ -58,19 +58,19 @@ namespace WebObligatorio_1_P3.Controllers
         #region Metodos de conversion de listas
         private List<ViewModelIngresoActividad> ConvertirListIngresosAModel(List<DTOIngresos> ingresosActivs)
         {
-            List<ViewModelIngresoActividad> listDtoIngs = new List<ViewModelIngresoActividad>();
+            List<ViewModelIngresoActividad> ingresosActViewModel = new List<ViewModelIngresoActividad>();
             foreach (DTOIngresos unDto in ingresosActivs)
             {
-                TimeSpan horaYMins = new TimeSpan(unDto.FechaYHoraIngreso.Hour, unDto.FechaYHoraIngreso.Minute, 0); //A partir de la fecha (que contiene fecha hora y minutos) creamos un timespan con solo la hora y los minutos
+                TimeSpan horaYMins = new TimeSpan(unDto.FechaYHoraIngreso.Hour, unDto.FechaYHoraIngreso.Minute, unDto.FechaYHoraIngreso.Second); //A partir de la fecha (que contiene fecha hora y minutos) creamos un timespan con solo la hora y los minutos
                 ViewModelIngresoActividad vmDelDto = new ViewModelIngresoActividad()
                 {
-                    FechaYHora = unDto.FechaYHoraIngreso, //La fecha la guardamos por separado y por medio del data annotation DataType.Datetime del ViewModel mostramos solo el formato dd/mm/aaa
+                    FechaYHora = unDto.FechaYHoraIngreso, //Por medio del data annotation DataType.Datetime del ViewModel mostramos solo el formato dd/mm/aaa
                     Dia = unDto.Dia,
                     Hora = horaYMins
                 };
-                listDtoIngs.Add(vmDelDto);
+                ingresosActViewModel.Add(vmDelDto);
             }
-            return listDtoIngs;
+            return ingresosActViewModel;
         }
         #endregion
     }

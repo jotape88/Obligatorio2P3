@@ -11,9 +11,9 @@ namespace WebObligatorio_2_P3.Models
     {
         [Display(Name = "Tipo de pase")]
         public string TipoPago { get; set; }
-        [Display(Name = "Fecha de pago"), DataType(DataType.Date)]
+        [Display(Name = "Fecha de pago"), DataType(DataType.Date)] //Acorta la fecha
         public DateTime FechaPago { get; set; }
-        [Display(Name = "Monto pagado"), DisplayFormat(DataFormatString = "{0:n0}")]
+        [Display(Name = "Monto pagado"), DisplayFormat(DataFormatString = "{0:n0}")] //Solo muestra decimales en el monto
         public decimal MontoPago { get; set; }
         [Display(Name = "Monto de descuento aplicado"), DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal DescuentoPago { get; set; }

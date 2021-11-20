@@ -225,8 +225,8 @@
     <Content Include="Views\PagarMensualidad\FormasPagosVigentesXFecha.cshtml" />
     <Content Include="Views\PagarMensualidad\GestionPago.cshtml" />
     <Content Include="Views\PagarMensualidad\ConfirmarPago.cshtml" />
-    <Content Include="Views\Actividad\IngresoNombreActYCedulaSocio.cshtml" />
     <Content Include="Views\Actividad\ListarIngresosActXSocio.cshtml" />
+    <Content Include="Views\Actividad\IngresoNombreActYCedulaSocio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

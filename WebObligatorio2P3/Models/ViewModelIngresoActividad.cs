@@ -18,13 +18,11 @@ namespace WebObligatorio_2_P3.Models
 
         public TimeSpan Hora { get; set; }
 
-        //[Required, Display(Name = "Fecha inicio"), DataType(DataType.Date)]
-        //public DateTime FechaInicio { get; set; }
-
-        //[Required, Display(Name = "Fecha fin"), DataType(DataType.Date)]
-        //public DateTime FechaFin { get; set; }
-
-        //public Socio Soc { get; set; }
+        [Required, Display(Name = "Nombre de la actividad")]
+        public string NombreActiv { get; set; }
+        [RegularExpression(@"^[0-9]{7,9}$")]
+        [Required, MaxLength(10), Display(Name = "Cedula del socio")]
+        public string CedulaSocio { get; set; }
 
     }
 }

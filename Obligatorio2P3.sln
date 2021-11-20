@@ -12,13 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auxiliar", "Auxiliar\Auxiliar.csproj", "{3C73FD9F-361A-4943-A003-9EC80EABDCD9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebObligatorio2P3", "WebObligatorio2P3\WebObligatorio2P3.csproj", "{E4DFEB0F-F87E-4FCA-A072-8D5C8278C2DA}"
-	ProjectSection(ProjectDependencies) = postProject
-		{99E9DD98-A5FC-4159-938B-7A3CF2DBAF13} = {99E9DD98-A5FC-4159-938B-7A3CF2DBAF13}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportarInformacion", "ExportarInformacion\ImportarInformacion.csproj", "{F715EC9C-C138-4C53-AABA-E73AC0E88C7B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngresoActividadWCF", "IngresoActividadWCF\IngresoActividadWCF.csproj", "{99E9DD98-A5FC-4159-938B-7A3CF2DBAF13}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIObligatorio2P3", "WebAPIObligatorio2P3\WebAPIObligatorio2P3.csproj", "{605E2B20-1977-4123-8DAB-B8206F6C4245}"
 EndProject
@@ -52,10 +47,6 @@ Global
 		{F715EC9C-C138-4C53-AABA-E73AC0E88C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F715EC9C-C138-4C53-AABA-E73AC0E88C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F715EC9C-C138-4C53-AABA-E73AC0E88C7B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99E9DD98-A5FC-4159-938B-7A3CF2DBAF13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99E9DD98-A5FC-4159-938B-7A3CF2DBAF13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99E9DD98-A5FC-4159-938B-7A3CF2DBAF13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99E9DD98-A5FC-4159-938B-7A3CF2DBAF13}.Release|Any CPU.Build.0 = Release|Any CPU
 		{605E2B20-1977-4123-8DAB-B8206F6C4245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{605E2B20-1977-4123-8DAB-B8206F6C4245}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{605E2B20-1977-4123-8DAB-B8206F6C4245}.Release|Any CPU.ActiveCfg = Release|Any CPU
