@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<WebObligatorio_2_P3.Models.ViewModelDiaYHora>
 
-<h2>Búsqueda de actividades segun criterio</h2>
+<h3>Búsqueda de actividades segun criterio</h3>
 
 <hr />
 @Html.ActionLink("Volver a buscar", "BusquedaActividadPorParametros")
@@ -34,9 +34,7 @@
                 @Html.DisplayFor(modelItem => item.Hora)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit") |
             </td>
         </tr>
     }

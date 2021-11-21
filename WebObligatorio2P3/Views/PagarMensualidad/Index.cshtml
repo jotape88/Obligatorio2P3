@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<WebObligatorio_2_P3.Models.ViewModelPagoMensualidad>
 
-@{
-    ViewBag.Title = "Pases libres y cuponeras vigentes";
-}
-
+<hr />
+<h3>Pases libres y cuponeras vigentes al mes: <em style="text-shadow: 1px 1px #444">@ViewBag.Mes</em> del año: <em style="text-shadow: 1px 1px #444">@ViewBag.Anio</em></h3>
 <hr />
 
 @if (ViewBag.SinResultados == null)
 {
-    <h2>Pases libres y cuponeras vigentes</h2>
     <hr />
     <table class="table table-bordered">
         <tr class="info">

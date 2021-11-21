@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<WebObligatorio_2_P3.Models.ViewModelIngresoActividad>
 
-<h2>Listando todos los ingresos de un socio a una actividad dada</h2>
+<hr />
+<h3>Listando todos los ingresos del socio: <em style="text-shadow: 1px 1px #444;">@ViewBag.CedulaSocio</em> a la actividad: <em style="text-shadow: 1px 1px #444";>@ViewBag.NombreActividad</em></h3>
 
 <hr />
 
@@ -17,18 +18,20 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaYHora)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hora)
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaYHora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hora)
+            </td>
+        </tr>
+    }
 </table>
+
+@Html.ActionLink("Volver a buscar", "IngresoNombreActYCedulaSocio")

@@ -98,8 +98,10 @@ namespace WebObligatorio_1_P3.Controllers
             {
                 return View("~/Views/Shared/NoAutorizado.cshtml");
             }
-            List<DTOIngresos> ingresosActivs = new List<DTOIngresos>();
+            ViewBag.CedulaSocio = CedulaSocio;
+            ViewBag.NombreActividad = NombreActiv;
 
+            List<DTOIngresos> ingresosActivs = new List<DTOIngresos>();
             string laUbicacion = ConfigurationManager.AppSettings["UbicacionWebAPI"];
             string laUrl = laUbicacion + "obligatorio/actividades/GetIngresosActividadPorSocio/";
             Uri laUri = new Uri(laUrl+ CedulaSocio + "/"+ NombreActiv);

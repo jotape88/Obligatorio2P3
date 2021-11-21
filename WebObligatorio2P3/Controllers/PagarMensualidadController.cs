@@ -24,8 +24,9 @@ namespace WebObligatorio_2_P3.Controllers
             {
                 return View("~/Views/Shared/NoAutorizado.cshtml");
             }
-            IRepoPagarMensualidad repoPagarM = FabricaRepositorios.ObtenerRepositorioPagarMensualidad();
-            List<DTOMensualidad> listaDtoMensualidades = repoPagarM.ListarFormasPagoPorMesYAnio(mes, anio);
+            ViewBag.Anio = anio;
+            ViewBag.Mes = mes;
+            List<DTOMensualidad> listaDtoMensualidades = repoMensualidad.ListarFormasPagoPorMesYAnio(mes, anio);
             if(listaDtoMensualidades.Count == 0)
             {
                 ViewBag.SinResultados = "No se encontraron formas de pago vigentes en la fecha proporcionada";

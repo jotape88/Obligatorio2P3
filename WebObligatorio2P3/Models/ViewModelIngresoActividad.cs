@@ -23,7 +23,6 @@ namespace WebObligatorio_2_P3.Models
 
         [RegularExpression(@"^[0-9]{7,9}$", ErrorMessage = "Ingrese un cédula válida de entre 7 y 9 dígitos sin puntos ni guíones")]
         [Required, MaxLength(10), Display(Name = "Cédula del socio")]
-        public string CedulaSocio { get; set; }
-
+        public string CedulaSocio { get; set; }   
     }
 }
