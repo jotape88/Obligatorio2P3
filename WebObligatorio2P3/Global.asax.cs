@@ -19,8 +19,8 @@ namespace WebObligatorio_2_P3
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            IRepoFormasPago repoFormas = FabricaRepositorios.ObtenerRepositorioFormasPagos();
-            dynamic[] arrayDeParametros = repoFormas.TraerAuxiliares();
+            IRepoPagarMensualidad repoPagarMens = FabricaRepositorios.ObtenerRepositorioPagarMensualidad();
+            dynamic[] arrayDeParametros = repoPagarMens.TraerAuxiliares();
             foreach(Parametros x in arrayDeParametros)
             {
                 PaseLibre.DescuentoPorAntiguedad = x.DescuentoPorAntiguedad;

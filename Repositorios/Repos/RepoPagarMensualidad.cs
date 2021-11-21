@@ -12,6 +12,19 @@ namespace Repositorios
 {
     public class RepoPagarMensualidad : IRepoPagarMensualidad
     {
+        #region Metodo para traer parametros auxiliares
+        public dynamic[] TraerAuxiliares()
+        {
+            dynamic[] arrayDatos = null;
+
+            using (ClubContext db = new ClubContext())
+            {
+                return arrayDatos = db.Parametros.Where(a => a.Id == 1)
+                                                 .ToArray();
+            }
+        }
+        #endregion
+
         #region Metodos de manejo de datos
         public bool AltaPago(int idSocio, decimal total, decimal descuento, int cantidadActiv = 0)
         {
@@ -65,7 +78,7 @@ namespace Repositorios
             }
             return bandera;
         }
-        public DateTime BuscarUltFechaPagoXIdSocio(int idSocio) //hacer
+        public DateTime BuscarUltFechaPagoXIdSocio(int idSocio) 
         {
             DateTime ultFechaPago = DateTime.MinValue;
             try
@@ -103,103 +116,6 @@ namespace Repositorios
             }
 
         }
-
-
-        //public FormaPago BuscarUltFormaPago(int idSocio) 
-        //{
-        //    FormaPago unaForma = null;
-
-        //    string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-        //    SqlConnection miConexion = new SqlConnection(miString);
-        //    try
-        //    {
-        //        string miSql = "SELECT TOP 1 FP.Id, FP.CantidadActividades, MAX(PM.FechasPagos) AS Fecha FROM FormasPagos FP, PagarMensualidades PM WHERE FP.Id = PM.IdFormasPagos AND PM.IdSocio = @idSocio GROUP BY FP.Id, FP.CantidadActividades ORDER BY Fecha DESC";
-
-
-        //        SqlCommand miComando = new SqlCommand(miSql, miConexion);
-        //        miComando.Parameters.AddWithValue("@idSocio", idSocio);
-        //        miConexion.Open();
-        //        SqlDataReader miReader = miComando.ExecuteReader();
-        //        if (miReader.Read())
-        //        {
-
-        //            if (miReader["CantidadActividades"] is DBNull)
-        //            {
-        //                unaForma = new PaseLibre()
-        //                {
-        //                    Id = miReader.GetInt32(0),
-
-        //                };
-        //            } else
-        //            {
-        //                unaForma = new Cuponera()
-        //                {
-        //                    Id = miReader.GetInt32(0),
-        //                    CantidadActividades = miReader.GetInt32(1)
-        //                };
-        //            }
-        //        }
-        //        miConexion.Close();
-        //        miConexion.Dispose();
-        //    }
-        //    catch
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        if (miConexion.State == ConnectionState.Open)
-        //        {
-        //            miConexion.Close();
-        //            miConexion.Dispose();
-        //        }
-        //    }
-        //    return unaForma;
-        //}
-
-        //public List<PagarMensualidad> TraerTodo()
-        //{
-        //    List<PagarMensualidad> pagarmensualidades = new List<PagarMensualidad>();
-        //    string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-        //    SqlConnection miConexion = new SqlConnection(miString);
-        //    try
-        //    {
-        //        string miSql = "SELECT * FROM PagarMensualidades";
-        //        SqlCommand miComando = new SqlCommand(miSql, miConexion);
-        //        miConexion.Open();
-        //        SqlDataReader miReader = miComando.ExecuteReader();
-        //        while (miReader.Read())
-
-        //        {
-        //            IRepoSocios socio = new RepoSocios();
-        //            IRepoFormasPago formpaP = new RepoFormasPago();
-        //            PagarMensualidad unPagoMensualidad = new PagarMensualidad
-        //            {
-        //                Id = miReader.GetInt32(0),
-        //                UnSocio = socio.BuscarPorId(miReader.GetInt32(1)),
-        //                UnaFormaPago = formpaP.BuscarPorId(miReader.GetInt32(2)), 
-        //                FechaPago = miReader.GetDateTime(3),
-        //            };
-        //            pagarmensualidades.Add(unPagoMensualidad);
-        //        }
-        //        miConexion.Close();
-        //        miConexion.Dispose();
-        //    }
-        //    catch
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        if (miConexion.State == ConnectionState.Open)
-        //        {
-        //            miConexion.Close();
-        //            miConexion.Dispose();
-        //        }
-        //    }
-        //    return pagarmensualidades;
-        //}
-
 
         #endregion
 

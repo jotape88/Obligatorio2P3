@@ -14,5 +14,8 @@ namespace Dominio
         FormaPago BuscarUltFormaPago(int idSocio);
 
         List<DTOMensualidad> ListarFormasPagoPorMesYAnio(int mes, int anio);
+
+        dynamic[] TraerAuxiliares();
+
     }
 }

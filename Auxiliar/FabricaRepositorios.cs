@@ -30,20 +30,11 @@ namespace Auxiliar
             return new RepoPagarMensualidad();
         }
 
-        public static IRepoFormasPago ObtenerRepositorioFormasPagos()
-        {
-            return new RepoFormasPago();
-        }
-
         public static IRepoDiaYHora ObtenerRepositorioDiaYHora()
         {
             return new RepoDiaYHora();
         }
 
-        public static IRepoIngresosActividades ObtenerRepositorioIngresosActividades()
-        {
-            return new RepoIngresosActividades();
-        }
     }
 
 }

@@ -20,8 +20,6 @@ namespace Dominio
         public int EdadMinima { get; set; }
         [Range(3, 90)]
         public int EdadMaxima { get; set; }
-        [Required]
-        public List<DiaYHora> DiasYhoras { get; set; }
         #endregion
 
         //Validamos por DataAnnotations y a su vez también por métodos
@@ -32,10 +30,10 @@ namespace Dominio
             return edadMinima < edadMaxima;
         }
 
-        public bool ValidarNombreAct(string nom)
-        {
-            return !string.IsNullOrWhiteSpace(nom); //Validamos que no hayan espacios en blanco o que sea null
-        }
+        //public bool ValidarNombreAct(string nom)
+        //{
+        //    return !string.IsNullOrWhiteSpace(nom); //Validamos que no hayan espacios en blanco o que sea null
+        //}
 
         #endregion
 

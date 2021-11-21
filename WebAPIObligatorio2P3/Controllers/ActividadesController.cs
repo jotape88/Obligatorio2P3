@@ -26,9 +26,9 @@ namespace WebAPIObligatorio2P3.Controllers
         {
             return db.DiasYHoras.OrderBy(dh => dh.Activ.Nombre)
                                  .ThenBy(dh => dh.Dia)
-                                 .ThenBy(a => a.Hora)
-                                  .Where(a => a.Activ.Nombre.Contains(texto))
-                                  .Select(a => new DTODiaYHora { NombreActividad = a.Activ.Nombre, Dia = a.Dia, Hora = a.Hora })
+                                 .ThenBy(dh => dh.Hora)
+                                  .Where(dh => dh.Activ.Nombre.Contains(texto))
+                                  .Select(dh => new DTODiaYHora { NombreActividad = dh.Activ.Nombre, Dia = dh.Dia, Hora = dh.Hora })
                                   .ToList().AsQueryable();                             
         }
 
@@ -40,9 +40,9 @@ namespace WebAPIObligatorio2P3.Controllers
 
             return db.DiasYHoras.OrderBy(dh => dh.Activ.Nombre)
                      .ThenBy(dh => dh.Dia)
-                     .ThenBy(a => a.Hora)
-                      .Where(a => a.Activ.EdadMinima > edadMin)
-                      .Select(a => new DTODiaYHora { NombreActividad = a.Activ.Nombre, Dia = a.Dia, Hora = a.Hora })
+                     .ThenBy(dh => dh.Hora)
+                      .Where(dh => dh.Activ.EdadMinima > edadMin)
+                      .Select(dh => new DTODiaYHora { NombreActividad = dh.Activ.Nombre, Dia = dh.Dia, Hora = dh.Hora, EdadMinima = dh.Activ.EdadMinima })
                       .ToList().AsQueryable();
         }
 
@@ -51,9 +51,9 @@ namespace WebAPIObligatorio2P3.Controllers
         {
             return db.DiasYHoras.OrderBy(dh => dh.Activ.Nombre)
                      .ThenBy(dh => dh.Dia)
-                     .ThenBy(a => a.Hora)
-                      .Where(a => a.Dia == dia && a.Hora == hora)
-                      .Select(a => new DTODiaYHora { NombreActividad = a.Activ.Nombre, Dia = a.Dia, Hora = a.Hora })
+                     .ThenBy(dh => dh.Hora)
+                      .Where(dh => dh.Dia == dia && dh.Hora == hora)
+                      .Select(dh => new DTODiaYHora { NombreActividad = dh.Activ.Nombre, Dia = dh.Dia, Hora = dh.Hora })
                       .ToList().AsQueryable();
         }
 
@@ -64,7 +64,7 @@ namespace WebAPIObligatorio2P3.Controllers
         {
             return db.IngresosActividades.Where(ia => ia.Soc.Cedula == cedula && ia.DiaYHr.Activ.Nombre == nombreActiv)
                                           .Select(ia => new DTOIngresos { FechaYHoraIngreso = ia.FechaYHora, Dia = ia.DiaYHr.Dia })  
-                                          .OrderByDescending(ia => ia.FechaYHoraIngreso); //el dto tiene fecha de ingreso, ordenamos descendentemente por eso (sino hay que ponerlo arriba del dto y ahi ordenar por FechaYHora)
+                                          .OrderByDescending(ia => ia.FechaYHoraIngreso);
         }
 
         #endregion

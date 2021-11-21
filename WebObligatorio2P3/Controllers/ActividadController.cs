@@ -26,7 +26,7 @@ namespace WebObligatorio_1_P3.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ListarActividadesPorTextoEnNombre(string NombreActivdad, string Dia, int? Hora, int? EdadMinima)
+        public ActionResult BusquedaActividadPorParametros(string NombreActivdad, string Dia, int? Hora, int? EdadMinima)
         {
             if (Session["usuarioLogueado"] == null)
             {
@@ -35,14 +35,27 @@ namespace WebObligatorio_1_P3.Controllers
             List<DTODiaYHora> dtoDiasYHrs = new List<DTODiaYHora>();
 
             string laUbicacion = ConfigurationManager.AppSettings["UbicacionWebAPI"];
-            string laUrl = laUbicacion + "obligatorio/actividades/GetActividadesPorNombre/";
-            Uri laUri = new Uri(laUrl + NombreActivdad);
+            Uri laUri = null;
+
+            if (NombreActivdad != "")
+            {
+                string laUrl = laUbicacion + "obligatorio/actividades/GetActividadesPorNombre/";
+                laUri = new Uri(laUrl + NombreActivdad);
+            }
+            else if (Dia != "" && Hora != null)
+            {
+                string laUrl = laUbicacion + "obligatorio/actividades/GetActividadesPorDiaHr/";
+                 laUri = new Uri(laUrl + Dia + "/" + Hora);
+            }
+            else if (EdadMinima != null)
+            {
+                string laUrl = laUbicacion + "obligatorio/actividades/GetActividadesPorCotaMinimaEdad/";
+                 laUri = new Uri(laUrl + EdadMinima);
+            }
 
             HttpClient proxy = new HttpClient();
             Task<HttpResponseMessage> tarea1 = proxy.GetAsync(laUri);
-
             tarea1.Wait();
-
             HttpResponseMessage laRespuesta = tarea1.Result;
 
             if (laRespuesta.IsSuccessStatusCode)
@@ -59,8 +72,7 @@ namespace WebObligatorio_1_P3.Controllers
                 ViewBag.Error = "No se pudieron obtener los ingresos: " + laRespuesta.StatusCode;
             }
             List<ViewModelDiaYHora> listaIngresos = ConvertirDiasYHrsAModel(dtoDiasYHrs);
-            return View(listaIngresos);
-
+            return View("BusquedaActividadPorParametrosLista", listaIngresos);
         }
 
         private List<ViewModelDiaYHora> ConvertirDiasYHrsAModel(List<DTODiaYHora> ingresosDiasYHrs)
@@ -68,12 +80,12 @@ namespace WebObligatorio_1_P3.Controllers
             List<ViewModelDiaYHora> diasHrsViewModel = new List<ViewModelDiaYHora>();
             foreach (DTODiaYHora unDhr in ingresosDiasYHrs)
             {
-                //TimeSpan horaYMins = new TimeSpan(unDto.FechaYHoraIngreso.Hour, unDto.FechaYHoraIngreso.Minute, unDto.FechaYHoraIngreso.Second); //A partir de la fecha (que contiene fecha hora y minutos) creamos un timespan con solo la hora y los minutos
                 ViewModelDiaYHora vmDiaHr = new ViewModelDiaYHora()
                 {
                     NombreActivdad = unDhr.NombreActividad,
                     Dia = unDhr.Dia,
-                    Hora = unDhr.Hora
+                    Hora = unDhr.Hora,
+                    EdadMinima = unDhr.EdadMinima
                 };
                 diasHrsViewModel.Add(vmDiaHr);
             }
@@ -83,7 +95,7 @@ namespace WebObligatorio_1_P3.Controllers
 
 
         //Punto 8
-        public ActionResult IngresoNombreActYCedulaSocio()
+        public ActionResult BusquedaIngresosActXSocio()
         {
             if (Session["usuarioLogueado"] == null)
             {
@@ -92,7 +104,7 @@ namespace WebObligatorio_1_P3.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ListarIngresosActXSocio(string CedulaSocio, string NombreActiv)
+        public ActionResult BusquedaIngresosActXSocio(string CedulaSocio, string NombreActiv)
         {
             if (Session["usuarioLogueado"] == null)
             {
@@ -127,7 +139,7 @@ namespace WebObligatorio_1_P3.Controllers
                 ViewBag.Error = "No se pudieron obtener los ingresos: " + laRespuesta.StatusCode;
             }
             List<ViewModelIngresoActividad> listaIngresos = ConvertirListIngresosAModel(ingresosActivs);
-            return View(listaIngresos);
+            return View("ListarIngresosActXSocio", listaIngresos);
 
         }
 

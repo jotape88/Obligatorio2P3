@@ -227,9 +227,9 @@
     <Content Include="Views\PagarMensualidad\GestionPago.cshtml" />
     <Content Include="Views\PagarMensualidad\ConfirmarPago.cshtml" />
     <Content Include="Views\Actividad\ListarIngresosActXSocio.cshtml" />
-    <Content Include="Views\Actividad\IngresoNombreActYCedulaSocio.cshtml" />
-    <Content Include="Views\Actividad\ListarActividadesPorTextoEnNombre.cshtml" />
+    <Content Include="Views\Actividad\BusquedaIngresosActXSocio.cshtml" />
     <Content Include="Views\Actividad\BusquedaActividadPorParametros.cshtml" />
+    <Content Include="Views\Actividad\BusquedaActividadPorParametrosLista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
