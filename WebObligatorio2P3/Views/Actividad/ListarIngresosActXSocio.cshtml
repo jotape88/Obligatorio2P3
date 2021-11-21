@@ -1,16 +1,11 @@
 ﻿@model IEnumerable<WebObligatorio_2_P3.Models.ViewModelIngresoActividad>
 
-@{
-    ViewBag.Title = "ListarIngresosActXSocio";
-}
+<h2>Listando todos los ingresos de un socio a una actividad dada</h2>
 
-<h2>ListarIngresosActXSocio</h2>
+<hr />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
+<table class="table table-bordered">
+    <tr class="info">
         <th>
             @Html.DisplayNameFor(model => model.FechaYHora)
         </th>
@@ -20,7 +15,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Hora)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {

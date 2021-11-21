@@ -20,6 +20,7 @@ namespace WebAPIObligatorio2P3.Controllers
         private ClubContext db = new ClubContext();
 
         #region ActionResults
+        //Consultas del punto 7
         [Route("GetActividadesPorNombre/{texto}")]
         public IQueryable<DTODiaYHora> GetActividadesPorNombre(string texto)
         {
@@ -34,6 +35,9 @@ namespace WebAPIObligatorio2P3.Controllers
         [Route("GetActividadesPorCotaMinimaEdad/{edadmin}")]
         public IQueryable<DTODiaYHora> GetActividadesPorCotaMinimaEdad(int edadMin)
         {
+
+            var weekDayList = new List<string> { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes" };
+
             return db.DiasYHoras.OrderBy(dh => dh.Activ.Nombre)
                      .ThenBy(dh => dh.Dia)
                      .ThenBy(a => a.Hora)
@@ -54,11 +58,7 @@ namespace WebAPIObligatorio2P3.Controllers
         }
 
 
-
-
-        /// <summary>
-        /// /////////////////////////////////////////////////////////////
-
+        //Consulta del punto 8
         [Route("GetIngresosActividadPorSocio/{cedula}/{nombreActiv}")]
         public IQueryable<DTOIngresos> GetIngresosActividadPorSocio(string cedula, string nombreActiv)
         {
@@ -67,116 +67,6 @@ namespace WebAPIObligatorio2P3.Controllers
                                           .OrderByDescending(ia => ia.FechaYHoraIngreso); //el dto tiene fecha de ingreso, ordenamos descendentemente por eso (sino hay que ponerlo arriba del dto y ahi ordenar por FechaYHora)
         }
 
-        #endregion
-
-        #region ActionResults sin uso
-        // GET: api/Actividades/5
-        [ResponseType(typeof(Actividad))]
-        public IHttpActionResult GetActividad(int id)
-        {
-            Actividad actividad = db.Actividades.Find(id);
-            if (actividad == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(actividad);
-        }
-
-        // PUT: api/Actividades/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutActividad(int id, Actividad actividad)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != actividad.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(actividad).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ActividadExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Actividades
-        [ResponseType(typeof(Actividad))]
-        public IHttpActionResult PostActividad(Actividad actividad)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Actividades.Add(actividad);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (ActividadExists(actividad.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = actividad.Id }, actividad);
-        }
-
-        // DELETE: api/Actividades/5
-        [ResponseType(typeof(Actividad))]
-        public IHttpActionResult DeleteActividad(int id)
-        {
-            Actividad actividad = db.Actividades.Find(id);
-            if (actividad == null)
-            {
-                return NotFound();
-            }
-
-            db.Actividades.Remove(actividad);
-            db.SaveChanges();
-
-            return Ok(actividad);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool ActividadExists(int id)
-        {
-            return db.Actividades.Count(e => e.Id == id) > 0;
-        }
         #endregion
     }
 }

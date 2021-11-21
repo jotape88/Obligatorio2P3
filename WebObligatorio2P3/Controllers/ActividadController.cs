@@ -16,18 +16,27 @@ namespace WebObligatorio_1_P3.Controllers
 {
     public class ActividadController : Controller
     {
+        //Punto 7
         public ActionResult BusquedaActividadPorParametros()
         {
+            if (Session["usuarioLogueado"] == null)
+            {
+                return View("~/Views/Shared/NoAutorizado.cshtml");
+            }
             return View();
         }
         [HttpPost]
-        public ActionResult ListarActividadesPorTextoEnNombre(string textoIncluido)
+        public ActionResult ListarActividadesPorTextoEnNombre(string NombreActivdad, string Dia, int? Hora, int? EdadMinima)
         {
+            if (Session["usuarioLogueado"] == null)
+            {
+                return View("~/Views/Shared/NoAutorizado.cshtml");
+            }
             List<DTODiaYHora> dtoDiasYHrs = new List<DTODiaYHora>();
 
             string laUbicacion = ConfigurationManager.AppSettings["UbicacionWebAPI"];
             string laUrl = laUbicacion + "obligatorio/actividades/GetActividadesPorNombre/";
-            Uri laUri = new Uri(laUrl + textoIncluido);
+            Uri laUri = new Uri(laUrl + NombreActivdad);
 
             HttpClient proxy = new HttpClient();
             Task<HttpResponseMessage> tarea1 = proxy.GetAsync(laUri);
@@ -73,21 +82,22 @@ namespace WebObligatorio_1_P3.Controllers
 
 
 
-
-
-
-
-
-
-
-
+        //Punto 8
         public ActionResult IngresoNombreActYCedulaSocio()
         {
+            if (Session["usuarioLogueado"] == null)
+            {
+                return View("~/Views/Shared/NoAutorizado.cshtml");
+            }
             return View();
         }
         [HttpPost]
         public ActionResult ListarIngresosActXSocio(string CedulaSocio, string NombreActiv)
         {
+            if (Session["usuarioLogueado"] == null)
+            {
+                return View("~/Views/Shared/NoAutorizado.cshtml");
+            }
             List<DTOIngresos> ingresosActivs = new List<DTOIngresos>();
 
             string laUbicacion = ConfigurationManager.AppSettings["UbicacionWebAPI"];
