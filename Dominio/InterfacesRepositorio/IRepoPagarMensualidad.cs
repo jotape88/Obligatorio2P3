@@ -17,5 +17,6 @@ namespace Dominio
 
         dynamic[] TraerAuxiliares();
 
+        bool CargaDeParametrosSiNoExisten(Parametros unParam);
     }
 }

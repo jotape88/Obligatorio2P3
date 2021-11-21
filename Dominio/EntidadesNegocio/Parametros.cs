@@ -11,7 +11,6 @@ namespace Dominio
     [Table("ParametrosAuxiliares")]
     public class Parametros
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)] //Tiene una unica fila de valores, la cual va a tener siempre Id 1
         public int Id { get; set; }
         public decimal DescuentoPorAntiguedad { get; set; }
         public int TopeAntiguedad { get; set; }

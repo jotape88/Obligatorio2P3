@@ -87,6 +87,10 @@
     <Compile Include="Migrations\202111202213076_agregada lista diasyhoras.Designer.cs">
       <DependentUpon>202111202213076_agregada lista diasyhoras.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111212324535_agregado identity en clase parametros.cs" />
+    <Compile Include="Migrations\202111212324535_agregado identity en clase parametros.Designer.cs">
+      <DependentUpon>202111212324535_agregado identity en clase parametros.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\RepoActividades.cs" />
@@ -132,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111202213076_agregada lista diasyhoras.resx">
       <DependentUpon>202111202213076_agregada lista diasyhoras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111212324535_agregado identity en clase parametros.resx">
+      <DependentUpon>202111212324535_agregado identity en clase parametros.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

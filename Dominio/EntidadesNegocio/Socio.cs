@@ -12,7 +12,6 @@ namespace Dominio
     public class Socio
     {
         #region Propiedades
-
         public int Id { get; set; }
         [RegularExpression(@"^[0-9]{7,9}$")] //Solo admitimos de 7 a 9 digitos
         [Required, MaxLength(10)]
@@ -30,33 +29,6 @@ namespace Dominio
         #endregion
 
         #region Validaciones
-        public bool ValidarCi (string numero)
-        {
-            return int.TryParse(numero, out int numeroInt) && numeroInt > 0 && numero.Length >= 7 && numero.Length <= 9;
-        }
-
-        public bool ValidarNomYApell(string nomYAp)
-        {
-            string nomYApTrim = nomYAp.Trim();
-            int bandera = 0;
-            int i = 0;           
-            while (bandera <= 1 && i < nomYApTrim.Length)
-            {
-                if (nomYApTrim[i] == ' ') 
-                {
-                    bandera++;
-                };
-                i++;
-            }
-            if(bandera == 1)
-            {
-                return nomYAp.Length >= 6 && !nomYAp.Any(char.IsDigit);
-            } else
-            {
-                return false;
-            }
-        }
-
         public bool ValidarEdad(DateTime fechaNacimiento)
         {
             int edad = DateTime.Today.Year - fechaNacimiento.Year;

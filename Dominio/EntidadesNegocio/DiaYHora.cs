@@ -22,25 +22,5 @@ namespace Dominio
         public Actividad Activ { get; set; }
         public int CuposMaximos { get; set; }
         #endregion
-
-        #region Metodos
-        public bool ValidarDiaYHora(string unDia, decimal unaHora)
-        {
-            bool bandera = false;
-            if(unDia == "Lunes" || unDia == "Martes" || unDia == "Miercoles" || unDia == "Jueves" || unDia == "Viernes")
-            {
-                decimal contador = 7;
-                while (contador <= 23)
-                {
-                    if ((Int32)unaHora == contador)
-                    {
-                        return true;
-                    }
-                    contador++;
-                }
-            }
-            return bandera;
-        }
-        #endregion
     }
 }

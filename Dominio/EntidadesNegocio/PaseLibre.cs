@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
 {
-    //[Table("PasesLibres")]
     public class PaseLibre : FormaPago
     {
         #region Propiedades

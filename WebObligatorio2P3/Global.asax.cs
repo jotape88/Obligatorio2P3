@@ -19,19 +19,35 @@ namespace WebObligatorio_2_P3
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            Utilidades.GenerarBDAlInicio(); //Llamamos al metodo estatico que se encarga de crear la BD mediante E.F si esta aún no existe
+
             IRepoPagarMensualidad repoPagarMens = FabricaRepositorios.ObtenerRepositorioPagarMensualidad();
             dynamic[] arrayDeParametros = repoPagarMens.TraerAuxiliares();
-            foreach(Parametros x in arrayDeParametros)
+            if(arrayDeParametros.Length > 0)
             {
-                PaseLibre.DescuentoPorAntiguedad = x.DescuentoPorAntiguedad;
-                PaseLibre.TopeAntiguedad = x.TopeAntiguedad;
-                Cuponera.DescPorTopeActiv = x.DescPorTopeActiv;
-                Cuponera.TopeActividades = x.TopeActividades;
-                PaseLibre.ValorMes = x.ValorMes;
-                Cuponera.ValorActividad = x.ValorActividad;
-            }
+                foreach (Parametros x in arrayDeParametros)
+                {
+                    PaseLibre.DescuentoPorAntiguedad = x.DescuentoPorAntiguedad;
+                    PaseLibre.TopeAntiguedad = x.TopeAntiguedad;
+                    Cuponera.DescPorTopeActiv = x.DescPorTopeActiv;
+                    Cuponera.TopeActividades = x.TopeActividades;
+                    PaseLibre.ValorMes = x.ValorMes;
+                    Cuponera.ValorActividad = x.ValorActividad;
+                }
+            } else
+            {
+                Parametros unParam = new Parametros
+                {
+                    DescuentoPorAntiguedad = 10,
+                    TopeAntiguedad = 2,
+                    DescPorTopeActiv = 200,
+                    TopeActividades = 30,
+                    ValorMes = 1200,
+                    ValorActividad = 30
+                };
 
-            Utilidades.GenerarBDAlInicio(); //Llamamos al metodo estatico que se encarga de crear la BD mediante E.F si esta aún no existe
+                repoPagarMens.CargaDeParametrosSiNoExisten(unParam);
+            }
         }
 
         protected void Session_Start(object sender, EventArgs e)

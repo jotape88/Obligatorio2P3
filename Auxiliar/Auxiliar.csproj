@@ -57,9 +57,9 @@
       <Project>{72ac896c-7b9b-4f59-a669-f4cd89de3c91}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repositorios\Repositorios.csproj">
+    <ProjectReference Include="..\Repositorios\ManejoDatos.csproj">
       <Project>{7d17a849-6b02-418c-a871-5b9b9b7cf15a}</Project>
-      <Name>Repositorios</Name>
+      <Name>ManejoDatos</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

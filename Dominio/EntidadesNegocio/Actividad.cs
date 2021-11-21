@@ -29,12 +29,6 @@ namespace Dominio
         {
             return edadMinima < edadMaxima;
         }
-
-        //public bool ValidarNombreAct(string nom)
-        //{
-        //    return !string.IsNullOrWhiteSpace(nom); //Validamos que no hayan espacios en blanco o que sea null
-        //}
-
         #endregion
 
     }

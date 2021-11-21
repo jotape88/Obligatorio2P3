@@ -12,7 +12,7 @@ namespace Repositorios
 {
     public class RepoPagarMensualidad : IRepoPagarMensualidad
     {
-        #region Metodo para traer parametros auxiliares
+        #region Metodos de parametros auxiliares
         public dynamic[] TraerAuxiliares()
         {
             dynamic[] arrayDatos = null;
@@ -23,6 +23,18 @@ namespace Repositorios
                                                  .ToArray();
             }
         }
+
+        public bool CargaDeParametrosSiNoExisten(Parametros unParam)
+        {
+            bool bandera = false;
+            using (ClubContext db = new ClubContext())
+            {
+                db.Parametros.Add(unParam);
+                bandera = db.SaveChanges() != 0;
+            }
+            return bandera;
+        }
+
         #endregion
 
         #region Metodos de manejo de datos

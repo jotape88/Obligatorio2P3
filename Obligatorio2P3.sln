@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consola", "Obligatorio2P3\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{72AC896C-7B9B-4F59-A669-F4CD89DE3C91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositorios", "Repositorios\Repositorios.csproj", "{7D17A849-6B02-418C-A871-5B9B9B7CF15A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejoDatos", "Repositorios\ManejoDatos.csproj", "{7D17A849-6B02-418C-A871-5B9B9B7CF15A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auxiliar", "Auxiliar\Auxiliar.csproj", "{3C73FD9F-361A-4943-A003-9EC80EABDCD9}"
 EndProject
