@@ -21,42 +21,43 @@ namespace WebAPIObligatorio2P3.Controllers
 
         #region ActionResults
         [Route("GetActividadesPorNombre/{texto}")]
-        public IQueryable<Actividad> GetActividadesPorNombre(string texto)
+        public IQueryable<DTODiaYHora> GetActividadesPorNombre(string texto)
         {
-            //return db.Actividades.Where(a => a.Nombre.Contains(texto))
-            //                     .OrderBy(a => a.Nombre)
-            //                     .ThenBy(a => a.);
-            //List<Actividad> actividades = new List<Actividad>();
-
-            //var activ = db.DiasYHoras.OrderBy(dh => dh.Dia)
-            //                         .ThenBy(dh => dh.Hora)
-            //                         .Select(dh => dh.Activ).Distinct()
-            //                         .Where(a => a.Nombre.Contains(texto))
-            //                         .OrderBy(a => a.Nombre)
-            //                         .Select(a => new DTOActividad { Nombre = a.Nombre, Dia = dh.};
-
-            
-            //var activ = db.DiasYHoras.Join()
-
-            return null;
+            return db.DiasYHoras.OrderBy(dh => dh.Activ.Nombre)
+                                 .ThenBy(dh => dh.Dia)
+                                 .ThenBy(a => a.Hora)
+                                  .Where(a => a.Activ.Nombre.Contains(texto))
+                                  .Select(a => new DTODiaYHora { NombreActividad = a.Activ.Nombre, Dia = a.Dia, Hora = a.Hora })
+                                  .ToList().AsQueryable();                             
         }
 
         [Route("GetActividadesPorCotaMinimaEdad/{edadmin}")]
-        public IQueryable<Actividad> GetActividadesPorCotaMinimaEdad(int edadMin)
+        public IQueryable<DTODiaYHora> GetActividadesPorCotaMinimaEdad(int edadMin)
         {
-            return db.Actividades.Where(a => a.EdadMinima >= edadMin);
+            return db.DiasYHoras.OrderBy(dh => dh.Activ.Nombre)
+                     .ThenBy(dh => dh.Dia)
+                     .ThenBy(a => a.Hora)
+                      .Where(a => a.Activ.EdadMinima > edadMin)
+                      .Select(a => new DTODiaYHora { NombreActividad = a.Activ.Nombre, Dia = a.Dia, Hora = a.Hora })
+                      .ToList().AsQueryable();
         }
 
         [Route("GetActividadesPorDiaHr/{dia}/{hora}")]
-        public IQueryable<Actividad> GetActividadesPorDiaHr(string dia, int hora)
+        public IQueryable<DTODiaYHora> GetActividadesPorDiaHr(string dia, int hora)
         {
-            return db.DiasYHoras.Where(dh => dh.Dia == dia && dh.Hora == hora)
-                                .Select(dh => dh.Activ);
+            return db.DiasYHoras.OrderBy(dh => dh.Activ.Nombre)
+                     .ThenBy(dh => dh.Dia)
+                     .ThenBy(a => a.Hora)
+                      .Where(a => a.Dia == dia && a.Hora == hora)
+                      .Select(a => new DTODiaYHora { NombreActividad = a.Activ.Nombre, Dia = a.Dia, Hora = a.Hora })
+                      .ToList().AsQueryable();
         }
 
 
 
 
+        /// <summary>
+        /// /////////////////////////////////////////////////////////////
 
         [Route("GetIngresosActividadPorSocio/{cedula}/{nombreActiv}")]
         public IQueryable<DTOIngresos> GetIngresosActividadPorSocio(string cedula, string nombreActiv)

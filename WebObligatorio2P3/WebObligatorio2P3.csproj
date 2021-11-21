@@ -147,6 +147,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModelDiaYHora.cs" />
     <Compile Include="Models\ViewModelIngresoActividad.cs" />
     <Compile Include="Models\ViewModelPagoMensualidad.cs" />
     <Compile Include="Models\ViewModelSocio.cs" />
@@ -227,6 +228,8 @@
     <Content Include="Views\PagarMensualidad\ConfirmarPago.cshtml" />
     <Content Include="Views\Actividad\ListarIngresosActXSocio.cshtml" />
     <Content Include="Views\Actividad\IngresoNombreActYCedulaSocio.cshtml" />
+    <Content Include="Views\Actividad\BusquedaActividadPorParametros.cshtml" />
+    <Content Include="Views\Actividad\ListarActividadesPorTextoEnNombre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

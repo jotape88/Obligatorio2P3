@@ -53,7 +53,7 @@
     <Compile Include="EntidadesNegocio\Actividad.cs" />
     <Compile Include="EntidadesNegocio\Cuponera.cs" />
     <Compile Include="EntidadesNegocio\DiaYHora.cs" />
-    <Compile Include="EntidadesNegocio\DTOs\DTOActividad.cs" />
+    <Compile Include="EntidadesNegocio\DTOs\DTODiaYHora.cs" />
     <Compile Include="EntidadesNegocio\DTOs\DTOIngresos.cs" />
     <Compile Include="EntidadesNegocio\DTOs\DTOMensualidad.cs" />
     <Compile Include="EntidadesNegocio\Parametros.cs" />

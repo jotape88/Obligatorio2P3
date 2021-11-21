@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "BusquedaActividadPorParametros";
+}
+
+
+@using (Html.BeginForm("ListarActividadesPorTextoEnNombre", "Actividad", FormMethod.Post))
+ {
+                           
+<form id="formularioReg" method="post">
+
+    <div class="form-group">
+        <label for="textoIncluido">nombre</label>
+        <small class="form-text text-muted">nombre</small>
+        <input type="text" class="form-control" name="textoIncluido" id="textoIncluido" placeholder="Ingrese su cedula" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrarse</button>
+</form>
+
+}

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class DTOActividad
+    public class DTODiaYHora
     {
-        public string Nombre { get; set; }
+        public string NombreActividad { get; set; }
         public string Dia { get; set; }
         public int Hora { get; set; }
     }

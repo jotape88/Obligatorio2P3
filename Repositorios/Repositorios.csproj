@@ -83,6 +83,10 @@
     <Compile Include="Migrations\202111152256463_Tabla_param_cambio_nombre.Designer.cs">
       <DependentUpon>202111152256463_Tabla_param_cambio_nombre.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111202213076_agregada lista diasyhoras.cs" />
+    <Compile Include="Migrations\202111202213076_agregada lista diasyhoras.Designer.cs">
+      <DependentUpon>202111202213076_agregada lista diasyhoras.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\RepoActividades.cs" />
@@ -127,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111152256463_Tabla_param_cambio_nombre.resx">
       <DependentUpon>202111152256463_Tabla_param_cambio_nombre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111202213076_agregada lista diasyhoras.resx">
+      <DependentUpon>202111202213076_agregada lista diasyhoras.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

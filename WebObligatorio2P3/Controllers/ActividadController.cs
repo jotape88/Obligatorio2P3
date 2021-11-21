@@ -16,6 +16,71 @@ namespace WebObligatorio_1_P3.Controllers
 {
     public class ActividadController : Controller
     {
+        public ActionResult BusquedaActividadPorParametros()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ListarActividadesPorTextoEnNombre(string textoIncluido)
+        {
+            List<DTODiaYHora> dtoDiasYHrs = new List<DTODiaYHora>();
+
+            string laUbicacion = ConfigurationManager.AppSettings["UbicacionWebAPI"];
+            string laUrl = laUbicacion + "obligatorio/actividades/GetActividadesPorNombre/";
+            Uri laUri = new Uri(laUrl + textoIncluido);
+
+            HttpClient proxy = new HttpClient();
+            Task<HttpResponseMessage> tarea1 = proxy.GetAsync(laUri);
+
+            tarea1.Wait();
+
+            HttpResponseMessage laRespuesta = tarea1.Result;
+
+            if (laRespuesta.IsSuccessStatusCode)
+            {
+                Task<string> tarea2 = laRespuesta.Content.ReadAsStringAsync();
+                tarea2.Wait();
+
+                string contenidoJson = tarea2.Result;
+
+                dtoDiasYHrs = JsonConvert.DeserializeObject<List<DTODiaYHora>>(contenidoJson);
+            }
+            else
+            {
+                ViewBag.Error = "No se pudieron obtener los ingresos: " + laRespuesta.StatusCode;
+            }
+            List<ViewModelDiaYHora> listaIngresos = ConvertirDiasYHrsAModel(dtoDiasYHrs);
+            return View(listaIngresos);
+
+        }
+
+        private List<ViewModelDiaYHora> ConvertirDiasYHrsAModel(List<DTODiaYHora> ingresosDiasYHrs)
+        {
+            List<ViewModelDiaYHora> diasHrsViewModel = new List<ViewModelDiaYHora>();
+            foreach (DTODiaYHora unDhr in ingresosDiasYHrs)
+            {
+                //TimeSpan horaYMins = new TimeSpan(unDto.FechaYHoraIngreso.Hour, unDto.FechaYHoraIngreso.Minute, unDto.FechaYHoraIngreso.Second); //A partir de la fecha (que contiene fecha hora y minutos) creamos un timespan con solo la hora y los minutos
+                ViewModelDiaYHora vmDiaHr = new ViewModelDiaYHora()
+                {
+                    NombreActivdad = unDhr.NombreActividad,
+                    Dia = unDhr.Dia,
+                    Hora = unDhr.Hora
+                };
+                diasHrsViewModel.Add(vmDiaHr);
+            }
+            return diasHrsViewModel;
+        }
+
+
+
+
+
+
+
+
+
+
+
         public ActionResult IngresoNombreActYCedulaSocio()
         {
             return View();
