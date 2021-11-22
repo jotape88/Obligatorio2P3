@@ -15,7 +15,7 @@ namespace Auxiliar
             return new RepoSocios();
         }
 
-        public static IRepoActividades ObtenerRepositorioActividades()
+        public static IRepositorio<Actividad> ObtenerRepositorioActividades()
         {
             return new RepoActividades();
         }

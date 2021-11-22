@@ -68,7 +68,7 @@ namespace ImportarInformacion
             try
             {
                 string rutaAplicacion = System.Web.HttpRuntime.AppDomainAppPath;
-                IRepoActividades repoActividades = FabricaRepositorios.ObtenerRepositorioActividades();
+                IRepositorio<Actividad> repoActividades = FabricaRepositorios.ObtenerRepositorioActividades();
 
                 string rutaArchivoActividades = Path.Combine(rutaAplicacion, "Archivos", "Actividad.txt");
                 Stream streamActividades = new FileStream(rutaArchivoActividades, FileMode.Open);
@@ -148,7 +148,7 @@ namespace ImportarInformacion
 
         private static DiaYHora ConvertirStringEnDiaHora(string unaLinea, string separador)
         {
-            IRepoActividades repoACt = FabricaRepositorios.ObtenerRepositorioActividades();
+            IRepositorio<Actividad> repoACt = FabricaRepositorios.ObtenerRepositorioActividades();
             string[] vecDiasHrs = unaLinea.Split(separador.ToCharArray());
             if (vecDiasHrs.Length == 5)
             {

@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace Repositorios
 {
-    public class RepoActividades : IRepoActividades
+    public class RepoActividades : IRepositorio<Actividad>
     {
         #region Metodos de manejo de datos
         public bool Alta(Actividad unaAct)

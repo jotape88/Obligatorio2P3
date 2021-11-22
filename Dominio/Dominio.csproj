@@ -62,10 +62,7 @@
     <Compile Include="EntidadesNegocio\IngresoActividad.cs" />
     <Compile Include="EntidadesNegocio\PagarMensualidad.cs" />
     <Compile Include="EntidadesNegocio\PaseLibre.cs" />
-    <Compile Include="InterfacesRepositorio\IRepoActividades.cs" />
     <Compile Include="InterfacesRepositorio\IRepoDiaYHora.cs" />
-    <Compile Include="InterfacesRepositorio\IRepoFormasPago.cs" />
-    <Compile Include="InterfacesRepositorio\IRepoIngresosActividades.cs" />
     <Compile Include="InterfacesRepositorio\IRepositorio.cs" />
     <Compile Include="InterfacesRepositorio\IRepoSocios.cs" />
     <Compile Include="InterfacesRepositorio\IRepoUsuarios.cs" />
