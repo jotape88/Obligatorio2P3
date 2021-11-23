@@ -33,7 +33,7 @@ namespace WebObligatorio_1_P3.Controllers
                 return View("~/Views/Shared/NoAutorizado.cshtml");
             }
             List<DTODiaYHora> dtoDiasYHrs = new List<DTODiaYHora>();
-
+            ViewBag.MostrarEdadMin = 0;
             string laUbicacion = ConfigurationManager.AppSettings["UbicacionWebAPI"];
             Uri laUri = null;
 
@@ -50,6 +50,7 @@ namespace WebObligatorio_1_P3.Controllers
             else if (EdadMinima != null)
             {
                 string laUrl = laUbicacion + "obligatorio/actividades/GetActividadesPorCotaMinimaEdad/";
+                ViewBag.MostrarEdadMin = EdadMinima;
                  laUri = new Uri(laUrl + EdadMinima);
             }
 
@@ -72,6 +73,11 @@ namespace WebObligatorio_1_P3.Controllers
                 ViewBag.Error = "No se pudieron obtener los ingresos: " + laRespuesta.StatusCode;
             }
             List<ViewModelDiaYHora> listaIngresos = ConvertirDiasYHrsAModel(dtoDiasYHrs);
+            if(listaIngresos.Count == 0)
+            {
+                ViewBag.Vacia = "No hay actividades que cumplan el criterio de busqueda detallado";
+            }
+           
             return View("BusquedaActividadPorParametrosLista", listaIngresos);
         }
 
@@ -139,6 +145,10 @@ namespace WebObligatorio_1_P3.Controllers
                 ViewBag.Error = "No se pudieron obtener los ingresos: " + laRespuesta.StatusCode;
             }
             List<ViewModelIngresoActividad> listaIngresos = ConvertirListIngresosAModel(ingresosActivs);
+            if (listaIngresos.Count == 0)
+            {
+                ViewBag.Vacia = "No hay actividades que cumplan el criterio de busqueda detallado";
+            }
             return View("ListarIngresosActXSocio", listaIngresos);
 
         }

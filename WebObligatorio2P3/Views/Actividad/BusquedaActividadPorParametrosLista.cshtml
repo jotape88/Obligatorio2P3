@@ -3,44 +3,61 @@
 <h3>Búsqueda de actividades segun criterio</h3>
 
 <hr />
-@Html.ActionLink("Volver a buscar", "BusquedaActividadPorParametros")
-<table class="table table-bordered">
+@if (ViewBag.Vacia == null)
+{
+    @Html.ActionLink("Volver a buscar", "BusquedaActividadPorParametros")
+    <table class="table table-bordered">
 
-    <tr class="info">
-        <th>
-            @Html.DisplayNameFor(model => model.NombreActivdad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Dia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hora)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EdadMinima)
-        </th>
-    </tr>
+        <tr class="info">
+            <th>
+                @Html.DisplayNameFor(model => model.NombreActivdad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hora)
+            </th>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreActivdad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hora)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EdadMinima)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit") |
-            </td>
+            @if (ViewBag.MostrarEdadMin != 0)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.EdadMinima)
+                </th>
+            }
+
         </tr>
-    }
-</table>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreActivdad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hora)
+                </td>
+                @if (item.EdadMinima != 0)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EdadMinima)
+                    </td>
+                }
+
+            </tr>
+        }
+    </table>
+
+
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Vacia
+    </div>
+}
 
 @Html.ActionLink("Volver a buscar", "BusquedaActividadPorParametros")

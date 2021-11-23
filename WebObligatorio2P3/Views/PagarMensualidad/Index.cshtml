@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<WebObligatorio_2_P3.Models.ViewModelPagoMensualidad>
 
 <hr />
-<h3>Pases libres y cuponeras vigentes al mes: <em style="text-shadow: 1px 1px #444">@ViewBag.Mes</em> del año: <em style="text-shadow: 1px 1px #444">@ViewBag.Anio</em></h3>
-<hr />
 
 @if (ViewBag.SinResultados == null)
 {
+    <hr />
+    <h3>Pases libres y cuponeras vigentes al mes: <em style="text-shadow: 1px 1px #444">@ViewBag.Mes</em> del año: <em style="text-shadow: 1px 1px #444">@ViewBag.Anio</em></h3>
+    <hr />
     <hr />
     <table class="table table-bordered">
         <tr class="info">
@@ -41,13 +42,14 @@
                 <td>
                     $ @Html.DisplayFor(modelItem => item.MontoPago)
                 </td>
-                @if(item.DescuentoPago == 0)
+                @if (item.DescuentoPago == 0)
                 {
-                   <td><p>No aplica</p></td>
-                } else
+                    <td><p>No aplica</p></td>
+                }
+                else
                 {
-                   <td>$@Html.DisplayFor(modelItem => item.DescuentoPago)</td>
-                }               
+                    <td>$@Html.DisplayFor(modelItem => item.DescuentoPago)</td>
+                }
                 <td>
                     @Html.DisplayFor(modelItem => item.CedulaSocio)
                 </td>
@@ -58,7 +60,7 @@
         }
     </table>
 }
-@if(ViewBag.SinResultados != null)
+@if (ViewBag.SinResultados != null)
 {
     <div class="alert alert-danger" role="alert">
         <h4>

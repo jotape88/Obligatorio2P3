@@ -1,37 +1,47 @@
 ﻿@model IEnumerable<WebObligatorio_2_P3.Models.ViewModelIngresoActividad>
 
-<hr />
-<h3>Listando todos los ingresos del socio: <em style="text-shadow: 1px 1px #444;">@ViewBag.CedulaSocio</em> a la actividad: <em style="text-shadow: 1px 1px #444";>@ViewBag.NombreActividad</em></h3>
 
-<hr />
+@if (ViewBag.Vacia == null)
+{
+    <hr />
+    <h3>Listando todos los ingresos del socio: <em style="text-shadow: 1px 1px #444;">@ViewBag.CedulaSocio</em> a la actividad: <em style="text-shadow: 1px 1px #444" ;>@ViewBag.NombreActividad</em></h3>
 
-<table class="table table-bordered">
-    <tr class="info">
-        <th>
-            @Html.DisplayNameFor(model => model.FechaYHora)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Dia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hora)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaYHora)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hora)
-            </td>
+    <hr />
+    <table class="table table-bordered">
+        <tr class="info">
+            <th>
+                @Html.DisplayNameFor(model => model.FechaYHora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hora)
+            </th>
         </tr>
-    }
-</table>
 
-@Html.ActionLink("Volver a buscar", "IngresoNombreActYCedulaSocio")
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaYHora)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hora)
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Vacia
+    </div>
+}
+
+
+@Html.ActionLink("Volver a buscar", "BusquedaIngresosActXSocio")

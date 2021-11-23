@@ -135,10 +135,10 @@ namespace WebObligatorio_2_P3.Controllers
             string tipoAct = datosPagos[0];
             decimal total = datosPagos[1];
             decimal descuento = datosPagos[2];
-            int ctdAct = datosPagos[3];
+            
 
             if (tipoAct == "cuponera")
-            {
+            {int ctdAct = datosPagos[3];
                 if (repoMensualidad.AltaPago(id, total, descuento, ctdAct))
                 {
                     ViewBag.Success = "El pago se ha realizado correctamente";
