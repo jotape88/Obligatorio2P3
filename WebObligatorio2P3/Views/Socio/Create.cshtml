@@ -25,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NombreYapellido, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NombreYapellido, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingrese nombres y apellidos" } })
+                @Html.EditorFor(model => model.NombreYapellido, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingrese un nombre y apellido" } })
                 @Html.ValidationMessageFor(model => model.NombreYapellido, "", new { @class = "text-danger" })
             </div>
         </div>

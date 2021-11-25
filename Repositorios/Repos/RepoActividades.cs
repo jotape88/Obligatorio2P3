@@ -17,7 +17,6 @@ namespace Repositorios
             bool bandera = false;
             if (unaAct != null)
             {
-                //if (unaAct.ValidarEdadActiv(unaAct.EdadMinima, unaAct.EdadMaxima) && unaAct.ValidarNombreAct(unaAct.Nombre))
                 if(unaAct.ValidarEdadActiv(unaAct.EdadMinima, unaAct.EdadMaxima))
                 {
                     try
@@ -75,7 +74,7 @@ namespace Repositorios
 
         #endregion
 
-        #region Metodos de manejo de datos
+        #region Metodos no implementados
         public bool Baja(int id)
         {
             throw new NotImplementedException();

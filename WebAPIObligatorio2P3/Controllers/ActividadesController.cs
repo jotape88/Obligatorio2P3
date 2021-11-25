@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
-using Dominio;
 using Repositorios;
 
 
@@ -17,7 +12,9 @@ namespace WebAPIObligatorio2P3.Controllers
     [RoutePrefix("obligatorio/actividades")]
     public class ActividadesController : ApiController
     {
+        #region Contexto
         private ClubContext db = new ClubContext();
+        #endregion
 
         #region ActionResults
         //Consultas del punto 7
@@ -35,8 +32,6 @@ namespace WebAPIObligatorio2P3.Controllers
         [Route("GetActividadesPorCotaMinimaEdad/{edadmin}")]
         public IHttpActionResult GetActividadesPorCotaMinimaEdad(int edadMin)
         {
-
-
             return Ok(db.DiasYHoras.OrderBy(dh => dh.Activ.Nombre)
                      .ThenBy(dh => dh.Dia)
                      .ThenBy(dh => dh.Hora)
@@ -66,7 +61,6 @@ namespace WebAPIObligatorio2P3.Controllers
                                           .OrderByDescending(ia => ia.FechaYHoraIngreso)
                                           .ToList());
         }
-
         #endregion
     }
 }

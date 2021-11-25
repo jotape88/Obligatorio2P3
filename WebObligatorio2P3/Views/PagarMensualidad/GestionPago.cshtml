@@ -34,20 +34,24 @@
         <div class="form-group">
             <label>Elija una forma de pago</label>
             <select name="tipoPago" onchange="mostrarInputActividades()" id="selectFormaPago" class="form-control">
+                <option value=”” disabled selected>Seleccione una opcion</option>
                 <option value="cuponera">Cuponera</option>
                 <option value="paseLibre">Pase Libre</option>
             </select>
         </div>
 
-        <div id="inputCantidadAct">
-            <input required name="ctdActiv" id="inputActividades" class="form-control" type="number" placeholder="Cantidad de actividades">
-        </div>
-        <hr />
+        <div id="divCantidadAct" hidden>
+            @*Hasta que el usuario no selecciona una opcion, ocultamos el input de actividades*@
+            <input required name="ctdActiv" id="inputCantActividades" class="form-control" type="number" placeholder="Cantidad de actividades">
+        </div><hr />
 
-        <input name="id" type='hidden' value="@Model.Id">
+        <div id="divMostrarTotal" hidden>
+            @*Hasta que el usuario no selecciona una opcion, no mostramos el boton de mostrar total*@
+        <button type="submit" id="btnMostrarTotal" class="btn btn-info">Mostrar el total</button>
+    </div>
 
-        <button type="submit" class="btn btn-info">Mostrar el total</button>
-    }
+    <input name="id" type='hidden' value="@Model.Id">
+}
 
     <hr />
 
@@ -83,7 +87,20 @@
 <script type="text/javascript">
     function mostrarInputActividades() {
         let formaPago = document.getElementById("selectFormaPago");
-        let activs = document.getElementById("inputCantidadAct");
-        activs.style.display = formaPago.value == "cuponera" ? "block" : "none";
+        let divCantActivs = document.getElementById("divCantidadAct");
+        let inputCantActividades = document.getElementById("inputCantActividades");
+        let divMostrarTotal = document.getElementById("divMostrarTotal");
+        divMostrarTotal.style.display = "block"; @* mostramos el btn de Mostrar total al llamar a la funcion *@
+
+        document.getElementById("inputCantActividades").value = ""; @* Cuando entramos en la funcion, limpiamos el campo de actividades *@
+
+        if (formaPago.value == "paseLibre") {     
+            inputCantActividades.required = false; @*seteamos el atributo required en false*@
+            divCantActivs.style.display = "none"; @*ocultamos el input de cantidad de actividades*@
+        }
+        if (formaPago.value == "cuponera") {
+            inputCantActividades.required = true; @*el atributo required esta activo*@
+            divCantActivs.style.display = "block"; @*mostramos el input de cantidad de activs*@
+        }
     }
 </script>

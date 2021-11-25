@@ -15,7 +15,7 @@ namespace Dominio
     {
         #region Propiedades
         public int Id { get; set; }
-        [Required, Index(IsUnique = true), EmailAddress, MaxLength(50)] //EmailAdress implementa una validacion del formato del correo electronico
+        [Required, Index(IsUnique = true), EmailAddress, MaxLength(50)] //EmailAdress implementa una validacion interna del formato del correo electronico
         public string Email { get; set; }
         [Required]
         public string Contrasenia { get; set; }
@@ -23,8 +23,6 @@ namespace Dominio
         [Required, MaxLength(50)] 
         public string ContraseniaDesencriptada { get; set; }
         #endregion
-
-        //Validamos por DataAnnotations y a su vez también por métodos
 
         #region Validaciones
         public bool ValidarContrasenia(string contrasenia) 

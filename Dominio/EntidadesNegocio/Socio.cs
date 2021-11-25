@@ -5,21 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
 
 namespace Dominio
 {
     [Table("Socios")]
     public class Socio
     {
-        #region Propiedades
+        #region Propiedades   
         public int Id { get; set; }
-        [RegularExpression(@"^[0-9]{7,9}$")] //Solo admitimos de 7 a 9 digitos
         [Required, MaxLength(10)]
         public string Cedula { get; set; }
-        [RegularExpression(@"^([a-zA-ZÀ-ÿ\u00f1\u00d1]+ )+[a-zA-ZÀ-ÿ\u00f1\u00d1]+$|^[a-zA-ZÀ-ÿ\u00f1\u00d1]{6,}$")] //Validamos que sean minimo 6 letras, unicamente espacios embebidos y admitimos caracteres especiales para nombres en español
         [Required, MaxLength(50)]
         public string NombreYapellido { get; set; }
-
         public DateTime FechaNacimiento { get; set; }
         [MaxLength(1)]
         public string EstaActivo { get; set; }
@@ -45,6 +43,13 @@ namespace Dominio
             }
             return edad >= 3 && edad <= 90; //lo cambie porque en la bd hay edades de 3 y 90
         }
+
+        public bool ValidarLargoNombreYAp(string nomYApell)
+        {
+            string sinEspacios = Regex.Replace(nomYApell, @"\s+", "");
+            return sinEspacios.Length >= 6; 
+        }
+
         #endregion
 
     }

@@ -19,23 +19,19 @@ namespace Repositorios
             bool bandera = false;
             if (unDiaYHr != null)
             {
-                //if (unDiaYHr.ValidarDiaYHora(unDiaYHr.Dia, unDiaYHr.Hora))
-                //{
-                    try
+                try
+                {
+                    using (ClubContext db = new ClubContext())
                     {
-                        using (ClubContext db = new ClubContext())
-                        {
-                            db.DiasYHoras.Add(unDiaYHr);
-                            db.Entry(unDiaYHr.Activ).State = EntityState.Unchanged;
-                            bandera = db.SaveChanges() != 0;
-                        }
+                        db.DiasYHoras.Add(unDiaYHr);
+                        db.Entry(unDiaYHr.Activ).State = EntityState.Unchanged;
+                        bandera = db.SaveChanges() != 0;
                     }
-                    catch(Exception laExc)
-                    {
-                        return false;
-                    }
-                //}
-
+                }
+                catch(Exception laExc)
+                {
+                    return false;
+                }
             }
             return bandera;
         }
@@ -80,93 +76,12 @@ namespace Repositorios
 
         public List<DiaYHora> TraerTodo()
         {
-            List<DiaYHora> diasYHoras = new List<DiaYHora>();
-            //string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            //SqlConnection miConexion = new SqlConnection(miString);
-            //try
-            //{
-            //    string miSql = "SELECT * FROM DiaYHora";
-            //    SqlCommand miComando = new SqlCommand(miSql, miConexion);
-
-            //    miConexion.Open();
-            //    SqlDataReader miReader = miComando.ExecuteReader();
-            //    RepoActividades repoAct = new RepoActividades();
-            //    while (miReader.Read())
-            //    {
-            //        DiaYHora unDiaYHora = new DiaYHora
-            //        {
-            //            Id = miReader.GetInt32(0),
-            //            Activ = repoAct.BuscarPorId(miReader.GetInt32(1)),
-            //            Dia = miReader.GetString(2),
-            //            Hora = miReader.GetDecimal(3),
-            //            CuposMaximos = miReader.GetInt32(4)
-            //        };
-            //        diasYHoras.Add(unDiaYHora);
-            //    }
-            //    miConexion.Close();
-            //    miConexion.Dispose();
-
-            //}
-            //catch
-            //{
-            //    throw;
-            //}
-            //finally
-            //{
-            //    if (miConexion.State == ConnectionState.Open)
-            //    {
-            //        miConexion.Close();
-            //        miConexion.Dispose();
-            //    }
-            //}
-            return diasYHoras;
+            throw new NotImplementedException();
         }
-
 
         public List<DiaYHora> TraerTodoFiltrado(string dia, decimal hora)
         {
-            List<DiaYHora> diasYHoras = new List<DiaYHora>();
-            //string miString = @"Data Source=localhost\SQLEXPRESS; Initial Catalog=BaseObligatorio1P3; Integrated Security=SSPI;";
-            //SqlConnection miConexion = new SqlConnection(miString);
-            //try
-            //{
-            //    string miSql = "SELECT * FROM DiaYHora WHERE Dia=@dia COLLATE Latin1_General_CI_AI AND Hora > @hora ORDER BY Hora";
-            //    SqlCommand miComando = new SqlCommand(miSql, miConexion);
-            //    miComando.Parameters.AddWithValue("@dia", dia);
-            //    miComando.Parameters.AddWithValue("@hora", hora);
-
-            //    miConexion.Open();
-            //    SqlDataReader miReader = miComando.ExecuteReader();
-
-            //    RepoActividades repoAct = new RepoActividades();
-
-            //    while (miReader.Read())
-            //    {
-            //        DiaYHora unDiaYHora = new DiaYHora
-            //        {
-            //            Id = miReader.GetInt32(0),
-            //            Activ = repoAct.BuscarPorId(miReader.GetInt32(1)),
-            //            Dia = miReader.GetString(2),
-            //            Hora = miReader.GetDecimal(3)
-            //        };
-            //        diasYHoras.Add(unDiaYHora);
-            //    }
-            //    miConexion.Close();
-            //    miConexion.Dispose();
-            //}
-            //catch
-            //{
-            //    throw;
-            //}
-            //finally
-            //{
-            //    if (miConexion.State == ConnectionState.Open)
-            //    {
-            //        miConexion.Close();
-            //        miConexion.Dispose();
-            //    }
-            //}
-            return diasYHoras;
+            throw new NotImplementedException();
         }
         #endregion
     }

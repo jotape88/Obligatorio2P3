@@ -11,6 +11,7 @@ namespace Dominio
     [Table("ParametrosAuxiliares")]
     public class Parametros
     {
+        #region Propiedades
         public int Id { get; set; }
         public decimal DescuentoPorAntiguedad { get; set; }
         public int TopeAntiguedad { get; set; }
@@ -18,5 +19,6 @@ namespace Dominio
         public int TopeActividades { get; set; }
         public decimal ValorMes { get; set; }
         public decimal ValorActividad { get; set; }
+        #endregion
     }
 }

@@ -138,7 +138,8 @@ namespace WebObligatorio_2_P3.Controllers
             
 
             if (tipoAct == "cuponera")
-            {int ctdAct = datosPagos[3];
+            {
+                int ctdAct = datosPagos[3];
                 if (repoMensualidad.AltaPago(id, total, descuento, ctdAct))
                 {
                     ViewBag.Success = "El pago se ha realizado correctamente";

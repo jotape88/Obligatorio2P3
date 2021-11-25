@@ -122,27 +122,35 @@ namespace WebObligatorio_2_P3.Controllers
             Socio unSoc = new Socio(); 
             if (unSoc.ValidarEdad(vMSocio.FechaNacimiento))
             {
-                unSoc = repoSoc.BuscarPorCedula(vMSocio.Cedula); 
-                if (unSoc == null)
+                if (unSoc.ValidarLargoNombreYAp(vMSocio.NombreYapellido))
                 {
-                    Socio socAux = new Socio()
+                    unSoc = repoSoc.BuscarPorCedula(vMSocio.Cedula);
+                    if (unSoc == null)
                     {
-                        Cedula = vMSocio.Cedula,
-                        NombreYapellido = vMSocio.NombreYapellido,
-                        FechaNacimiento = vMSocio.FechaNacimiento,
-                        EstaActivo = "1",
-                        FechaRegistro = DateTime.Now
-                    };
+                        Socio socAux = new Socio()
+                        {
+                            Cedula = vMSocio.Cedula,
+                            NombreYapellido = vMSocio.NombreYapellido,
+                            FechaNacimiento = vMSocio.FechaNacimiento,
+                            EstaActivo = "1",
+                            FechaRegistro = DateTime.Now
+                        };
 
-                    if (repoSoc.Alta(socAux))
+                        if (repoSoc.Alta(socAux))
+                        {
+                            ViewBag.Success = "El socio fue dado de alta correctamente";
+                            return View();
+                        }
+                    }
+                    else
                     {
-                        ViewBag.Success = "El socio fue dado de alta correctamente";
+                        ViewBag.Error = "La cédula ya se encuentra registrada, intente nuevamente";
                         return View();
                     }
                 }
                 else
                 {
-                    ViewBag.Error = "La cédula ya se encuentra registrada, intente nuevamente";
+                    ViewBag.Error = "El largo mínimo del nombre y apellido debe ser de 6 caracteres";
                     return View();
                 }
             }
@@ -186,23 +194,31 @@ namespace WebObligatorio_2_P3.Controllers
             {
                 if(unSoc.ValidarEdad(vmSocio.FechaNacimiento)) 
                 {
-                    unSoc = new Socio()
+                    if(unSoc.ValidarLargoNombreYAp(vmSocio.NombreYapellido))
                     {
-                        Id = vmSocio.Id,
-                        NombreYapellido = vmSocio.NombreYapellido,
-                        FechaNacimiento = vmSocio.FechaNacimiento,
-                        Cedula = unSoc.Cedula,
-                        EstaActivo = unSoc.EstaActivo,
-                        FechaRegistro = unSoc.FechaRegistro
-                    };
-                    if (repoSoc.Modificacion(unSoc))
-                    {
-                        ViewBag.Success = "El socio se ha editado con éxito";
-                        return View();
+                        unSoc = new Socio()
+                        {
+                            Id = vmSocio.Id,
+                            NombreYapellido = vmSocio.NombreYapellido,
+                            FechaNacimiento = vmSocio.FechaNacimiento,
+                            Cedula = unSoc.Cedula,
+                            EstaActivo = unSoc.EstaActivo,
+                            FechaRegistro = unSoc.FechaRegistro
+                        };
+                        if (repoSoc.Modificacion(unSoc))
+                        {
+                            ViewBag.Success = "El socio se ha editado con éxito";
+                            return View();
+                        }
+                        else
+                        {
+                            ViewBag.Error = "Hubo un error en la modificacion";
+                            return View();
+                        }
                     }
                     else
                     {
-                        ViewBag.Error = "Hubo un error en la modificacion";
+                        ViewBag.Error = "El largo mínimo del nombre y apellido debe ser de 6 caracteres";
                         return View();
                     }
                 }

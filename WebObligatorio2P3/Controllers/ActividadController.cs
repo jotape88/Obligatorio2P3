@@ -16,6 +16,7 @@ namespace WebObligatorio_1_P3.Controllers
 {
     public class ActividadController : Controller
     {
+        #region ActionResults
         //Punto 7
         public ActionResult BusquedaActividadPorParametros()
         {
@@ -81,23 +82,6 @@ namespace WebObligatorio_1_P3.Controllers
             return View("BusquedaActividadPorParametrosLista", listaIngresos);
         }
 
-        private List<ViewModelDiaYHora> ConvertirDiasYHrsAModel(List<DTODiaYHora> ingresosDiasYHrs)
-        {
-            List<ViewModelDiaYHora> diasHrsViewModel = new List<ViewModelDiaYHora>();
-            foreach (DTODiaYHora unDhr in ingresosDiasYHrs)
-            {
-                ViewModelDiaYHora vmDiaHr = new ViewModelDiaYHora()
-                {
-                    NombreActivdad = unDhr.NombreActividad,
-                    Dia = unDhr.Dia,
-                    Hora = unDhr.Hora,
-                    EdadMinima = unDhr.EdadMinima
-                };
-                diasHrsViewModel.Add(vmDiaHr);
-            }
-            return diasHrsViewModel;
-        }
-
 
 
         //Punto 8
@@ -152,9 +136,28 @@ namespace WebObligatorio_1_P3.Controllers
             return View("ListarIngresosActXSocio", listaIngresos);
 
         }
-
+        #endregion
 
         #region Metodos de conversion de listas
+        //Punto 7
+        private List<ViewModelDiaYHora> ConvertirDiasYHrsAModel(List<DTODiaYHora> ingresosDiasYHrs)
+        {
+            List<ViewModelDiaYHora> diasHrsViewModel = new List<ViewModelDiaYHora>();
+            foreach (DTODiaYHora unDhr in ingresosDiasYHrs)
+            {
+                ViewModelDiaYHora vmDiaHr = new ViewModelDiaYHora()
+                {
+                    NombreActivdad = unDhr.NombreActividad,
+                    Dia = unDhr.Dia,
+                    Hora = unDhr.Hora,
+                    EdadMinima = unDhr.EdadMinima
+                };
+                diasHrsViewModel.Add(vmDiaHr);
+            }
+            return diasHrsViewModel;
+        }
+
+        //Punto 8
         private List<ViewModelIngresoActividad> ConvertirListIngresosAModel(List<DTOIngresos> ingresosActivs)
         {
             List<ViewModelIngresoActividad> ingresosActViewModel = new List<ViewModelIngresoActividad>();

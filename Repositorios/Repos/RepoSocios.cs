@@ -19,14 +19,10 @@ namespace Repositorios
             bool bandera = false;
             if (unSocio != null)
             {
-                //if(unSocio.ValidarNomYApell(unSocio.NombreYapellido) && unSocio.ValidarEdad(unSocio.FechaNacimiento) && unSocio.ValidarCi(unSocio.Cedula)) 
-                // {
                 try
                 {
                     using (ClubContext db = new ClubContext())
                     {
-                        //unSocio.FechaRegistro = DateTime.Now;
-                        //unSocio.EstaActivo = "1";
                         db.Socios.Add(unSocio);
                         bandera = db.SaveChanges() != 0;
                     }
@@ -35,7 +31,6 @@ namespace Repositorios
                 {
                     return false;
                 }
-                // }
             }
             return bandera;
         }
@@ -47,8 +42,6 @@ namespace Repositorios
             {
                 using (ClubContext db = new ClubContext())
                 {
-                    //Socio unSoc = new Socio() { Id = id };
-                    //db.Entry(unSoc);
                     Socio unSoc = db.Socios.Find(id);
                     unSoc.EstaActivo = "0";
                     bandera = db.SaveChanges() != 0;
@@ -116,10 +109,6 @@ namespace Repositorios
                         db.Entry(unSoc).State = EntityState.Detached;
                         db.Entry(unSocio).State = EntityState.Modified;
                         bandera = db.SaveChanges() != 0;
-
-                        //unSoc.NombreYapellido = unSocio.NombreYapellido;
-                        //unSoc.FechaNacimiento = unSocio.FechaNacimiento;
-                        //bandera = db.SaveChanges() != 0;
                     }
                 }
             }
