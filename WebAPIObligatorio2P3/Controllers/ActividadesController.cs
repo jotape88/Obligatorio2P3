@@ -35,7 +35,7 @@ namespace WebAPIObligatorio2P3.Controllers
             return Ok(db.DiasYHoras.OrderBy(dh => dh.Activ.Nombre)
                      .ThenBy(dh => dh.Dia)
                      .ThenBy(dh => dh.Hora)
-                      .Where(dh => dh.Activ.EdadMinima > edadMin)
+                      .Where(dh => dh.Activ.EdadMinima >= edadMin)
                       .Select(dh => new  { NombreActividad = dh.Activ.Nombre, Dia = dh.Dia, Hora = dh.Hora, EdadMinima = dh.Activ.EdadMinima })
                       .ToList());
         }
